@@ -1,0 +1,125 @@
+---
+// IntroSection.astro — story-driven introduction following the hero
+---
+
+<section class="intro">
+  <div class="intro-inner">
+    <div class="eyebrow">A photojournalist&rsquo;s eye. A filmmaker&rsquo;s heart.</div>
+    <h2>Stories worth telling. <em>Told well.</em></h2>
+    <div class="intro-body">
+      <p>
+        For twenty years I carried a camera for publications like the
+        <i>New York Times</i>, <i>Washington Post</i>, and <i>TIME</i> &mdash; a
+        photojournalist trained to find the real stories underneath what people
+        say first. The Story Speaks brings that same instinct to brand films,
+        documentaries, and case studies.
+      </p>
+      <p>
+        Five Emmys, a national Addy, and TED recognition for &ldquo;Ads Worth
+        Spreading,&rdquo; I work out of Boulder, Colorado &mdash; partnering
+        with Fortune 500s, leading hospitals, research universities, and
+        nonprofits across Denver, the Rockies, and the world.
+      </p>
+      <p>
+        No agency bloat. No formula. Just careful storytelling, with a crew
+        that scales to fit your project and a budget that respects it.
+      </p>
+    </div>
+    <div class="intro-cta-row">
+      <a class="intro-link" href="#films">See the Films &rarr;</a>
+      <a class="intro-link" href="#contact">Start a Conversation &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    background: var(--color-bg-deep);
+    background-image: linear-gradient(
+      180deg,
+      var(--color-bg-deep) 0%,
+      var(--color-bg-mid) 100%
+    );
+    padding: 6rem 2rem 6.5rem;
+    color: var(--color-text);
+    margin: 0;
+    position: relative;
+  }
+
+  .intro-inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .intro h2 {
+    font-size: clamp(1.85rem, 4vw, 3rem);
+    line-height: 1.12;
+    margin: 0 0 2.5rem 0;
+    color: var(--color-text);
+    text-align: left;
+  }
+
+  .intro h2 em {
+    font-style: italic;
+    color: var(--color-accent);
+    font-weight: 300;
+  }
+
+  .intro-body p {
+    font-size: 1.075rem;
+    line-height: 1.78;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .intro-body p i {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .intro-body p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .intro-cta-row {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2.25rem;
+    flex-wrap: wrap;
+  }
+
+  .intro-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 6px;
+    transition: all var(--transition);
+  }
+
+  .intro-link:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .intro {
+      padding: 4rem 1.5rem 4.5rem;
+    }
+    .intro-body p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .intro-cta-row {
+      gap: 1.25rem;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 2.25rem;
+    }
+  }
+</style>
