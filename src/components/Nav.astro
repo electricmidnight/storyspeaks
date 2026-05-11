@@ -6,6 +6,7 @@ const isHome = currentPath === '/';
 
 const activeSection =
   isHome ? 'home' :
+  currentPath.startsWith('/process') ? 'process' :
   currentPath.startsWith('/work') ? 'work' :
   currentPath.startsWith('/about') ? 'about' :
   currentPath.startsWith('/contact') ? 'contact' : '';
@@ -19,6 +20,14 @@ const activeSection =
         <div class="nav-link-wrapper">
           <a href="/" class="nav-link-button">Home</a>
           <a href="/" class="nav-link-button-hover" aria-hidden="true">Home</a>
+        </div>
+      </div>
+
+      <div class={`nav-link-container ${activeSection === 'process' ? 'active' : ''}`}>
+        <div class="nav-link-wrapper">
+          <a href="/process/" class="nav-link-button">Process</a>
+          <a href="/process/" class="nav-link-button-hover" aria-hidden="true">Process</a>
+          {activeSection === 'process' && <a href="/" class="nav-close-btn" aria-label="Return to home"></a>}
         </div>
       </div>
 
@@ -67,6 +76,7 @@ const activeSection =
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="/" class={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}>Home</a>
+    <a href="/process/" class={`mobile-nav-link ${activeSection === 'process' ? 'active' : ''}`}>Process</a>
     <a href="/work/" class={`mobile-nav-link ${activeSection === 'work' ? 'active' : ''}`}>Work</a>
     <a href="/about/" class={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}>About</a>
     <a href="/contact/" class={`mobile-nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a>
@@ -74,7 +84,6 @@ const activeSection =
 </nav>
 
 <style>
-  /* ============ DESKTOP NAV ============ */
   .site-nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -219,7 +228,6 @@ const activeSection =
   }
   .logo-container:hover { opacity: 0.85; }
 
-  /* ============ MOBILE NAV ============ */
   @media (max-width: 991px) {
     .site-nav--desktop { display: none; }
     .site-nav--mobile  { display: block; padding: 0; }
@@ -296,6 +304,7 @@ const activeSection =
     .mobile-menu.open .mobile-nav-link:nth-child(2) { transition-delay: 0.15s; }
     .mobile-menu.open .mobile-nav-link:nth-child(3) { transition-delay: 0.20s; }
     .mobile-menu.open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
+    .mobile-menu.open .mobile-nav-link:nth-child(5) { transition-delay: 0.30s; }
     .mobile-nav-link:hover { color: var(--color-accent); }
   }
 </style>
