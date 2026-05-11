@@ -1,0 +1,55 @@
+---
+export interface Props {
+  variant?: 'on-dark' | 'on-light';
+  size?: 'sm' | 'md' | 'lg';
+  showWordmark?: boolean;
+}
+
+const {
+  variant = 'on-dark',
+  size = 'md',
+  showWordmark = true
+} = Astro.props;
+
+const color = variant === 'on-dark' ? 'var(--color-accent)' : 'var(--color-bg-deep)';
+---
+
+<span class:list={['brand-mark', `brand-mark--${size}`]} style={`color: ${color};`}>
+  <svg class="brand-mark__icon" viewBox="0 0 283.3 154.3" aria-hidden="true">
+    <ellipse cx="122.84" cy="19.3" rx="17.2" ry="16.3"
+             fill="none" stroke="currentColor" stroke-width="6" stroke-miterlimit="10"/>
+    <path d="M7.24,151.3c18.67-18.67,37.33-41.33,56-68,18.67,13.33,32,20,48,28,15.2-23.2,44.8-64.8,61.6-95.2,8,27.2,17.6,55.2,28,77.6,15.2-13.6,32-30.4,46.4-42.4,10.67,32,21.33,65.33,32,100H7.24Z"
+          fill="none" stroke="currentColor" stroke-width="6" stroke-miterlimit="10"/>
+  </svg>
+  {showWordmark && <span class="brand-mark__wordmark">The Story Speaks</span>}
+</span>
+
+<style>
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .brand-mark__icon {
+    height: 2.5rem;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .brand-mark__wordmark {
+    font-family: var(--font-wordmark);
+    font-size: 1.5rem;
+    letter-spacing: 0.01em;
+    color: inherit;
+  }
+
+  .brand-mark--sm .brand-mark__icon     { height: 2rem; }
+  .brand-mark--sm .brand-mark__wordmark { font-size: 1.2rem; }
+
+  .brand-mark--lg .brand-mark__icon     { height: 3.5rem; }
+  .brand-mark--lg .brand-mark__wordmark { font-size: 2.1rem; }
+</style>
