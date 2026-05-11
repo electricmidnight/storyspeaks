@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Our Process — The Story Speaks"
+  description="The PRISM Method: a proprietary five-phase narrative architecture for translating complex truth into resonant human experience."
+>
+  <main class="process-page">
+    <section class="process-intro">
+      <p class="eyebrow">Our Process</p>
+      <h1 class="process-headline">
+        The <span class="word-prism">PRISM</span> Method
+      </h1>
+      <p class="process-subtitle">The Architecture for Unforgettable Stories</p>
+      <p class="process-body">
+        Most agencies promise creative magic. We deliver strategic certainty. PRISM is our proprietary narrative architecture designed to translate complex truth into resonant human experience. It's a rigorous, five-phase process that ensures every film is built with the clarity, precision and purpose required to drive real results.
+      </p>
+    </section>
+
+    <section class="prism-phases">
+      <article class="phase-card">
+        <div class="phase-letter">P</div>
+        <div class="phase-content">
+          <h3 class="phase-title">People</h3>
+          <p class="phase-description">The Heart of every story. We find characters with desire, uniqueness, and complexity that your audience sees themselves in.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-letter">R</div>
+        <div class="phase-content">
+          <h3 class="phase-title">Resonance</h3>
+          <p class="phase-description">The Why behind the narrative. We craft stories with clear purpose that resonate deeply — changing attitudes and driving action.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-letter">I</div>
+        <div class="phase-content">
+          <h3 class="phase-title">Immersion</h3>
+          <p class="phase-description">The Structure that transports. We create stories so engaging that audiences become fully absorbed in your narrative world.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-letter">S</div>
+        <div class="phase-content">
+          <h3 class="phase-title">Storyfinding</h3>
+          <p class="phase-description">The Discovery process. We systematically seek authentic narratives through pre-interviews, uncovering specific moments.</p>
+        </div>
+      </article>
+
+      <article class="phase-card">
+        <div class="phase-letter">M</div>
+        <div class="phase-content">
+          <h3 class="phase-title">Moments</h3>
+          <p class="phase-description">The Visual language. We capture moments that show rather than tell, using symbolism and surprise to amplify meaning.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .process-page {
+    min-height: 100vh;
+    background: var(--color-bg-deep);
+    padding-top: 9rem;
+    padding-bottom: 6rem;
+  }
+
+  .process-intro {
+    max-width: 760px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .process-headline {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+  }
+
+  .word-prism {
+    font-family: var(--font-wordmark);
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    font-weight: 400;
+  }
+
+  .process-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-style: italic;
+    color: var(--color-accent);
+    margin: 0 0 2.5rem;
+  }
+
+  .process-body {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .prism-phases {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .phase-card {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(232, 197, 116, 0.18);
+    border-radius: 4px;
+    transition: all 0.4s ease;
+  }
+
+  .phase-card:hover {
+    background: rgba(232, 197, 116, 0.05);
+    border-color: rgba(232, 197, 116, 0.45);
+    transform: translateY(-2px);
+  }
+
+  .phase-letter {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent);
+    color: var(--color-bg-deep);
+    font-family: var(--font-wordmark);
+    font-size: 2rem;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+
+  .phase-title {
+    font-family: var(--font-wordmark);
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin: 0 0 0.5rem;
+    line-height: 1;
+  }
+
+  .phase-description {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .phase-card {
+      padding: 2.5rem;
+    }
+  }
+</style>
