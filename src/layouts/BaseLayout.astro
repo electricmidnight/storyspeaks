@@ -2,6 +2,9 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 
+const pathname = Astro.url.pathname;
+const bodyClass = pathname.startsWith('/process') ? 'page-process' : '';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -34,6 +37,7 @@ const {
 
     <title>{title}</title>
   </head>
-  <body>
+  <body class={bodyClass}>
     <Nav />
     <slot />
+  </body>
