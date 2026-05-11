@@ -12,6 +12,13 @@
   --color-accent: #e8c574;
   --color-accent-deep: #b8945a;
 
+  /* PRISM phase colors — lifted spectrum (rainbow order) */
+  --prism-people:       #d4756f;
+  --prism-resonance:    #f5d589;
+  --prism-immersion:    #a3bc7e;
+  --prism-storyfinding: #86a8c9;
+  --prism-moments:      #a583b5;
+
   /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
@@ -32,6 +39,13 @@
 
   /* Motion */
   --transition: 0.3s ease;
+}
+
+/* On the Process page, the brand gold lifts to match the Resonance ray.
+   This cascades to the brand mark, wordmark, eyebrow, buttons, and any
+   other element that uses var(--color-accent). */
+body.page-process {
+  --color-accent: #f5d589;
 }
 
 /* ============================================
