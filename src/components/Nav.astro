@@ -68,20 +68,22 @@ const activeSection =
     <a href="/" class="mobile-logo-link" aria-label="The Story Speaks — home">
       <BrandMark variant="on-dark" size="sm" showWordmark={true} />
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/" class={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}>Home</a>
-    <a href="/process/" class={`mobile-nav-link ${activeSection === 'process' ? 'active' : ''}`}>Process</a>
-    <a href="/work/" class={`mobile-nav-link ${activeSection === 'work' ? 'active' : ''}`}>Work</a>
-    <a href="/about/" class={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}>About</a>
-    <a href="/contact/" class={`mobile-nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a>
   </div>
 </nav>
+
+<button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</button>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" class={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}>Home</a>
+  <a href="/process/" class={`mobile-nav-link ${activeSection === 'process' ? 'active' : ''}`}>Process</a>
+  <a href="/work/" class={`mobile-nav-link ${activeSection === 'work' ? 'active' : ''}`}>Work</a>
+  <a href="/about/" class={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}>About</a>
+  <a href="/contact/" class={`mobile-nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a>
+</div>
 
 <style>
   .site-nav {
@@ -228,6 +230,11 @@ const activeSection =
   }
   .logo-container:hover { opacity: 0.85; }
 
+  /* Hamburger and mobile menu are now siblings of .site-nav, not children — so they're not trapped by backdrop-filter */
+  .hamburger { display: none; }
+  .mobile-menu { display: none; }
+
+  /* ============ MOBILE BREAKPOINT ============ */
   @media (max-width: 991px) {
     .site-nav--desktop { display: none; }
     .site-nav--mobile  { display: block; padding: 0; }
@@ -235,11 +242,14 @@ const activeSection =
     .mobile-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 15px 20px 12px;
     }
 
     .hamburger {
+      position: fixed;
+      top: 14px;
+      right: 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -248,7 +258,7 @@ const activeSection =
       background: transparent;
       border: none;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 1002;
       padding: 0;
     }
     .hamburger-line {
@@ -260,74 +270,4 @@ const activeSection =
     }
     .hamburger.open .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
     .hamburger.open .hamburger-line:nth-child(2) { opacity: 0; transform: translateX(-20px); }
-    .hamburger.open .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      background: rgba(7, 16, 30, 0.98);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 35px;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 999;
-    }
-    .mobile-menu.open { opacity: 1; visibility: visible; }
-
-    .mobile-nav-link {
-      font-family: var(--font-wordmark);
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #fff;
-      text-decoration: none;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      padding: 10px 20px;
-      border: 1px solid transparent;
-    }
-    .mobile-nav-link.active {
-      color: var(--color-accent);
-      border-color: var(--color-accent);
-      background: rgba(232, 197, 116, 0.08);
-    }
-    .mobile-menu.open .mobile-nav-link { opacity: 1; transform: translateY(0); }
-    .mobile-menu.open .mobile-nav-link:nth-child(1) { transition-delay: 0.10s; }
-    .mobile-menu.open .mobile-nav-link:nth-child(2) { transition-delay: 0.15s; }
-    .mobile-menu.open .mobile-nav-link:nth-child(3) { transition-delay: 0.20s; }
-    .mobile-menu.open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
-    .mobile-menu.open .mobile-nav-link:nth-child(5) { transition-delay: 0.30s; }
-    .mobile-nav-link:hover { color: var(--color-accent); }
-  }
-</style>
-
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-
-    mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-</script>
+    .hamburger.open .hamburger-line:nth-child(3) { transform: rotate(-
