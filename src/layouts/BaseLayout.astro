@@ -33,7 +33,22 @@ const {
 
     <title>{title}</title>
   </head>
+---
+import BrandMark from '../components/BrandMark.astro';
+// ... any existing imports
+---
+<!-- inside <body>, before the <slot /> -->
   <body>
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <BrandMark variant="on-dark" size="md" />
+    <ul class="site-nav__links">
+      <li><a href="/work/">Work</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+  </div>
+</nav>
     <slot />
   </body>
 </html>
