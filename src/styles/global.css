@@ -138,3 +138,36 @@ p:last-child {
   border-color: var(--color-text);
   background: rgba(255, 255, 255, 0.1);
 }
+.site-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 1.25rem 2rem;
+}
+.site-nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.site-nav__links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-nav__links a {
+  color: var(--color-text-muted);
+  font-family: var(--font-wordmark);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.site-nav__links a:hover { color: var(--color-accent); }
