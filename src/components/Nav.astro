@@ -31,7 +31,7 @@ const activeSection =
       </div>
 
       <a href="/" class="logo-container" aria-label="The Story Speaks — home">
-        <BrandMark variant="on-dark" size="sm" showWordmark={true} href={null} />
+        <BrandMark variant="on-dark" size="sm" showWordmark={true} />
       </a>
 
       <div class={`nav-link-container ${activeSection === 'about' ? 'active' : ''}`}>
@@ -57,7 +57,7 @@ const activeSection =
 <nav class="site-nav site-nav--mobile" aria-label="Primary mobile">
   <div class="mobile-header">
     <a href="/" class="mobile-logo-link" aria-label="The Story Speaks — home">
-      <BrandMark variant="on-dark" size="sm" showWordmark={true} href={null} />
+      <BrandMark variant="on-dark" size="sm" showWordmark={true} />
     </a>
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span class="hamburger-line"></span>
@@ -73,15 +73,15 @@ const activeSection =
   </div>
 </nav>
 
-<div class="header-line" aria-hidden="true"></div>
-
 <style>
   /* ============ DESKTOP NAV ============ */
   .site-nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 1000;
-    padding: 20px 40px;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   .site-nav--desktop { display: block; }
   .site-nav--mobile { display: none; }
@@ -92,10 +92,7 @@ const activeSection =
     justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 15px 30px;
-    background: rgba(10, 22, 40, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 22px 30px 18px;
   }
 
   .site-nav__controller {
@@ -222,34 +219,16 @@ const activeSection =
   }
   .logo-container:hover { opacity: 0.85; }
 
-  .header-line {
-    position: fixed;
-    top: 98px;
-    left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(232, 197, 116, 0.3) 20%,
-      rgba(232, 197, 116, 0.6) 50%,
-      rgba(232, 197, 116, 0.3) 80%,
-      transparent 100%);
-    z-index: 1001;
-    box-shadow: 0 0 8px rgba(232, 197, 116, 0.3);
-  }
-
   /* ============ MOBILE NAV ============ */
   @media (max-width: 991px) {
     .site-nav--desktop { display: none; }
-    .site-nav--mobile  { display: block; padding: 15px 20px; }
+    .site-nav--mobile  { display: block; padding: 0; }
 
     .mobile-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10, 22, 40, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 12px 20px;
+      padding: 15px 20px 12px;
     }
 
     .hamburger {
@@ -318,8 +297,6 @@ const activeSection =
     .mobile-menu.open .mobile-nav-link:nth-child(3) { transition-delay: 0.20s; }
     .mobile-menu.open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
     .mobile-nav-link:hover { color: var(--color-accent); }
-
-    .header-line { top: 74px; }
   }
 </style>
 
