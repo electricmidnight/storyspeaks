@@ -120,10 +120,11 @@ const phases = [
             style={`--phase-color: ${phase.colorHex};`}
           >
             <div class="phase-letter">{phase.letter}</div>
-            <h3 class="phase-name">{phase.name}</h3>
-            <p class="phase-subtitle">{phase.subtitle}</p>
-            <p class="phase-description">{phase.description}</p>
-            <span class="phase-underline" aria-hidden="true"></span>
+            <div class="phase-content">
+              <h3 class="phase-name">{phase.name}</h3>
+              <p class="phase-subtitle">{phase.subtitle}</p>
+              <p class="phase-description">{phase.description}</p>
+            </div>
           </article>
         ))}
       </div>
@@ -288,42 +289,60 @@ const phases = [
     display: block;
   }
  
-  /* ============ PHASES (Option 2 layout) ============ */
+  /* ============ PHASES — HORIZONTAL CARDS (letter left, content right) ============ */
   .phases-section {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 4rem auto 0;
-    padding: 0 2rem;
+    padding: 0 1.25rem;
   }
  
   .phases-row {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
   }
  
   .phase-block {
-    text-align: center;
-    padding: 1rem 0;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem 1.5rem;
+    background: color-mix(in srgb, var(--phase-color) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--phase-color) 40%, transparent);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+ 
+  .phase-block:hover {
+    background: color-mix(in srgb, var(--phase-color) 12%, transparent);
+    border-color: color-mix(in srgb, var(--phase-color) 60%, transparent);
   }
  
   .phase-letter {
+    flex-shrink: 0;
+    width: clamp(3.5rem, 14vw, 5rem);
+    text-align: center;
     font-family: var(--font-sans);
-    font-size: clamp(4.5rem, 18vw, 7rem);
+    font-size: clamp(3.5rem, 13vw, 5.25rem);
     font-weight: 200;
     line-height: 0.9;
     letter-spacing: -0.05em;
     color: var(--phase-color);
-    margin-bottom: 0.5rem;
+  }
+ 
+  .phase-content {
+    flex: 1;
+    min-width: 0;
   }
  
   .phase-name {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     color: var(--phase-color);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.4rem;
     line-height: 1;
   }
  
@@ -332,8 +351,8 @@ const phases = [
     font-style: italic;
     font-weight: 300;
     font-size: 0.95rem;
-    color: var(--color-accent);
-    margin: 0 0 1rem;
+    color: var(--phase-color);
+    margin: 0 0 0.6rem;
     line-height: 1.3;
     letter-spacing: -0.01em;
   }
@@ -342,22 +361,12 @@ const phases = [
     font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--color-text-muted);
-    margin: 0 auto;
-    max-width: 280px;
+    margin: 0;
   }
  
-  .phase-underline {
-    display: block;
-    width: 80px;
-    height: 1px;
-    background: var(--phase-color);
-    opacity: 0.4;
-    margin: 1.5rem auto 0;
-  }
- 
-  /* ============ SECTION CTA ============ */
+  /* ============ SECTION CTA (mobile only) ============ */
   .section-cta-wrapper {
     text-align: center;
     margin: 4rem auto 3rem;
@@ -430,18 +439,19 @@ const phases = [
     letter-spacing: 0.04em;
   }
  
+  /* ENGINEER is now the gold accent; STORIES and INFLUENCE are muted white */
   .science-headline-stories {
     color: rgba(255, 255, 255, 0.75);
     margin-right: 0.4em;
   }
  
   .science-headline-engineer {
-    color: var(--color-text);
+    color: var(--color-accent);
     margin-right: 0.4em;
   }
  
   .science-headline-influence {
-    color: var(--color-accent);
+    color: rgba(255, 255, 255, 0.75);
   }
  
   .science-subtitle {
@@ -555,40 +565,35 @@ const phases = [
     }
  
     .phases-section {
+      max-width: 860px;
       margin-top: 6rem;
+      padding: 0 2rem;
     }
  
     .phases-row {
-      flex-direction: row;
-      gap: 1.5rem;
-      justify-content: space-between;
-      align-items: flex-start;
+      gap: 1.75rem;
     }
  
     .phase-block {
-      flex: 1;
-      padding: 0 0.5rem;
+      padding: 2rem 2.25rem;
+      gap: 2rem;
     }
  
     .phase-letter {
-      font-size: clamp(5rem, 9vw, 8rem);
+      width: clamp(5rem, 9vw, 6rem);
+      font-size: clamp(5rem, 8vw, 6rem);
     }
  
     .phase-name {
-      font-size: 1.05rem;
-    }
- 
-    .phase-subtitle {
       font-size: 1rem;
     }
  
-    .phase-description {
-      font-size: 0.9rem;
-      max-width: none;
+    .phase-subtitle {
+      font-size: 1.2rem;
     }
  
-    .phase-underline {
-      margin-top: 2rem;
+    .phase-description {
+      font-size: 0.95rem;
     }
  
     .section-cta-wrapper {
@@ -626,4 +631,3 @@ const phases = [
     }
   }
 </style>
- 
