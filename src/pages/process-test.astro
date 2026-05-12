@@ -47,7 +47,7 @@ const phases = [
  
 <BaseLayout
   title="Process Animation Test — The Story Speaks"
-  description="Interactive PRISM prototype with thin-line/wedge hover."
+  description="Interactive PRISM prototype."
 >
   <main class="test-page">
  
@@ -68,11 +68,10 @@ const phases = [
       </p>
     </section>
  
-    <!-- The entire prism scene lives inside .prism-row. SVG spans the full row -->
     <section class="prism-section">
       <div class="prism-row" id="prismRow">
  
-        <!-- SVG with rays + invisible hover polygons. Covers the entire row. -->
+        <!-- SVG layer covers the entire row -->
         <svg class="rays-svg" id="raysSvg" viewBox="0 0 1400 500" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
@@ -82,18 +81,16 @@ const phases = [
             <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
  
             <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
             </filter>
           </defs>
  
-          <!-- Visible rays — JS sets initial geometry after layout -->
           <polygon id="ray-p" class="prism-ray" data-phase="p" points="0,0 0,0 0,0" fill="url(#ray-grad-p)" style="filter: url(#ray-glow); opacity: 0;"/>
           <polygon id="ray-r" class="prism-ray" data-phase="r" points="0,0 0,0 0,0" fill="url(#ray-grad-r)" style="filter: url(#ray-glow); opacity: 0;"/>
           <polygon id="ray-i" class="prism-ray" data-phase="i" points="0,0 0,0 0,0" fill="url(#ray-grad-i)" style="filter: url(#ray-glow); opacity: 0;"/>
           <polygon id="ray-s" class="prism-ray" data-phase="s" points="0,0 0,0 0,0" fill="url(#ray-grad-s)" style="filter: url(#ray-glow); opacity: 0;"/>
           <polygon id="ray-m" class="prism-ray" data-phase="m" points="0,0 0,0 0,0" fill="url(#ray-grad-m)" style="filter: url(#ray-glow); opacity: 0;"/>
  
-          <!-- Invisible hover polygons — wide wedge shape catches the cursor easily -->
           <polygon id="hover-p" class="hover-area" data-phase="p" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
           <polygon id="hover-r" class="hover-area" data-phase="r" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
           <polygon id="hover-i" class="hover-area" data-phase="i" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
@@ -101,37 +98,43 @@ const phases = [
           <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
         </svg>
  
-        <!-- LEFT: prism gem + RAW STORY label -->
+        <!-- LEFT: prism gem with rainbow orb behind it + RAW STORY label -->
         <div class="prism-side">
           <div class="raw-story-label">RAW STORY</div>
-          <div class="prism-gem" id="prismGem">
-            <svg class="prism-pyramid-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="prism-front-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
-                  <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
-                  <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
-                  <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
-                  <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
-                </linearGradient>
-                <linearGradient id="prism-side-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.45)"/>
-                  <stop offset="100%" stop-color="rgba(165, 131, 181, 0.45)"/>
-                </linearGradient>
-                <radialGradient id="prism-highlight-grad">
-                  <stop offset="0%"   stop-color="rgba(255,255,255,0.6)"/>
-                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                </radialGradient>
-              </defs>
-              <polygon points="50,10 8,82 90,82" fill="url(#prism-front-grad)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-              <polygon points="50,10 90,82 95,86" fill="url(#prism-side-grad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-              <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#prism-highlight-grad)"/>
-              <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
-            </svg>
+ 
+          <div class="prism-container">
+            <!-- The glass-glow orb sits BEHIND the prism — rainbow radial gradient that pulses -->
+            <div class="glass-glow"></div>
+ 
+            <div class="prism-gem" id="prismGem">
+              <svg class="prism-pyramid-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="prism-front-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
+                    <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
+                    <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
+                    <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
+                    <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
+                  </linearGradient>
+                  <linearGradient id="prism-side-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.45)"/>
+                    <stop offset="100%" stop-color="rgba(165, 131, 181, 0.45)"/>
+                  </linearGradient>
+                  <radialGradient id="prism-highlight-grad">
+                    <stop offset="0%"   stop-color="rgba(255,255,255,0.6)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                  </radialGradient>
+                </defs>
+                <polygon points="50,10 8,82 90,82" fill="url(#prism-front-grad)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <polygon points="50,10 90,82 95,86" fill="url(#prism-side-grad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#prism-highlight-grad)"/>
+                <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
+              </svg>
+            </div>
           </div>
         </div>
  
-        <!-- RIGHT: prism items, vertically stacked. Each row has its own letter/word/description -->
+        <!-- RIGHT: prism items -->
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -233,12 +236,13 @@ const phases = [
   .prism-row {
     position: relative;
     display: flex;
-    align-items: stretch;
-    min-height: 500px;
+    align-items: center;
+    justify-content: center;
+    min-height: 550px;
     gap: 0;
   }
  
-  /* SVG: full-row absolute overlay with overflow:visible so rays can extend anywhere */
+  /* SVG layer */
   .rays-svg {
     position: absolute;
     inset: 0;
@@ -254,22 +258,21 @@ const phases = [
     pointer-events: none;
   }
  
-  /* Hover catchers stay clickable even though parent SVG has pointer-events:none */
   .hover-area {
     pointer-events: all;
     cursor: pointer;
   }
  
-  /* ============ LEFT: PRISM SIDE ============ */
+  /* ============ LEFT SIDE: prism + orb + RAW STORY ============ */
   .prism-side {
     position: relative;
     width: 280px;
     flex-shrink: 0;
-    z-index: 2;
+    height: 550px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 30px;
+    z-index: 2;
   }
  
   .raw-story-label {
@@ -278,21 +281,85 @@ const phases = [
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.25em;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     pointer-events: none;
-    text-shadow: 0 0 12px rgba(245, 213, 137, 0.45);
+    z-index: 3;
+    /* Same multilayer glow as RAW STORY in Luminous Story */
+    text-shadow:
+      0 0 10px rgba(248, 250, 252, 0.7),
+      0 0 20px rgba(248, 250, 252, 0.4),
+      0 0 30px rgba(245, 213, 137, 0.3);
+    animation: rawStoryPulse 4s ease-in-out infinite;
+  }
+ 
+  @keyframes rawStoryPulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px rgba(248, 250, 252, 0.7),
+        0 0 20px rgba(248, 250, 252, 0.4),
+        0 0 30px rgba(245, 213, 137, 0.3);
+    }
+    50% {
+      text-shadow:
+        0 0 14px rgba(248, 250, 252, 0.9),
+        0 0 28px rgba(248, 250, 252, 0.6),
+        0 0 42px rgba(245, 213, 137, 0.5);
+    }
+  }
+ 
+  /* The container holds the orb + prism gem together so they pulse in unison */
+  .prism-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  /* The glowing orb — rainbow radial gradient that pulses behind the prism */
+  .glass-glow {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+      rgba(212, 117, 111, 0.18) 0%,
+      rgba(245, 213, 137, 0.18) 20%,
+      rgba(163, 188, 126, 0.18) 40%,
+      rgba(134, 168, 201, 0.20) 60%,
+      rgba(165, 131, 181, 0.14) 80%,
+      transparent 100%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: orbPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+ 
+  @keyframes orbPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.18);
+      opacity: 1;
+    }
   }
  
   .prism-gem {
-    width: 95px;
-    height: 95px;
     position: relative;
     z-index: 3;
-    filter: drop-shadow(0 0 28px rgba(245, 213, 137, 0.45));
+    width: 95px;
+    height: 95px;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.35));
     animation: prismPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
@@ -305,89 +372,92 @@ const phases = [
  
   @keyframes prismPulse {
     0%, 100% {
-      filter: drop-shadow(0 0 22px rgba(245, 213, 137, 0.35));
+      transform: scale(1);
+      filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.3));
     }
     50% {
-      filter: drop-shadow(0 0 38px rgba(245, 213, 137, 0.6));
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
     }
   }
  
-  /* ============ RIGHT: PRISM ITEMS ============ */
+  /* ============ RIGHT SIDE: prism items (750px wide like Luminous Story) ============ */
   .items-container {
-    flex: 1;
+    width: 750px;
+    flex-shrink: 0;
     position: relative;
     z-index: 4;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 14px;
-    padding: 0 2rem 0 0;
+    gap: 0;
   }
  
   .prism-item {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 1.5rem 0.8rem 1rem;
-    height: 72px;
+    gap: 1.25rem;
+    padding: 0 1.5rem;
+    height: 90px;
     border: 1px solid transparent;
-    border-radius: 0 4px 4px 0;
+    border-left: none;
     cursor: pointer;
-    transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Letter box — always visible at rest */
+  /* Letter box */
   .letter-box {
     flex-shrink: 0;
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-sans);
-    font-size: 1.85rem;
+    font-size: 2rem;
     font-weight: 300;
     color: var(--phase-color);
-    border: 1.5px solid color-mix(in srgb, var(--phase-color) 75%, transparent);
-    background: color-mix(in srgb, var(--phase-color) 12%, transparent);
+    border: 1.5px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
+    background: color-mix(in srgb, var(--phase-color) 14%, transparent);
     border-radius: 4px;
-    text-shadow: 0 0 12px color-mix(in srgb, var(--phase-color) 70%, transparent);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    text-shadow:
+      0 0 12px color-mix(in srgb, var(--phase-color) 70%, transparent),
+      0 0 24px color-mix(in srgb, var(--phase-color) 50%, transparent);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Word title — sits right of the letter box at rest */
+  /* Word title */
   .word-title {
     flex-shrink: 0;
     font-family: var(--font-sans);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     color: var(--phase-color);
     line-height: 1;
     text-shadow: 0 0 14px color-mix(in srgb, var(--phase-color) 50%, transparent);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Description: absolutely positioned, hidden off-screen at rest */
+  /* Description — absolutely positioned, hidden far to the right at rest */
   .description {
     position: absolute;
     top: 50%;
-    right: -100%;
+    right: -600px;
     transform: translateY(-50%);
-    width: calc(100% - 240px); /* leaves space for letter-box + word-title on left */
-    max-width: 520px;
+    max-width: 550px;
+    width: 550px;
     font-family: var(--font-sans);
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.88);
     opacity: 0;
-    transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
   }
  
@@ -396,13 +466,16 @@ const phases = [
     color: var(--phase-color);
   }
  
-  /* ============ ACTIVE / HOVER STATE ============ */
+  /* ============ ACTIVE STATE ============ */
   .prism-item.active {
-    background: color-mix(in srgb, var(--phase-color) 18%, transparent);
-    border-color: color-mix(in srgb, var(--phase-color) 55%, transparent);
-    border-left-color: transparent; /* visually connects to ray on the left */
-    box-shadow: 0 0 28px color-mix(in srgb, var(--phase-color) 45%, transparent),
-                0 0 56px color-mix(in srgb, var(--phase-color) 22%, transparent);
+    background: color-mix(in srgb, var(--phase-color) 22%, transparent);
+    border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
+    border-left: none;
+    box-shadow:
+      0 0 36px color-mix(in srgb, var(--phase-color) 55%, transparent),
+      0 0 72px color-mix(in srgb, var(--phase-color) 28%, transparent);
+    transform: translateY(-3px);
+    z-index: 10;
   }
  
   .prism-item.active .letter-box {
@@ -411,15 +484,22 @@ const phases = [
   }
  
   .prism-item.active .word-title {
-    transform: translateX(-72px); /* slides into where letter-box was */
+    transform: translateX(-76px);
   }
  
   .prism-item.active .description {
-    right: 1.5rem;
+    right: 20px;
     opacity: 1;
   }
  
   /* ============ MOBILE LAYOUT ============ */
+  @media (max-width: 992px) {
+    .items-container {
+      width: 100%;
+      max-width: 600px;
+    }
+  }
+ 
   @media (max-width: 768px) {
     .prism-section {
       padding: 0 1rem;
@@ -433,26 +513,30 @@ const phases = [
     }
  
     .rays-svg {
-      display: none; /* Hide rays on mobile, use simple expand interaction */
+      display: none;
     }
  
     .prism-side {
       width: auto;
-      padding-right: 0;
-      padding-top: 1rem;
+      height: auto;
+      padding: 1rem 0;
     }
  
     .raw-story-label {
       position: static;
       transform: none;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: block;
       text-align: center;
+    }
+ 
+    .prism-container {
+      margin-right: 0;
     }
  
     .items-container {
       width: 100%;
       max-width: 480px;
-      padding: 0;
       gap: 8px;
     }
  
@@ -473,13 +557,12 @@ const phases = [
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      margin-top: 0;
-      padding-top: 0;
-      transition: max-height 0.4s ease, opacity 0.4s ease, padding-top 0.4s ease;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
     }
  
     .prism-item.active {
-      border-left-color: color-mix(in srgb, var(--phase-color) 55%, transparent);
+      transform: none;
+      border-left-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
     }
  
     .prism-item.active .letter-box {
@@ -495,7 +578,6 @@ const phases = [
       max-height: 200px;
       opacity: 1;
       padding-top: 0.5rem;
-      margin-top: 0.25rem;
     }
   }
 </style>
@@ -504,9 +586,9 @@ const phases = [
   (function () {
     'use strict';
  
-    var THIN_HALF = 1.5;   // half-thickness of resting thin line
-    var WEDGE_HALF = 36;   // half-height of expanded wedge at target end
-    var HOVER_HALF = 50;   // hover catcher slightly wider than visible wedge for forgiving cursor
+    var THIN_HALF = 1.5;
+    var WEDGE_HALF = 40;
+    var HOVER_HALF = 52;
  
     var phases = ['p', 'r', 'i', 's', 'm'];
  
@@ -519,10 +601,8 @@ const phases = [
       var rowRect = row.getBoundingClientRect();
       var gemRect = gem.getBoundingClientRect();
  
-      // Set SVG viewBox to match the row's actual pixel size (1:1 coords)
       svg.setAttribute('viewBox', '0 0 ' + rowRect.width + ' ' + rowRect.height);
  
-      // Prism center in row-local pixel coords (= SVG viewBox coords)
       var prismX = gemRect.left - rowRect.left + gemRect.width / 2;
       var prismY = gemRect.top - rowRect.top + gemRect.height / 2;
  
@@ -531,23 +611,19 @@ const phases = [
         if (!item) return;
         var itemRect = item.getBoundingClientRect();
  
-        // Ray target: left edge of the prism-item (just before its colored background)
         var targetX = itemRect.left - rowRect.left;
         var targetY = itemRect.top - rowRect.top + itemRect.height / 2;
  
-        // Thin line geometry (rest state)
         var thinPoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - THIN_HALF) + ' ' +
           targetX + ',' + (targetY + THIN_HALF);
  
-        // Wedge geometry (hover state) — visible wedge
         var wedgePoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - WEDGE_HALF) + ' ' +
           targetX + ',' + (targetY + WEDGE_HALF);
  
-        // Hover catcher (slightly wider than wedge)
         var hoverPoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - HOVER_HALF) + ' ' +
@@ -560,7 +636,6 @@ const phases = [
           ray.setAttribute('points', thinPoints);
           ray.style.opacity = '0.9';
  
-          // Update the gradient direction to follow the ray's actual path
           var grad = document.getElementById('ray-grad-' + phase);
           if (grad) {
             grad.setAttribute('x1', String(prismX));
@@ -578,11 +653,10 @@ const phases = [
     }
  
     function activate(phase) {
-      // Expand this ray to wedge, others stay thin
       phases.forEach(function (p) {
         var ray = document.getElementById('ray-' + p);
         if (!ray) return;
-        ray.style.transition = 'opacity 0.35s ease, points 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+        ray.style.transition = 'opacity 0.4s ease, points 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         if (p === phase) {
           ray.setAttribute('points', ray.dataset.wedgePoints);
           ray.style.opacity = '0.95';
@@ -592,7 +666,6 @@ const phases = [
         }
       });
  
-      // Add active class to matching item, remove from others
       var items = document.querySelectorAll('.prism-item');
       for (var i = 0; i < items.length; i++) {
         if (items[i].getAttribute('data-phase') === phase) {
@@ -607,7 +680,7 @@ const phases = [
       phases.forEach(function (p) {
         var ray = document.getElementById('ray-' + p);
         if (!ray) return;
-        ray.style.transition = 'opacity 0.35s ease, points 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+        ray.style.transition = 'opacity 0.4s ease, points 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         ray.setAttribute('points', ray.dataset.thinPoints);
         ray.style.opacity = '0.9';
       });
@@ -618,7 +691,6 @@ const phases = [
     }
  
     function attachHandlers() {
-      // 1) Hover catchers in SVG (the wide wedge zones)
       phases.forEach(function (phase) {
         var hoverArea = document.getElementById('hover-' + phase);
         if (hoverArea) {
@@ -626,17 +698,15 @@ const phases = [
             activate(phase);
           });
           hoverArea.addEventListener('mouseleave', function (e) {
-            // Only deactivate if cursor isn't moving to the prism-item
             var toEl = e.relatedTarget;
             if (toEl && toEl.closest && toEl.closest('.prism-item[data-phase="' + phase + '"]')) {
-              return; // ignore, item handler will take over
+              return;
             }
             deactivateAll();
           });
         }
       });
  
-      // 2) Direct hover on prism-items (so user can hover the letter/word/description too)
       var items = document.querySelectorAll('.prism-item');
       for (var i = 0; i < items.length; i++) {
         (function (item) {
@@ -645,14 +715,12 @@ const phases = [
             activate(phase);
           });
           item.addEventListener('mouseleave', function (e) {
-            // Only deactivate if cursor isn't moving back to the SVG hover area
             var toEl = e.relatedTarget;
             if (toEl && toEl.id === 'hover-' + phase) {
               return;
             }
             deactivateAll();
           });
-          // Tap/click for mobile
           item.addEventListener('click', function () {
             if (item.classList.contains('active')) {
               if (window.innerWidth < 769) {
@@ -667,13 +735,11 @@ const phases = [
     }
  
     function init() {
-      // Wait a frame so layout settles before measuring
       requestAnimationFrame(function () {
         computeGeometry();
         attachHandlers();
       });
  
-      // Recompute geometry on resize
       var resizeTimer = null;
       window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
@@ -683,7 +749,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Interactive prism initialized (faithful port)');
+      console.log('[Process Test] Interactive prism initialized — faithful port');
     }
  
     if (document.readyState === 'loading') {
