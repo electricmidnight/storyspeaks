@@ -56,21 +56,15 @@ const phases = [
       <a href="/process/" class="test-banner-link">← Back to /process/</a>
     </div>
  
+    <!-- Compact hero so the prism scene gets to dominate -->
     <section class="test-hero">
-      <p class="eyebrow">Animation Prototype</p>
-      <h1 class="test-headline">
-        <span class="prism-multicolor">
-          <span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span>
-        </span>
-      </h1>
-      <p class="test-intro">
-        Hover or tap each ray to reveal that phase of the methodology.
-      </p>
+      <p class="test-intro">Hover or tap each ray to reveal that phase of the methodology.</p>
     </section>
  
     <section class="prism-section">
       <div class="prism-row" id="prismRow">
  
+        <!-- Full-row SVG layer with overflow: visible -->
         <svg class="rays-svg" id="raysSvg" viewBox="0 0 1400 500" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
@@ -80,7 +74,7 @@ const phases = [
             <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
  
             <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
             </filter>
           </defs>
  
@@ -97,7 +91,7 @@ const phases = [
           <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
         </svg>
  
-        <!-- LEFT: prism + orb + RAW STORY -->
+        <!-- LEFT zone: RAW STORY + prism (prism on LEFT of zone, far from items) -->
         <div class="prism-side">
           <div class="raw-story-label">RAW STORY</div>
  
@@ -132,7 +126,7 @@ const phases = [
           </div>
         </div>
  
-        <!-- RIGHT: prism items -->
+        <!-- RIGHT zone: items, narrow so the ray gap is huge -->
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -160,13 +154,13 @@ const phases = [
     background: var(--color-bg-deep);
     min-height: 100vh;
     padding-top: 5rem;
-    padding-bottom: 6rem;
+    padding-bottom: 4rem;
   }
  
   .test-banner {
     max-width: 1200px;
-    margin: 0 auto 2.5rem;
-    padding: 1rem 2rem;
+    margin: 0 auto 2rem;
+    padding: 0.85rem 1.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -177,7 +171,7 @@ const phases = [
  
   .test-banner-label {
     font-family: var(--font-wordmark, 'Fjalla One', sans-serif);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--color-accent);
     letter-spacing: 0.2em;
     margin: 0;
@@ -185,7 +179,7 @@ const phases = [
  
   .test-banner-link {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
     text-decoration: none;
     transition: color 0.2s ease;
@@ -195,52 +189,39 @@ const phases = [
     color: var(--color-accent);
   }
  
+  /* Compact hero — just an intro line, no big PRISM headline above */
   .test-hero {
     max-width: 760px;
-    margin: 0 auto 2rem;
+    margin: 0 auto 2.5rem;
     padding: 0 2rem;
     text-align: center;
   }
  
-  .test-headline {
-    font-family: var(--font-sans);
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    font-weight: 200;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    margin: 0.75rem 0 1rem;
-  }
- 
-  .prism-multicolor {
-    font-weight: 200;
-  }
- 
   .test-intro {
-    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
-    max-width: 480px;
-    margin: 0 auto;
+    margin: 0;
     font-weight: 300;
   }
  
-  /* ============ PRISM SECTION — wider to fit the longer rays ============ */
+  /* ============ THE PRISM SECTION — wider than before to fit longer rays ============ */
   .prism-section {
-    max-width: 1500px;
-    margin: 3rem auto 0;
+    max-width: 1700px;
+    margin: 0 auto;
     padding: 0 1.5rem;
   }
  
+  /* Grid layout: prism-side fixed, ray zone expandable (1fr), items-container fixed.
+     With max-width 1700: 240 + 1fr + 680 = 1700, so 1fr = 780 (huge ray zone). */
   .prism-row {
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 240px 1fr 680px;
     align-items: center;
-    justify-content: center;
-    min-height: 560px;
-    gap: 0;
+    min-height: 620px;
   }
  
-  /* SVG layer — covers entire row, overflow visible */
   .rays-svg {
     position: absolute;
     inset: 0;
@@ -261,31 +242,32 @@ const phases = [
     cursor: pointer;
   }
  
-  /* ============ LEFT SIDE ============ */
+  /* ============ LEFT: prism on FAR LEFT of the row ============ */
   .prism-side {
     position: relative;
-    width: 280px;
-    flex-shrink: 0;
-    height: 560px;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    /* prism on the LEFT side of this zone, not the right — gives rays more room to span */
+    justify-content: flex-start;
+    padding-left: 1rem;
     z-index: 2;
   }
  
   .raw-story-label {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    /* RAW STORY sits ABOVE the prism gem (vertically stacked), not to its left */
+    left: 1rem;
+    top: calc(50% - 95px);
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.92);
     letter-spacing: 0.22em;
     text-transform: uppercase;
     pointer-events: none;
     z-index: 3;
+    white-space: nowrap;
     text-shadow:
       0 0 10px rgba(248, 250, 252, 0.7),
       0 0 22px rgba(248, 250, 252, 0.45),
@@ -310,9 +292,8 @@ const phases = [
  
   .prism-container {
     position: relative;
-    width: 150px;
-    height: 150px;
-    margin-right: 30px;
+    width: 170px;
+    height: 170px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -320,17 +301,17 @@ const phases = [
  
   .glass-glow {
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     background: radial-gradient(circle,
-      rgba(212, 117, 111, 0.20) 0%,
-      rgba(245, 213, 137, 0.20) 20%,
-      rgba(163, 188, 126, 0.20) 40%,
-      rgba(134, 168, 201, 0.22) 60%,
-      rgba(165, 131, 181, 0.16) 80%,
+      rgba(212, 117, 111, 0.22) 0%,
+      rgba(245, 213, 137, 0.22) 20%,
+      rgba(163, 188, 126, 0.22) 40%,
+      rgba(134, 168, 201, 0.24) 60%,
+      rgba(165, 131, 181, 0.18) 80%,
       transparent 100%);
     border-radius: 50%;
     z-index: 1;
@@ -344,7 +325,7 @@ const phases = [
       opacity: 0.85;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.18);
+      transform: translate(-50%, -50%) scale(1.2);
       opacity: 1;
     }
   }
@@ -352,9 +333,9 @@ const phases = [
   .prism-gem {
     position: relative;
     z-index: 3;
-    width: 105px;
-    height: 105px;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.45));
     animation: prismPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
@@ -368,24 +349,23 @@ const phases = [
   @keyframes prismPulse {
     0%, 100% {
       transform: scale(1);
-      filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.35));
+      filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.4));
     }
     50% {
       transform: scale(1.08);
-      filter: drop-shadow(0 0 32px rgba(255, 255, 255, 0.55));
+      filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6));
     }
   }
  
-  /* ============ RIGHT SIDE — items container is WIDER for longer rays ============ */
+  /* ============ RIGHT: items-container ============ */
   .items-container {
-    width: 950px;
-    flex-shrink: 0;
     position: relative;
     z-index: 4;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0;
+    align-self: stretch;
   }
  
   .prism-item {
@@ -394,7 +374,7 @@ const phases = [
     align-items: center;
     gap: 1.25rem;
     padding: 0 1.5rem;
-    height: 90px;
+    height: 88px;
     border: 1px solid transparent;
     border-left: none;
     cursor: pointer;
@@ -426,30 +406,30 @@ const phases = [
   .word-title {
     flex-shrink: 0;
     font-family: var(--font-sans);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     color: var(--phase-color);
     line-height: 1;
+    white-space: nowrap;
     text-shadow: 0 0 14px color-mix(in srgb, var(--phase-color) 50%, transparent);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Description is anchored at a FIXED LEFT position (310px from row's left edge)
-     so it never overlaps the word regardless of word length.
-     Sized via right: 1.5rem to fill the rest of the row width.
-     Hidden by translating off to the right at rest. */
+  /* Description: anchored fixed-left, sized via right edge.
+     With items-container 680px: description left:280px right:1.5rem = ~376px wide
+     With max-width cap at 420px for visual containment */
   .description {
     position: absolute;
     top: 50%;
-    left: 310px;
+    left: 280px;
     right: 1.5rem;
-    max-width: 620px;
+    max-width: 420px;
     transform: translateY(-50%) translateX(40px);
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 0.86rem;
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.55;
     color: rgba(255, 255, 255, 0.88);
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -489,35 +469,50 @@ const phases = [
   }
  
   /* ============ MEDIUM SCREENS ============ */
-  @media (max-width: 1300px) {
-    .items-container {
-      width: 800px;
+  @media (max-width: 1450px) {
+    .prism-row {
+      grid-template-columns: 220px 1fr 640px;
+      min-height: 580px;
     }
  
     .description {
-      left: 290px;
-      font-size: 0.9rem;
+      left: 270px;
+      max-width: 380px;
+      font-size: 0.84rem;
     }
   }
  
-  @media (max-width: 1100px) {
-    .items-container {
-      width: 700px;
+  @media (max-width: 1200px) {
+    .prism-row {
+      grid-template-columns: 200px 1fr 600px;
+      min-height: 560px;
     }
  
     .description {
-      left: 280px;
-      font-size: 0.88rem;
+      left: 260px;
+      max-width: 340px;
+      font-size: 0.82rem;
+    }
+ 
+    .glass-glow {
+      width: 200px;
+      height: 200px;
+    }
+ 
+    .prism-gem {
+      width: 110px;
+      height: 110px;
     }
   }
  
   /* ============ MOBILE ============ */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .prism-section {
       padding: 0 1rem;
     }
  
     .prism-row {
+      display: flex;
       flex-direction: column;
       align-items: center;
       min-height: auto;
@@ -532,18 +527,19 @@ const phases = [
       width: auto;
       height: auto;
       padding: 1rem 0;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
     }
  
     .raw-story-label {
       position: static;
       transform: none;
-      margin-bottom: 1.5rem;
+      top: auto;
+      left: auto;
+      margin-bottom: 0.5rem;
       display: block;
       text-align: center;
-    }
- 
-    .prism-container {
-      margin-right: 0;
     }
  
     .items-container {
@@ -602,8 +598,8 @@ const phases = [
     'use strict';
  
     var THIN_HALF = 1.5;
-    var WEDGE_HALF = 40;
-    var HOVER_HALF = 52;
+    var WEDGE_HALF = 44;
+    var HOVER_HALF = 58;
  
     var phases = ['p', 'r', 'i', 's', 'm'];
  
@@ -738,7 +734,7 @@ const phases = [
           });
           item.addEventListener('click', function () {
             if (item.classList.contains('active')) {
-              if (window.innerWidth < 769) {
+              if (window.innerWidth < 901) {
                 deactivateAll();
               }
             } else {
@@ -764,7 +760,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Prism initialized with longer rays + anchored description');
+      console.log('[Process Test] Prism — prism on far left, ray zone dominant');
     }
  
     if (document.readyState === 'loading') {
