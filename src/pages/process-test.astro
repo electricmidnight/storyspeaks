@@ -47,144 +47,141 @@ const phases = [
  
 <BaseLayout
   title="Process Animation Test — The Story Speaks"
-  description="Test page for the PRISM animation prototype."
+  description="Interactive PRISM prototype: hover each ray to reveal its phase."
 >
   <main class="test-page">
  
-    <!-- Test page banner -->
     <div class="test-banner">
-      <p class="test-banner-label">TEST PAGE — Animation Prototype</p>
+      <p class="test-banner-label">TEST PAGE — Interactive PRISM Prototype</p>
       <a href="/process/" class="test-banner-link">← Back to /process/</a>
     </div>
  
     <section class="test-hero">
-      <p class="eyebrow">Animation Prototype</p>
+      <p class="eyebrow">Interactive Prototype</p>
       <h1 class="test-headline">The <span class="prism-multicolor">
         <span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span>
-      </span> Method — Animated</h1>
+      </span> Method</h1>
       <p class="test-intro">
-        A faithful adaptation of the Luminous Story PRISM animation using our color spectrum. The beam enters from the left, the prism appears, and five colored rays fan outward to reveal each phase of the methodology.
+        Hover over each ray to reveal that phase of the methodology. On mobile, tap each ray.
       </p>
     </section>
  
-    <!-- The animation scene -->
-    <section class="animation-stage">
-      <div class="animation-row">
+    <section class="prism-stage">
+      <div class="prism-scene" id="prismScene">
  
-        <!-- Left column: the animation area -->
-        <div class="prism-animation-container" id="prismContainer">
-          <div class="light-beam" id="lightBeam"></div>
-          <div class="raw-story-label" id="rawStoryLabel">RAW STORY</div>
-          <div class="particle-container" id="particleContainer"></div>
+        <!-- RAW STORY label -->
+        <div class="raw-story-label">RAW STORY</div>
  
-          <!-- SVG for the rays. overflow:visible so polygons can extend to the cards. -->
-          <svg class="animation-svg" viewBox="0 0 1100 600" preserveAspectRatio="xMidYMid meet">
+        <!-- The faceted prism in the center -->
+        <div class="prism-gem" id="prismGem">
+          <svg class="prism-gem-svg" viewBox="0 0 100 110" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/>
-                <stop offset="100%" stop-color="rgba(212, 117, 111, 0.85)"/>
-              </linearGradient>
-              <linearGradient id="ray-grad-r" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="rgba(245, 213, 137, 0.35)"/>
-                <stop offset="100%" stop-color="rgba(245, 213, 137, 0.85)"/>
-              </linearGradient>
-              <linearGradient id="ray-grad-i" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="rgba(163, 188, 126, 0.35)"/>
-                <stop offset="100%" stop-color="rgba(163, 188, 126, 0.85)"/>
-              </linearGradient>
-              <linearGradient id="ray-grad-s" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="rgba(134, 168, 201, 0.35)"/>
-                <stop offset="100%" stop-color="rgba(134, 168, 201, 0.85)"/>
-              </linearGradient>
-              <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/>
+              <!-- Front face: vertical rainbow gradient (visible spectrum on the prism) -->
+              <linearGradient id="prism-front-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
+                <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
+                <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
+                <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
                 <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
               </linearGradient>
- 
-              <filter id="ray-blur" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+              <!-- Right side face: darker, neutral -->
+              <linearGradient id="prism-side-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="rgba(40, 55, 80, 0.85)"/>
+                <stop offset="100%" stop-color="rgba(25, 35, 55, 0.85)"/>
+              </linearGradient>
+              <!-- Highlight overlay -->
+              <linearGradient id="prism-highlight-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="rgba(255, 255, 255, 0.4)"/>
+                <stop offset="40%"  stop-color="rgba(255, 255, 255, 0.1)"/>
+                <stop offset="100%" stop-color="rgba(255, 255, 255, 0)"/>
+              </linearGradient>
+              <filter id="prism-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+                <feMerge>
+                  <feMergeNode/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
               </filter>
             </defs>
  
-            <!-- Five rays (initially collapsed at prism center) -->
-            <polygon class="prism-ray" id="ray-p" points="225,300 225,300 225,300"
-              fill="url(#ray-grad-p)"
-              style="opacity: 0; filter: url(#ray-blur);"/>
-            <polygon class="prism-ray" id="ray-r" points="225,300 225,300 225,300"
-              fill="url(#ray-grad-r)"
-              style="opacity: 0; filter: url(#ray-blur);"/>
-            <polygon class="prism-ray" id="ray-i" points="225,300 225,300 225,300"
-              fill="url(#ray-grad-i)"
-              style="opacity: 0; filter: url(#ray-blur);"/>
-            <polygon class="prism-ray" id="ray-s" points="225,300 225,300 225,300"
-              fill="url(#ray-grad-s)"
-              style="opacity: 0; filter: url(#ray-blur);"/>
-            <polygon class="prism-ray" id="ray-m" points="225,300 225,300 225,300"
-              fill="url(#ray-grad-m)"
-              style="opacity: 0; filter: url(#ray-blur);"/>
+            <!-- Right side face (3D depth) -->
+            <polygon points="50,8 80,100 92,92" fill="url(#prism-side-grad)" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+            <!-- Front face (the rainbow) -->
+            <polygon points="50,8 20,100 80,100" fill="url(#prism-front-grad)" stroke="rgba(255,255,255,0.55)" stroke-width="0.8"/>
+            <!-- Highlight on the left edge of front face -->
+            <polygon points="50,8 20,100 32,100 50,30" fill="url(#prism-highlight-grad)" opacity="0.6"/>
+            <!-- Apex highlight -->
+            <circle cx="50" cy="8" r="1.8" fill="rgba(255,255,255,0.95)"/>
           </svg>
- 
-          <!-- The prism pyramid that appears in the center -->
-          <div class="prism-center" id="prismCenter">
-            <svg class="prism-pyramid" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="pyramid-front" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.7)"/>
-                  <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.7)"/>
-                  <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.7)"/>
-                  <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.7)"/>
-                  <stop offset="100%" stop-color="rgba(165, 131, 181, 0.7)"/>
-                </linearGradient>
-                <linearGradient id="pyramid-side" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.5)"/>
-                  <stop offset="100%" stop-color="rgba(165, 131, 181, 0.5)"/>
-                </linearGradient>
-                <radialGradient id="pyramid-highlight">
-                  <stop offset="0%"   stop-color="rgba(255,255,255,0.7)"/>
-                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                </radialGradient>
-              </defs>
- 
-              <!-- Front face -->
-              <polygon points="50,10 8,82 90,82" fill="url(#pyramid-front)"
-                stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-              <!-- Right side face -->
-              <polygon points="50,10 90,82 95,86" fill="url(#pyramid-side)"
-                stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
-              <!-- Glass highlight -->
-              <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#pyramid-highlight)"/>
-              <!-- Apex point -->
-              <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
-            </svg>
-          </div>
         </div>
  
-        <!-- Right column: the five phase cards -->
-        <div class="phase-cards" id="phaseCards">
+        <!-- SVG for rays — overflow:visible lets rays extend to the right edge -->
+        <svg class="rays-svg" viewBox="0 0 1100 600" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="ray-grad-p-test" gradientUnits="userSpaceOnUse" x1="225" y1="300" x2="1000" y2="120">
+              <stop offset="0%" stop-color="rgba(212, 117, 111, 0.3)"/>
+              <stop offset="100%" stop-color="rgba(212, 117, 111, 0.9)"/>
+            </linearGradient>
+            <linearGradient id="ray-grad-r-test" gradientUnits="userSpaceOnUse" x1="225" y1="300" x2="1000" y2="210">
+              <stop offset="0%" stop-color="rgba(245, 213, 137, 0.3)"/>
+              <stop offset="100%" stop-color="rgba(245, 213, 137, 0.9)"/>
+            </linearGradient>
+            <linearGradient id="ray-grad-i-test" gradientUnits="userSpaceOnUse" x1="225" y1="300" x2="1000" y2="300">
+              <stop offset="0%" stop-color="rgba(163, 188, 126, 0.3)"/>
+              <stop offset="100%" stop-color="rgba(163, 188, 126, 0.9)"/>
+            </linearGradient>
+            <linearGradient id="ray-grad-s-test" gradientUnits="userSpaceOnUse" x1="225" y1="300" x2="1000" y2="390">
+              <stop offset="0%" stop-color="rgba(134, 168, 201, 0.3)"/>
+              <stop offset="100%" stop-color="rgba(134, 168, 201, 0.9)"/>
+            </linearGradient>
+            <linearGradient id="ray-grad-m-test" gradientUnits="userSpaceOnUse" x1="225" y1="300" x2="1000" y2="480">
+              <stop offset="0%" stop-color="rgba(165, 131, 181, 0.3)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.9)"/>
+            </linearGradient>
+            <filter id="ray-soft-blur" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+            </filter>
+          </defs>
+ 
+          <!-- Five fanning rays — start narrow at the prism apex, widen at the right edge -->
+          <polygon class="prism-ray" data-phase="p" id="rayP" points="225,300 1000,114 1000,126" fill="url(#ray-grad-p-test)" style="filter: url(#ray-soft-blur);"/>
+          <polygon class="prism-ray" data-phase="r" id="rayR" points="225,300 1000,204 1000,216" fill="url(#ray-grad-r-test)" style="filter: url(#ray-soft-blur);"/>
+          <polygon class="prism-ray" data-phase="i" id="rayI" points="225,300 1000,294 1000,306" fill="url(#ray-grad-i-test)" style="filter: url(#ray-soft-blur);"/>
+          <polygon class="prism-ray" data-phase="s" id="rayS" points="225,300 1000,384 1000,396" fill="url(#ray-grad-s-test)" style="filter: url(#ray-soft-blur);"/>
+          <polygon class="prism-ray" data-phase="m" id="rayM" points="225,300 1000,474 1000,486" fill="url(#ray-grad-m-test)" style="filter: url(#ray-soft-blur);"/>
+        </svg>
+ 
+        <!-- Five hover/tap zones, one per ray. These are wider regions that catch the cursor. -->
+        <div class="ray-zones">
           {phases.map((phase) => (
-            <article
-              class={`phase-card phase-card-${phase.letter.toLowerCase()}`}
+            <div
+              class={`ray-zone ray-zone-${phase.letter.toLowerCase()}`}
+              data-phase={phase.letter.toLowerCase()}
+              role="button"
+              tabindex="0"
+              aria-label={`Reveal ${phase.name} phase`}
+            ></div>
+          ))}
+        </div>
+ 
+        <!-- Phase reveal panels — one per ray, positioned at the right end of each ray -->
+        <div class="phase-reveals">
+          {phases.map((phase) => (
+            <div
+              class={`phase-reveal phase-reveal-${phase.letter.toLowerCase()}`}
               data-phase={phase.letter.toLowerCase()}
               style={`--phase-color: ${phase.colorHex}; --phase-color-rgb: ${phase.colorRgb};`}
             >
-              <div class="phase-letter-anim">{phase.letter}</div>
-              <div class="phase-content">
+              <div class="phase-letter-badge">{phase.letter}</div>
+              <div class="phase-text">
                 <h3 class="phase-name">{phase.name}</h3>
                 <p class="phase-subtitle">{phase.subtitle}</p>
                 <p class="phase-description">{phase.description}</p>
               </div>
-            </article>
+            </div>
           ))}
         </div>
  
-      </div>
- 
-      <!-- Replay button -->
-      <div class="replay-wrapper">
-        <button class="replay-button" id="replayBtn" type="button">
-          <span class="replay-icon" aria-hidden="true">↻</span>
-          <span>REPLAY ANIMATION</span>
-        </button>
       </div>
     </section>
  
@@ -192,7 +189,6 @@ const phases = [
 </BaseLayout>
  
 <style>
-  /* ============ PAGE FOUNDATION ============ */
   .test-page {
     background: var(--color-bg-deep);
     min-height: 100vh;
@@ -234,7 +230,7 @@ const phases = [
  
   .test-hero {
     max-width: 760px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 3rem;
     padding: 0 2rem;
     text-align: center;
   }
@@ -256,205 +252,178 @@ const phases = [
     font-size: clamp(0.9rem, 1.3vw, 1rem);
     line-height: 1.7;
     color: var(--color-text-muted);
-    max-width: 600px;
+    max-width: 540px;
     margin: 0 auto;
     font-weight: 300;
   }
  
-  /* ============ ANIMATION STAGE ============ */
-  .animation-stage {
+  /* ============ THE PRISM STAGE ============ */
+  .prism-stage {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 2rem;
   }
  
-  .animation-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-  }
- 
-  /* ============ PRISM ANIMATION CONTAINER ============ */
-  .prism-animation-container {
+  .prism-scene {
     position: relative;
     width: 100%;
-    max-width: 450px;
-    height: 450px;
-    flex-shrink: 0;
+    height: clamp(500px, 65vh, 700px);
+    margin: 0 auto;
   }
  
-  .animation-svg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    overflow: visible; /* Critical — lets rays extend to the cards on the right */
-    pointer-events: none;
-  }
- 
-  /* Light beam shooting in from the left */
-  .light-beam {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 5px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(245, 213, 137, 1));
-    opacity: 0;
-    filter: blur(2px);
-    box-shadow: 0 0 18px rgba(245, 213, 137, 0.8), 0 0 36px rgba(245, 213, 137, 0.4);
-    pointer-events: none;
-  }
- 
-  .light-beam.animating {
-    animation: beamShoot 0.6s ease-out forwards;
-  }
- 
-  @keyframes beamShoot {
-    0%   { opacity: 0; width: 0; }
-    5%   { opacity: 1; width: 30px; }
-    100% { opacity: 1; width: 175px; }
-  }
- 
-  /* RAW STORY label */
+  /* RAW STORY label, left of prism */
   .raw-story-label {
     position: absolute;
-    left: 0;
+    left: 8%;
     top: 50%;
-    transform: translate(-2.5rem, calc(-50% - 1.5rem));
+    transform: translateY(-50%);
     font-family: var(--font-sans);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    opacity: 0;
-    white-space: nowrap;
     pointer-events: none;
+    z-index: 3;
   }
  
-  .raw-story-label.animating {
-    animation: labelReveal 0.6s ease-out forwards;
-  }
- 
-  @keyframes labelReveal {
-    0%   { opacity: 0; }
-    5%   { opacity: 1; }
-    100% { opacity: 1; }
-  }
- 
-  /* Particle container & particles */
-  .particle-container {
+  /* The faceted prism gem in the center */
+  .prism-gem {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-  }
- 
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
- 
-  /* The prism pyramid in the center */
-  .prism-center {
-    position: absolute;
-    left: 50%;
+    left: 15%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 90px;
-    height: 90px;
-    opacity: 0;
-    pointer-events: none;
-    filter: drop-shadow(0 0 20px rgba(245, 213, 137, 0.5));
+    transform: translate(-50%, -50%);
+    width: clamp(75px, 9vw, 110px);
+    height: clamp(82px, 10vw, 121px);
+    z-index: 4;
+    filter: drop-shadow(0 0 25px rgba(245, 213, 137, 0.35));
+    animation: prismPulse 4.5s ease-in-out infinite;
   }
  
-  .prism-center.appearing {
-    animation: prismAppear 0.33s ease forwards;
-  }
- 
-  .prism-center.pulsing {
-    animation: prismPulse 3s ease-in-out infinite;
-  }
- 
-  .prism-pyramid {
+  .prism-gem-svg {
     width: 100%;
     height: 100%;
-  }
- 
-  @keyframes prismAppear {
-    from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    display: block;
   }
  
   @keyframes prismPulse {
     0%, 100% {
-      transform: translate(-50%, -50%) scale(1);
-      filter: brightness(1) drop-shadow(0 0 20px rgba(245, 213, 137, 0.5));
+      filter: drop-shadow(0 0 22px rgba(245, 213, 137, 0.3));
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.11);
-      filter: brightness(1.15) drop-shadow(0 0 32px rgba(245, 213, 137, 0.7));
+      filter: drop-shadow(0 0 38px rgba(245, 213, 137, 0.55));
     }
   }
  
-  /* Rays use CSS transition for smooth point animation */
-  .prism-ray {
-    transition: opacity 0.35s ease;
-  }
- 
-  /* ============ PHASE CARDS (right column) ============ */
-  .phase-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
+  /* The SVG holding the five rays */
+  .rays-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    max-width: 600px;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 2;
   }
  
-  .phase-card {
+  /* Default ray state: dim, ready to be activated */
+  .prism-ray {
+    opacity: 0.45;
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), points 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+ 
+  .prism-ray.dimmed {
+    opacity: 0.15;
+  }
+ 
+  .prism-ray.active {
+    opacity: 1;
+  }
+ 
+  /* ============ RAY HOVER/TAP ZONES ============ */
+  /* These are large invisible areas that catch the cursor near each ray */
+  .ray-zones {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+ 
+  .ray-zone {
+    position: absolute;
+    cursor: pointer;
+    pointer-events: all;
+    /* Wedge shape from prism to right edge using clip-path */
+    left: 15%;
+    width: 75%;
+    height: 18%;
+  }
+ 
+  /* Position each zone vertically to align with its ray */
+  .ray-zone-p { top: 11%; clip-path: polygon(0% 80%, 0% 100%, 100% 0%, 100% 20%); }
+  .ray-zone-r { top: 27%; clip-path: polygon(0% 60%, 0% 100%, 100% 25%, 100% 45%); }
+  .ray-zone-i { top: 41%; clip-path: polygon(0% 40%, 0% 60%, 100% 45%, 100% 55%); }
+  .ray-zone-s { top: 55%; clip-path: polygon(0% 0%, 0% 40%, 100% 55%, 100% 75%); }
+  .ray-zone-m { top: 71%; clip-path: polygon(0% 0%, 0% 20%, 100% 80%, 100% 100%); }
+ 
+  /* ============ PHASE REVEAL PANELS ============ */
+  /* Each phase reveal sits at the right end of its ray, hidden by default */
+  .phase-reveals {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 6;
+  }
+ 
+  .phase-reveal {
+    position: absolute;
+    right: 0;
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     padding: 1.25rem 1.5rem;
-    background: color-mix(in srgb, var(--phase-color) 6%, transparent);
-    border: 1px solid color-mix(in srgb, var(--phase-color) 35%, transparent);
+    width: clamp(280px, 42%, 500px);
+    background: color-mix(in srgb, var(--phase-color) 12%, rgba(10, 22, 40, 0.95));
+    border: 1px solid color-mix(in srgb, var(--phase-color) 60%, transparent);
     border-radius: 4px;
+    box-shadow: 0 0 32px color-mix(in srgb, var(--phase-color) 35%, transparent),
+                0 0 64px color-mix(in srgb, var(--phase-color) 18%, transparent);
     opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.27s ease, transform 0.27s ease;
+    transform: translateX(20px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
   }
  
-  .phase-card.appearing {
+  /* Vertical position of each reveal matches its ray endpoint */
+  .phase-reveal-p { top: 8%; }
+  .phase-reveal-r { top: 26%; }
+  .phase-reveal-i { top: 44%; }
+  .phase-reveal-s { top: 62%; }
+  .phase-reveal-m { top: 80%; }
+ 
+  .phase-reveal.visible {
     opacity: 1;
     transform: translateX(0);
   }
  
-  .phase-letter-anim {
+  .phase-letter-badge {
     flex-shrink: 0;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-sans);
-    font-size: 2.25rem;
+    font-size: 2rem;
     font-weight: 200;
     color: var(--phase-color);
-    background: color-mix(in srgb, var(--phase-color) 12%, transparent);
-    border: 1px solid color-mix(in srgb, var(--phase-color) 50%, transparent);
+    border: 1.5px solid var(--phase-color);
     border-radius: 4px;
-    box-shadow: 0 0 18px color-mix(in srgb, var(--phase-color) 35%, transparent);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--phase-color) 70%, transparent);
   }
  
-  .phase-content {
+  .phase-text {
     flex: 1;
     min-width: 0;
   }
@@ -465,7 +434,7 @@ const phases = [
     font-weight: 600;
     letter-spacing: 0.18em;
     color: var(--phase-color);
-    margin: 0 0 0.35rem;
+    margin: 0 0 0.3rem;
     line-height: 1;
   }
  
@@ -488,70 +457,16 @@ const phases = [
     margin: 0;
   }
  
-  /* ============ REPLAY BUTTON ============ */
-  .replay-wrapper {
-    margin-top: 4rem;
-    text-align: center;
-  }
- 
-  .replay-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.85rem 1.75rem;
-    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-    border: 1px solid var(--color-accent);
-    border-radius: 2px;
-    color: var(--color-accent);
-    font-family: var(--font-wordmark, 'Fjalla One', sans-serif);
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
- 
-  .replay-button:hover {
-    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
-    transform: translateY(-1px);
-  }
- 
-  .replay-icon {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0;
-  }
- 
-  /* ============ DESKTOP LAYOUT ============ */
+  /* ============ DESKTOP REFINEMENTS ============ */
   @media (min-width: 992px) {
     .test-page {
       padding-top: 8rem;
     }
  
-    .animation-row {
-      flex-direction: row;
-      align-items: center;
-      gap: 4rem;
-      min-height: 600px;
-    }
- 
-    .prism-animation-container {
-      width: 450px;
-      height: 600px;
-      max-width: 450px;
-      flex-shrink: 0;
-    }
- 
-    .phase-cards {
-      max-width: 580px;
-    }
- 
-    .phase-letter-anim {
-      width: 70px;
-      height: 70px;
-      font-size: 2.5rem;
+    .phase-letter-badge {
+      width: 64px;
+      height: 64px;
+      font-size: 2.4rem;
     }
  
     .phase-name {
@@ -566,257 +481,114 @@ const phases = [
       font-size: 0.9rem;
     }
   }
+ 
+  /* ============ MOBILE FALLBACK ============ */
+  @media (max-width: 640px) {
+    .prism-scene {
+      height: 560px;
+    }
+ 
+    .raw-story-label {
+      font-size: 0.65rem;
+      left: 4%;
+    }
+ 
+    .phase-reveal {
+      width: 60%;
+      padding: 0.85rem 1rem;
+    }
+ 
+    .phase-letter-badge {
+      width: 42px;
+      height: 42px;
+      font-size: 1.5rem;
+    }
+  }
 </style>
  
 <script is:inline>
   (function () {
     'use strict';
  
-    var PARTICLE_COUNT = 40;
-    var SVG_VIEW_WIDTH = 1100;
-    var SVG_VIEW_HEIGHT = 600;
-    var PRISM_CENTER_X = 225; // SVG coordinates
-    var PRISM_CENTER_Y = 300;
-    var RAY_FAN_WIDTH = 16; // perpendicular half-width at the target
+    var rays = ['p', 'r', 'i', 'isn', 's', 'm'];
+    var allRays = document.querySelectorAll('.prism-ray');
+    var allReveals = document.querySelectorAll('.phase-reveal');
+    var allZones = document.querySelectorAll('.ray-zone');
  
-    var COLORS = {
-      p: 'rgba(212, 117, 111, 0.8)',
-      r: 'rgba(245, 213, 137, 0.8)',
-      i: 'rgba(163, 188, 126, 0.8)',
-      s: 'rgba(134, 168, 201, 0.8)',
-      m: 'rgba(165, 131, 181, 0.8)'
-    };
- 
-    var COLOR_LIST = [COLORS.p, COLORS.r, COLORS.i, COLORS.s, COLORS.m];
- 
-    var RAY_CONFIG = [
-      { id: 'ray-p', gradientId: 'ray-grad-p', cardLetter: 'p', delay: 833 },
-      { id: 'ray-r', gradientId: 'ray-grad-r', cardLetter: 'r', delay: 900 },
-      { id: 'ray-i', gradientId: 'ray-grad-i', cardLetter: 'i', delay: 967 },
-      { id: 'ray-s', gradientId: 'ray-grad-s', cardLetter: 's', delay: 1033 },
-      { id: 'ray-m', gradientId: 'ray-grad-m', cardLetter: 'm', delay: 1100 }
-    ];
- 
-    function easeInOutQuart(t) {
-      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
-    }
- 
-    function createParticles() {
-      var container = document.getElementById('particleContainer');
-      if (!container) return;
-      container.innerHTML = '';
- 
-      var containerWidth = container.offsetWidth;
-      var containerHeight = container.offsetHeight;
-      var centerX = containerWidth / 2;
-      var centerY = containerHeight / 2;
-      var maxDistance = Math.min(containerWidth, containerHeight) * 0.45;
- 
-      for (var i = 0; i < PARTICLE_COUNT; i++) {
-        var particle = document.createElement('div');
-        particle.className = 'particle';
- 
-        var angle = Math.random() * Math.PI * 2;
-        var distance = maxDistance * (0.7 + Math.random() * 0.3);
-        var startX = centerX + Math.cos(angle) * distance;
-        var startY = centerY + Math.sin(angle) * distance;
- 
-        var size = 2 + Math.random() * 3;
-        var color = COLOR_LIST[Math.floor(Math.random() * COLOR_LIST.length)];
-        var delay = Math.random() * 0.3;
- 
-        particle.style.left = startX + 'px';
-        particle.style.top = startY + 'px';
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.background = color;
-        particle.style.boxShadow = '0 0 ' + (6 + Math.random() * 10) + 'px ' + color;
-        particle.style.opacity = '0';
- 
-        particle.dataset.startX = startX;
-        particle.dataset.startY = startY;
-        particle.dataset.centerX = centerX;
-        particle.dataset.centerY = centerY;
-        particle.dataset.delay = delay;
- 
-        container.appendChild(particle);
-      }
-    }
- 
-    function animateParticles() {
-      var particles = document.querySelectorAll('.particle');
-      var duration = 667;
-      var startTime = Date.now();
- 
-      function step() {
-        var elapsed = Date.now() - startTime;
-        var progress = Math.min(elapsed / duration, 1);
- 
-        for (var i = 0; i < particles.length; i++) {
-          var p = particles[i];
-          var delay = parseFloat(p.dataset.delay) * 1000;
-          var pProgress = Math.max(0, Math.min(1, (elapsed - delay) / duration));
-          var eased = easeInOutQuart(pProgress);
- 
-          var sx = parseFloat(p.dataset.startX);
-          var sy = parseFloat(p.dataset.startY);
-          var cx = parseFloat(p.dataset.centerX);
-          var cy = parseFloat(p.dataset.centerY);
- 
-          var x = sx + (cx - sx) * eased;
-          var y = sy + (cy - sy) * eased;
- 
-          p.style.left = x + 'px';
-          p.style.top = y + 'px';
-          p.style.opacity = String(pProgress * 0.8);
-        }
- 
-        if (progress < 1) {
-          requestAnimationFrame(step);
+    function activatePhase(phase) {
+      // Highlight target ray, dim others
+      for (var i = 0; i < allRays.length; i++) {
+        var ray = allRays[i];
+        var rayPhase = ray.getAttribute('data-phase');
+        ray.classList.remove('dimmed', 'active');
+        if (rayPhase === phase) {
+          ray.classList.add('active');
         } else {
-          setTimeout(function () {
-            for (var i = 0; i < particles.length; i++) {
-              particles[i].style.transition = 'opacity 0.6s ease';
-              particles[i].style.opacity = '0';
-            }
-          }, 500);
+          ray.classList.add('dimmed');
         }
       }
- 
-      step();
-    }
- 
-    function animateRays() {
-      var container = document.getElementById('prismContainer');
-      if (!container) return;
- 
-      RAY_CONFIG.forEach(function (rayConfig) {
-        setTimeout(function () {
-          var ray = document.getElementById(rayConfig.id);
-          var gradient = document.getElementById(rayConfig.gradientId);
-          var card = document.querySelector('.phase-card[data-phase="' + rayConfig.cardLetter + '"]');
-          var letterEl = card ? card.querySelector('.phase-letter-anim') : null;
- 
-          if (!ray || !letterEl || !container) return;
- 
-          // Reveal the card
-          if (card) card.classList.add('appearing');
- 
-          // Compute target position in SVG viewBox coordinates
-          var letterRect = letterEl.getBoundingClientRect();
-          var containerRect = container.getBoundingClientRect();
-          var letterCenterX = letterRect.left - containerRect.left + letterRect.width / 2;
-          var letterCenterY = letterRect.top - containerRect.top + letterRect.height / 2;
- 
-          var targetX = (letterCenterX / container.offsetWidth) * SVG_VIEW_WIDTH;
-          var targetY = (letterCenterY / container.offsetHeight) * SVG_VIEW_HEIGHT;
- 
-          // Build a fanning triangle: point at prism center, wider at target
-          var dx = targetX - PRISM_CENTER_X;
-          var dy = targetY - PRISM_CENTER_Y;
-          var len = Math.sqrt(dx * dx + dy * dy);
-          if (len === 0) return;
- 
-          // Perpendicular unit vector (for the fan width)
-          var perpX = -dy / len * RAY_FAN_WIDTH;
-          var perpY = dx / len * RAY_FAN_WIDTH;
- 
-          var p1 = PRISM_CENTER_X + ',' + PRISM_CENTER_Y;
-          var p2 = (targetX + perpX) + ',' + (targetY + perpY);
-          var p3 = (targetX - perpX) + ',' + (targetY - perpY);
- 
-          // Update gradient direction so the brighter end is at the target
-          if (gradient) {
-            gradient.setAttribute('x1', String(PRISM_CENTER_X));
-            gradient.setAttribute('y1', String(PRISM_CENTER_Y));
-            gradient.setAttribute('x2', String(targetX));
-            gradient.setAttribute('y2', String(targetY));
-          }
- 
-          // Animate the polygon's points and opacity
-          // We use a brief setTimeout to ensure CSS picks up the transition
-          ray.setAttribute('points', p1 + ' ' + p2 + ' ' + p3);
-          ray.style.opacity = '0.9';
-        }, rayConfig.delay);
-      });
-    }
- 
-    function resetAnimation() {
-      var beam = document.getElementById('lightBeam');
-      var label = document.getElementById('rawStoryLabel');
-      var prismCenter = document.getElementById('prismCenter');
- 
-      if (beam) {
-        beam.classList.remove('animating');
-        beam.style.width = '0';
-        beam.style.opacity = '0';
-      }
-      if (label) {
-        label.classList.remove('animating');
-        label.style.opacity = '0';
-      }
-      if (prismCenter) {
-        prismCenter.classList.remove('appearing', 'pulsing');
-        prismCenter.style.opacity = '0';
-        prismCenter.style.transform = 'translate(-50%, -50%) scale(0)';
-      }
- 
-      var cards = document.querySelectorAll('.phase-card');
-      for (var i = 0; i < cards.length; i++) {
-        cards[i].classList.remove('appearing');
-      }
- 
-      var rays = document.querySelectorAll('.prism-ray');
-      for (var j = 0; j < rays.length; j++) {
-        rays[j].style.opacity = '0';
-        rays[j].setAttribute('points', PRISM_CENTER_X + ',' + PRISM_CENTER_Y + ' ' + PRISM_CENTER_X + ',' + PRISM_CENTER_Y + ' ' + PRISM_CENTER_X + ',' + PRISM_CENTER_Y);
+      // Show matching reveal
+      for (var j = 0; j < allReveals.length; j++) {
+        var reveal = allReveals[j];
+        if (reveal.getAttribute('data-phase') === phase) {
+          reveal.classList.add('visible');
+        } else {
+          reveal.classList.remove('visible');
+        }
       }
     }
  
-    function startAnimation() {
-      resetAnimation();
-      createParticles();
+    function deactivateAll() {
+      for (var i = 0; i < allRays.length; i++) {
+        allRays[i].classList.remove('dimmed', 'active');
+      }
+      for (var j = 0; j < allReveals.length; j++) {
+        allReveals[j].classList.remove('visible');
+      }
+    }
  
-      // Brief delay so reset takes effect before animation starts
-      setTimeout(function () {
-        var beam = document.getElementById('lightBeam');
-        var label = document.getElementById('rawStoryLabel');
-        var prismCenter = document.getElementById('prismCenter');
+    function attachZoneHandlers() {
+      for (var i = 0; i < allZones.length; i++) {
+        var zone = allZones[i];
+        var phase = zone.getAttribute('data-phase');
  
-        if (beam) beam.classList.add('animating');
-        if (label) label.classList.add('animating');
- 
-        animateParticles();
- 
-        // Prism center appears after beam reaches it
-        setTimeout(function () {
-          if (prismCenter) {
-            prismCenter.classList.add('appearing');
-            // After it finishes appearing, start the infinite pulse
-            setTimeout(function () {
-              prismCenter.classList.add('pulsing');
-            }, 350);
-          }
-        }, 600);
- 
-        animateRays();
-      }, 50);
+        (function (zoneEl, phaseValue) {
+          zoneEl.addEventListener('mouseenter', function () {
+            activatePhase(phaseValue);
+          });
+          zoneEl.addEventListener('mouseleave', function () {
+            deactivateAll();
+          });
+          // Touch / tap support for mobile
+          zoneEl.addEventListener('click', function (e) {
+            e.preventDefault();
+            // Toggle: if already active, hide; otherwise activate
+            var reveal = document.querySelector('.phase-reveal[data-phase="' + phaseValue + '"]');
+            if (reveal && reveal.classList.contains('visible')) {
+              deactivateAll();
+            } else {
+              activatePhase(phaseValue);
+            }
+          });
+          zoneEl.addEventListener('focus', function () {
+            activatePhase(phaseValue);
+          });
+          zoneEl.addEventListener('blur', function () {
+            deactivateAll();
+          });
+          zoneEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              activatePhase(phaseValue);
+            }
+          });
+        })(zone, phase);
+      }
     }
  
     function init() {
-      var replayBtn = document.getElementById('replayBtn');
-      if (replayBtn) {
-        replayBtn.addEventListener('click', function () {
-          startAnimation();
-        });
-      }
- 
-      // Start animation on initial page load with a brief delay so layout settles
-      setTimeout(function () {
-        startAnimation();
-      }, 300);
- 
-      console.log('[Process Test] PRISM animation initialized');
+      attachZoneHandlers();
+      console.log('[Process Test] Interactive prism initialized with', allZones.length, 'zones');
     }
  
     if (document.readyState === 'loading') {
