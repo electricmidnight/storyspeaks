@@ -60,57 +60,58 @@ const phases = [
       <p class="process-intro">
         Most agencies promise creative magic. PRISM delivers strategic certainty. A proprietary narrative architecture designed to translate complex truth into resonant human experience.
       </p>
- 
-      <div class="hero-prism">
-        <svg class="prism-svg" viewBox="0 0 280 175" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <defs>
-            <linearGradient id="incoming-hero" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#f5d589" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#f5d589" stop-opacity="1"/>
-            </linearGradient>
-            <linearGradient id="ray-p-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d4756f" stop-opacity="1"/><stop offset="100%" stop-color="#d4756f" stop-opacity="0.45"/></linearGradient>
-            <linearGradient id="ray-r-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f5d589" stop-opacity="1"/><stop offset="100%" stop-color="#f5d589" stop-opacity="0.45"/></linearGradient>
-            <linearGradient id="ray-i-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a3bc7e" stop-opacity="1"/><stop offset="100%" stop-color="#a3bc7e" stop-opacity="0.45"/></linearGradient>
-            <linearGradient id="ray-s-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#86a8c9" stop-opacity="1"/><stop offset="100%" stop-color="#86a8c9" stop-opacity="0.45"/></linearGradient>
-            <linearGradient id="ray-m-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a583b5" stop-opacity="1"/><stop offset="100%" stop-color="#a583b5" stop-opacity="0.45"/></linearGradient>
-            <linearGradient id="prism-glass-hero" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stop-color="#d4756f" stop-opacity="0.65"/>
-              <stop offset="25%"  stop-color="#f5d589" stop-opacity="0.65"/>
-              <stop offset="50%"  stop-color="#a3bc7e" stop-opacity="0.65"/>
-              <stop offset="75%"  stop-color="#86a8c9" stop-opacity="0.65"/>
-              <stop offset="100%" stop-color="#a583b5" stop-opacity="0.65"/>
-            </linearGradient>
-            <filter id="ray-glow-hero" x="-20%" y="-50%" width="140%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
- 
-          <text x="32" y="80" text-anchor="end" class="raw-label">RAW</text>
-          <text x="32" y="92" text-anchor="end" class="raw-label">STORY</text>
- 
-          <line x1="36" y1="87" x2="48" y2="87" stroke="url(#incoming-hero)" stroke-width="2.5"/>
- 
-          <polygon points="50,50 50,124 76,87" fill="url(#prism-glass-hero)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.2"/>
- 
-          <g filter="url(#ray-glow-hero)">
-            <polygon points="76,87 240,15 240,28" fill="url(#ray-p-hero)"/>
-            <polygon points="76,87 240,50 240,63" fill="url(#ray-r-hero)"/>
-            <polygon points="76,87 240,82 240,95" fill="url(#ray-i-hero)"/>
-            <polygon points="76,87 240,114 240,127" fill="url(#ray-s-hero)"/>
-            <polygon points="76,87 240,146 240,159" fill="url(#ray-m-hero)"/>
-          </g>
- 
-          <g class="prism-cap-letters">
-            <text x="260" y="27" text-anchor="middle" fill="#d4756f">P</text>
-            <text x="260" y="60" text-anchor="middle" fill="#f5d589">R</text>
-            <text x="260" y="93" text-anchor="middle" fill="#a3bc7e">I</text>
-            <text x="260" y="124" text-anchor="middle" fill="#86a8c9">S</text>
-            <text x="260" y="158" text-anchor="middle" fill="#a583b5">M</text>
-          </g>
-        </svg>
-      </div>
     </section>
+ 
+    <!-- Prism illustration — own container, wider than the text hero -->
+    <div class="hero-prism">
+      <svg class="prism-svg" viewBox="0 0 280 175" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="incoming-hero" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f5d589" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#f5d589" stop-opacity="1"/>
+          </linearGradient>
+          <linearGradient id="ray-p-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d4756f" stop-opacity="1"/><stop offset="100%" stop-color="#d4756f" stop-opacity="0.45"/></linearGradient>
+          <linearGradient id="ray-r-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f5d589" stop-opacity="1"/><stop offset="100%" stop-color="#f5d589" stop-opacity="0.45"/></linearGradient>
+          <linearGradient id="ray-i-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a3bc7e" stop-opacity="1"/><stop offset="100%" stop-color="#a3bc7e" stop-opacity="0.45"/></linearGradient>
+          <linearGradient id="ray-s-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#86a8c9" stop-opacity="1"/><stop offset="100%" stop-color="#86a8c9" stop-opacity="0.45"/></linearGradient>
+          <linearGradient id="ray-m-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a583b5" stop-opacity="1"/><stop offset="100%" stop-color="#a583b5" stop-opacity="0.45"/></linearGradient>
+          <linearGradient id="prism-glass-hero" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#d4756f" stop-opacity="0.65"/>
+            <stop offset="25%"  stop-color="#f5d589" stop-opacity="0.65"/>
+            <stop offset="50%"  stop-color="#a3bc7e" stop-opacity="0.65"/>
+            <stop offset="75%"  stop-color="#86a8c9" stop-opacity="0.65"/>
+            <stop offset="100%" stop-color="#a583b5" stop-opacity="0.65"/>
+          </linearGradient>
+          <filter id="ray-glow-hero" x="-20%" y="-50%" width="140%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+ 
+        <text x="32" y="80" text-anchor="end" class="raw-label">RAW</text>
+        <text x="32" y="92" text-anchor="end" class="raw-label">STORY</text>
+ 
+        <line x1="36" y1="87" x2="48" y2="87" stroke="url(#incoming-hero)" stroke-width="2.5"/>
+ 
+        <polygon points="50,50 50,124 76,87" fill="url(#prism-glass-hero)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.2"/>
+ 
+        <g filter="url(#ray-glow-hero)">
+          <polygon points="76,87 240,15 240,28" fill="url(#ray-p-hero)"/>
+          <polygon points="76,87 240,50 240,63" fill="url(#ray-r-hero)"/>
+          <polygon points="76,87 240,82 240,95" fill="url(#ray-i-hero)"/>
+          <polygon points="76,87 240,114 240,127" fill="url(#ray-s-hero)"/>
+          <polygon points="76,87 240,146 240,159" fill="url(#ray-m-hero)"/>
+        </g>
+ 
+        <g class="prism-cap-letters">
+          <text x="260" y="27" text-anchor="middle" fill="#d4756f">P</text>
+          <text x="260" y="60" text-anchor="middle" fill="#f5d589">R</text>
+          <text x="260" y="93" text-anchor="middle" fill="#a3bc7e">I</text>
+          <text x="260" y="124" text-anchor="middle" fill="#86a8c9">S</text>
+          <text x="260" y="158" text-anchor="middle" fill="#a583b5">M</text>
+        </g>
+      </svg>
+    </div>
  
     <section class="phases-section">
       <div class="phases-row">
@@ -137,71 +138,74 @@ const phases = [
       </a>
     </div>
  
+    <!-- Science section is now a full-width panel with lifted background + gold gradient rule markers -->
     <section class="science-section" id="science">
-      <div class="science-eyebrow-wrapper">
-        <span class="science-eyebrow-rule"></span>
-        <p class="eyebrow science-eyebrow">The Science</p>
-        <span class="science-eyebrow-rule"></span>
-      </div>
+      <div class="science-section-inner">
+        <div class="science-eyebrow-wrapper">
+          <span class="science-eyebrow-rule"></span>
+          <p class="eyebrow science-eyebrow">The Science</p>
+          <span class="science-eyebrow-rule"></span>
+        </div>
  
-      <h2 class="science-headline">
-        <span class="science-headline-stories">STORIES</span>
-        <span class="science-headline-engineer">ENGINEER</span>
-        <span class="science-headline-influence">INFLUENCE.</span>
-      </h2>
+        <h2 class="science-headline">
+          <span class="science-headline-stories">STORIES</span>
+          <span class="science-headline-engineer">ENGINEER</span>
+          <span class="science-headline-influence">INFLUENCE.</span>
+        </h2>
  
-      <p class="science-subtitle">
-        Story is the only evolutionary technology proven to synchronize the brain, bypass logic, and compel action. <span class="prism-multicolor"><span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span></span> is the architecture for harnessing these biological levers.
-      </p>
+        <p class="science-subtitle">
+          Story is the only evolutionary technology proven to synchronize the brain, bypass logic, and compel action. <span class="prism-multicolor"><span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span></span> is the architecture for harnessing these biological levers.
+        </p>
  
-      <div class="science-cards">
-        <article class="science-card">
-          <div class="science-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
-              <line x1="30" y1="22" x2="30" y2="10" stroke="currentColor" stroke-width="2"/>
-              <line x1="30" y1="38" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
-              <line x1="38" y1="30" x2="50" y2="30" stroke="currentColor" stroke-width="2"/>
-              <line x1="22" y1="30" x2="10" y2="30" stroke="currentColor" stroke-width="2"/>
-              <line x1="36" y1="36" x2="45" y2="45" stroke="currentColor" stroke-width="2"/>
-              <line x1="24" y1="24" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <h3 class="science-card-title">The Attention Hack</h3>
-          <p class="science-card-subtitle">(Cortisol)</p>
-          <p class="science-card-body">
-            The brain is wired to ignore the predictable. It craves conflict. A narrative structured around high-stakes tension triggers a biological response — focus, in a distracted world. The work doesn't ask for attention; it seizes it.
-          </p>
-        </article>
+        <div class="science-cards">
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                <line x1="30" y1="22" x2="30" y2="10" stroke="currentColor" stroke-width="2"/>
+                <line x1="30" y1="38" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
+                <line x1="38" y1="30" x2="50" y2="30" stroke="currentColor" stroke-width="2"/>
+                <line x1="22" y1="30" x2="10" y2="30" stroke="currentColor" stroke-width="2"/>
+                <line x1="36" y1="36" x2="45" y2="45" stroke="currentColor" stroke-width="2"/>
+                <line x1="24" y1="24" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Attention Hack</h3>
+            <p class="science-card-subtitle">(Cortisol)</p>
+            <p class="science-card-body">
+              The brain is wired to ignore the predictable. It craves conflict. A narrative structured around high-stakes tension triggers a biological response — focus, in a distracted world. The work doesn't ask for attention; it seizes it.
+            </p>
+          </article>
  
-        <article class="science-card">
-          <div class="science-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 60 60" fill="none">
-              <path d="M5 30 L15 20 L25 35 L35 15 L45 40 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5 30 L15 25 L25 32 L35 20 L45 38 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-            </svg>
-          </div>
-          <h3 class="science-card-title">The Empathy Engine</h3>
-          <p class="science-card-subtitle">(Oxytocin)</p>
-          <p class="science-card-body">
-            Facts inform, but stories connect. When an audience identifies with a character's struggle, their brain releases oxytocin — the "trust molecule." This bridges the gap between your brand and your audience, turning skepticism into solidarity.
-          </p>
-        </article>
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <path d="M5 30 L15 20 L25 35 L35 15 L45 40 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 30 L15 25 L25 32 L35 20 L45 38 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Empathy Engine</h3>
+            <p class="science-card-subtitle">(Oxytocin)</p>
+            <p class="science-card-body">
+              Facts inform, but stories connect. When an audience identifies with a character's struggle, their brain releases oxytocin — the "trust molecule." This bridges the gap between your brand and your audience, turning skepticism into solidarity.
+            </p>
+          </article>
  
-        <article class="science-card">
-          <div class="science-card-icon" aria-hidden="true">
-            <svg viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="4" fill="currentColor"/>
-              <circle cx="30" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
-              <circle cx="30" cy="30" r="20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
-            </svg>
-          </div>
-          <h3 class="science-card-title">The Action Protocol</h3>
-          <p class="science-card-subtitle">(Narrative Transportation)</p>
-          <p class="science-card-body">
-            When a story is architected correctly, the viewer enters a state of "Narrative Transportation." They cease to be an observer and become a participant. In this state, beliefs are malleable, and the impulse to act becomes internal, not external.
-          </p>
-        </article>
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="4" fill="currentColor"/>
+                <circle cx="30" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+                <circle cx="30" cy="30" r="20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Action Protocol</h3>
+            <p class="science-card-subtitle">(Narrative Transportation)</p>
+            <p class="science-card-body">
+              When a story is architected correctly, the viewer enters a state of "Narrative Transportation." They cease to be an observer and become a participant. In this state, beliefs are malleable, and the impulse to act becomes internal, not external.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
  
@@ -245,7 +249,7 @@ const phases = [
   /* ============ HERO SECTION ============ */
   .process-hero {
     max-width: 760px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 2rem;
     padding: 0 2rem;
     text-align: center;
   }
@@ -273,14 +277,16 @@ const phases = [
     font-size: clamp(0.9rem, 1.3vw, 1.05rem);
     line-height: 1.75;
     color: var(--color-text-muted);
-    margin: 0 auto 3rem;
+    margin: 0 auto;
     max-width: 600px;
     font-weight: 300;
   }
  
+  /* ============ HERO PRISM (now wider, own container) ============ */
   .hero-prism {
-    max-width: 560px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
   }
  
   .prism-svg {
@@ -292,7 +298,7 @@ const phases = [
   /* ============ PHASES — HORIZONTAL CARDS (letter left, content right) ============ */
   .phases-section {
     max-width: 800px;
-    margin: 4rem auto 0;
+    margin: 0 auto;
     padding: 0 1.25rem;
   }
  
@@ -403,13 +409,41 @@ const phases = [
     letter-spacing: 0;
   }
  
-  /* ============ SCIENCE SECTION ============ */
+  /* ============ SCIENCE SECTION — full-width panel with bg-mid + gold rules ============ */
   .science-section {
-    max-width: 1100px;
-    margin: 5rem auto 4rem;
-    padding: 0 2rem;
+    background: var(--color-bg-mid);
+    padding: 6rem 0 5rem;
+    margin: 5rem 0 4rem;
     text-align: center;
     scroll-margin-top: 100px;
+    position: relative;
+  }
+ 
+  /* Gold gradient rules mark the top and bottom boundaries of the panel */
+  .science-section::before,
+  .science-section::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(340px, 70%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    opacity: 0.6;
+  }
+ 
+  .science-section::before {
+    top: 0;
+  }
+ 
+  .science-section::after {
+    bottom: 0;
+  }
+ 
+  .science-section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
  
   .science-eyebrow-wrapper {
@@ -439,7 +473,7 @@ const phases = [
     letter-spacing: 0.04em;
   }
  
-  /* ENGINEER is now the gold accent; STORIES and INFLUENCE are muted white */
+  /* ENGINEER is the gold anchor; STORIES and INFLUENCE in muted white */
   .science-headline-stories {
     color: rgba(255, 255, 255, 0.75);
     margin-right: 0.4em;
@@ -525,7 +559,7 @@ const phases = [
   /* ============ FINAL CTA ============ */
   .final-cta {
     max-width: 720px;
-    margin: 5rem auto 0;
+    margin: 4rem auto 0;
     padding: 0 2rem;
     text-align: center;
   }
@@ -557,16 +591,17 @@ const phases = [
  
     .process-hero {
       max-width: 920px;
-      margin-bottom: 5rem;
+      margin-bottom: 3rem;
     }
  
     .hero-prism {
-      max-width: 720px;
+      max-width: 1000px;
+      margin-bottom: 5rem;
+      padding: 0 2rem;
     }
  
     .phases-section {
       max-width: 860px;
-      margin-top: 6rem;
       padding: 0 2rem;
     }
  
@@ -600,6 +635,17 @@ const phases = [
       display: none;
     }
  
+    /* Science panel: more breathing room and slightly wider boundary rules on desktop */
+    .science-section {
+      margin: 7rem 0 5rem;
+      padding: 7rem 0 6rem;
+    }
+ 
+    .science-section::before,
+    .science-section::after {
+      width: min(420px, 50%);
+    }
+ 
     .science-cards {
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
@@ -622,12 +668,8 @@ const phases = [
       font-size: 1rem;
     }
  
-    .science-section {
-      margin-top: 8rem;
-    }
- 
     .final-cta {
-      margin-top: 7rem;
+      margin-top: 5rem;
     }
   }
 </style>
