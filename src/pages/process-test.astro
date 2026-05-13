@@ -56,7 +56,6 @@ const phases = [
       <a href="/process/" class="test-banner-link">← Back to /process/</a>
     </div>
  
-    <!-- Compact hero so the prism scene gets to dominate -->
     <section class="test-hero">
       <p class="test-intro">Hover or tap each ray to reveal that phase of the methodology.</p>
     </section>
@@ -91,7 +90,7 @@ const phases = [
           <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
         </svg>
  
-        <!-- LEFT zone: RAW STORY + prism (prism on LEFT of zone, far from items) -->
+        <!-- LEFT zone: RAW STORY (on left) + prism + orb -->
         <div class="prism-side">
           <div class="raw-story-label">RAW STORY</div>
  
@@ -126,7 +125,7 @@ const phases = [
           </div>
         </div>
  
-        <!-- RIGHT zone: items, narrow so the ray gap is huge -->
+        <!-- RIGHT zone: items -->
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -189,7 +188,6 @@ const phases = [
     color: var(--color-accent);
   }
  
-  /* Compact hero — just an intro line, no big PRISM headline above */
   .test-hero {
     max-width: 760px;
     margin: 0 auto 2.5rem;
@@ -205,19 +203,21 @@ const phases = [
     font-weight: 300;
   }
  
-  /* ============ THE PRISM SECTION — wider than before to fit longer rays ============ */
+  /* ============ THE PRISM SECTION ============ */
+  /* Section uses near-full viewport width so the scene can really stretch out */
   .prism-section {
-    max-width: 1700px;
+    max-width: 1800px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
   }
  
-  /* Grid layout: prism-side fixed, ray zone expandable (1fr), items-container fixed.
-     With max-width 1700: 240 + 1fr + 680 = 1700, so 1fr = 780 (huge ray zone). */
+  /* The row is a 3-column grid that fills the section width:
+     [prism-side fixed]  [ray-zone 1fr — EXPANDABLE]  [items-container fixed]
+     The 1fr column eats whatever space remains, which is what makes rays long. */
   .prism-row {
     position: relative;
     display: grid;
-    grid-template-columns: 240px 1fr 680px;
+    grid-template-columns: 320px 1fr 760px;
     align-items: center;
     min-height: 620px;
   }
@@ -242,23 +242,24 @@ const phases = [
     cursor: pointer;
   }
  
-  /* ============ LEFT: prism on FAR LEFT of the row ============ */
+  /* ============ LEFT: prism-side holds RAW STORY (left) + prism (right) ============ */
   .prism-side {
     position: relative;
     height: 100%;
     display: flex;
     align-items: center;
-    /* prism on the LEFT side of this zone, not the right — gives rays more room to span */
-    justify-content: flex-start;
-    padding-left: 1rem;
+    justify-content: flex-end;  /* prism at right edge of this column */
     z-index: 2;
   }
  
+  /* RAW STORY sits to the LEFT of the prism (not inside the orb).
+     With prism-side 320px, prism container at right takes ~170px,
+     leaving ~150px on the left for the RAW STORY label. */
   .raw-story-label {
     position: absolute;
-    /* RAW STORY sits ABOVE the prism gem (vertically stacked), not to its left */
-    left: 1rem;
-    top: calc(50% - 95px);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: var(--font-sans);
     font-size: 0.85rem;
     font-weight: 700;
@@ -294,6 +295,7 @@ const phases = [
     position: relative;
     width: 170px;
     height: 170px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -301,8 +303,8 @@ const phases = [
  
   .glass-glow {
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -325,7 +327,7 @@ const phases = [
       opacity: 0.85;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.2);
+      transform: translate(-50%, -50%) scale(1.18);
       opacity: 1;
     }
   }
@@ -374,7 +376,7 @@ const phases = [
     align-items: center;
     gap: 1.25rem;
     padding: 0 1.5rem;
-    height: 88px;
+    height: 90px;
     border: 1px solid transparent;
     border-left: none;
     cursor: pointer;
@@ -406,9 +408,9 @@ const phases = [
   .word-title {
     flex-shrink: 0;
     font-family: var(--font-sans);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.16em;
     color: var(--phase-color);
     line-height: 1;
     white-space: nowrap;
@@ -416,18 +418,17 @@ const phases = [
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Description: anchored fixed-left, sized via right edge.
-     With items-container 680px: description left:280px right:1.5rem = ~376px wide
-     With max-width cap at 420px for visual containment */
+  /* Description anchored at left:290px from prism-item left edge.
+     With items-container 760px: 760 - 290 - 24 = 446px width. */
   .description {
     position: absolute;
     top: 50%;
-    left: 280px;
+    left: 290px;
     right: 1.5rem;
-    max-width: 420px;
+    max-width: 450px;
     transform: translateY(-50%) translateX(40px);
     font-family: var(--font-sans);
-    font-size: 0.86rem;
+    font-size: 0.9rem;
     font-weight: 300;
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.88);
@@ -469,39 +470,43 @@ const phases = [
   }
  
   /* ============ MEDIUM SCREENS ============ */
-  @media (max-width: 1450px) {
+  @media (max-width: 1500px) {
     .prism-row {
-      grid-template-columns: 220px 1fr 640px;
+      grid-template-columns: 280px 1fr 700px;
       min-height: 580px;
     }
  
     .description {
-      left: 270px;
-      max-width: 380px;
-      font-size: 0.84rem;
+      left: 280px;
+      max-width: 400px;
+      font-size: 0.86rem;
     }
   }
  
-  @media (max-width: 1200px) {
+  @media (max-width: 1250px) {
     .prism-row {
-      grid-template-columns: 200px 1fr 600px;
+      grid-template-columns: 240px 1fr 640px;
       min-height: 560px;
     }
  
     .description {
-      left: 260px;
-      max-width: 340px;
-      font-size: 0.82rem;
+      left: 270px;
+      max-width: 350px;
+      font-size: 0.84rem;
     }
  
     .glass-glow {
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
     }
  
     .prism-gem {
       width: 110px;
       height: 110px;
+    }
+ 
+    .raw-story-label {
+      font-size: 0.78rem;
     }
   }
  
@@ -528,18 +533,18 @@ const phases = [
       height: auto;
       padding: 1rem 0;
       justify-content: center;
-      flex-direction: column;
-      gap: 1rem;
     }
  
     .raw-story-label {
       position: static;
       transform: none;
-      top: auto;
-      left: auto;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
       display: block;
       text-align: center;
+    }
+ 
+    .prism-container {
+      margin-right: 0;
     }
  
     .items-container {
@@ -760,7 +765,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Prism — prism on far left, ray zone dominant');
+      console.log('[Process Test] Prism — scene fills full section width');
     }
  
     if (document.readyState === 'loading') {
