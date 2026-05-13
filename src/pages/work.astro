@@ -4,35 +4,34 @@
 // Ported and adapted from Luminous Story Work page.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
+ 
 <BaseLayout title="Our Work — The Story Speaks">
-
+ 
   <main class="work-page">
-
+ 
     <!-- ============ HERO HEADER ============ -->
     <section class="work-hero">
       <p class="work-eyebrow">Our Work</p>
       <h1 class="work-headline">
-        <span class="word word-stories">STORIES</span>
-        <span class="word word-that">THAT</span>
-        <span class="word word-deliver">DELIVER</span>
+        <span class="headline-line line-1">STORIES</span>
+        <span class="headline-line line-2">THAT <span class="word-deliver">DELIVER</span></span>
       </h1>
       <p class="work-subtitle">
         Strategic narrative architecture that moves audiences, drives action, and delivers measurable results.
       </p>
     </section>
-
+ 
     <!-- ============ CASES GRID ============ -->
     <section class="cases-section">
       <div class="cases-grid">
-
+ 
         <!-- Case 01: Healthcare / Geisinger -->
         <article class="case-card" data-case="healthcare">
           <div class="case-video-preview">
             <div class="video-poster poster-healthcare">
               <div class="poster-overlay"></div>
-              <div class="play-icon-static">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="8,5 19,12 8,19"/></svg>
+              <div class="play-indicator">
+                <div class="play-indicator-inner"></div>
               </div>
             </div>
           </div>
@@ -49,14 +48,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </p>
           </div>
         </article>
-
+ 
         <!-- Case 02: Nonprofit / Tenderheart Crusades -->
         <article class="case-card" data-case="nonprofit">
           <div class="case-video-preview">
             <div class="video-poster poster-placeholder">
               <div class="poster-overlay"></div>
-              <div class="play-icon-static">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="8,5 19,12 8,19"/></svg>
+              <div class="play-indicator">
+                <div class="play-indicator-inner"></div>
               </div>
             </div>
           </div>
@@ -72,14 +71,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </p>
           </div>
         </article>
-
+ 
         <!-- Case 03: Corporate / Memphis Chamber -->
         <article class="case-card" data-case="corporate">
           <div class="case-video-preview">
             <div class="video-poster poster-placeholder">
               <div class="poster-overlay"></div>
-              <div class="play-icon-static">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="8,5 19,12 8,19"/></svg>
+              <div class="play-indicator">
+                <div class="play-indicator-inner"></div>
               </div>
             </div>
           </div>
@@ -98,9 +97,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </p>
           </div>
         </article>
-
+ 
       </div>
-
+ 
       <!-- Bottom CTA -->
       <div class="work-cta-wrapper">
         <a href="/process" class="work-cta">
@@ -109,20 +108,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       </div>
     </section>
-
+ 
     <!-- ============ DETAIL VIEW MODAL ============ -->
     <div class="detail-view" id="detailView" aria-hidden="true" role="dialog">
       <div class="detail-overlay" id="detailOverlay"></div>
+ 
+      <!-- Top-level BACK TO CASES button -->
+      <button class="detail-back-top" id="detailBack" type="button">
+        <span class="back-arrow">←</span>
+        <span>Back to Cases</span>
+      </button>
+ 
       <div class="detail-container">
-
+ 
         <div class="detail-left">
           <div class="detail-header-section">
-            <button class="detail-back" id="detailBack" type="button">← Back to Cases</button>
             <div class="detail-story-number" id="detailNumber"></div>
             <h2 class="detail-title" id="detailTitle"></h2>
             <p class="detail-subtitle" id="detailSubtitle"></p>
           </div>
-
+ 
           <div class="detail-content">
             <div class="detail-block">
               <div class="detail-label">The Brief</div>
@@ -137,28 +142,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="detail-text" id="detailOutcome"></div>
             </div>
           </div>
-
+ 
           <div class="detail-actions">
             <button class="detail-button primary" id="detailWatch" type="button">Watch Full Story</button>
             <button class="detail-button" id="detailViewAll" type="button">View All Cases</button>
           </div>
         </div>
-
+ 
         <div class="detail-right">
           <div class="detail-video-container" id="detailVideoContainer">
             <div class="detail-poster" id="detailPoster"></div>
             <div class="detail-video-gradient"></div>
             <div class="detail-play-button" id="detailPlayButton" role="button" aria-label="Play full film">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <polygon points="8,5 19,12 8,19"/>
-              </svg>
+              <span>PLAY</span>
             </div>
           </div>
         </div>
-
+ 
       </div>
     </div>
-
+ 
     <!-- ============ FULLSCREEN PLAYER MODAL ============ -->
     <div class="fullscreen-mode" id="fullscreenPlayer" aria-hidden="true" role="dialog">
       <div class="fullscreen-header">
@@ -172,9 +175,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
     </div>
-
+ 
   </main>
-
+ 
   <!-- ============ DATA + INTERACTIVITY ============ -->
   <script is:inline>
     // Case data (kept inline so it can be edited as text content)
@@ -210,59 +213,59 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         vimeoUrl: ''
       }
     };
-
+ 
     let currentCase = null;
-
+ 
     // ========== Detail view open/close ==========
     function openDetailView(caseId) {
       const data = caseData[caseId];
       if (!data) return;
       currentCase = caseId;
-
+ 
       document.getElementById('detailNumber').textContent = data.number;
       document.getElementById('detailTitle').textContent = data.title;
       document.getElementById('detailSubtitle').textContent = data.subtitle;
       document.getElementById('detailChallenge').textContent = data.challenge;
       document.getElementById('detailProcess').textContent = data.process;
       document.getElementById('detailOutcome').innerHTML = data.outcome;
-
+ 
       const poster = document.getElementById('detailPoster');
       poster.className = 'detail-poster ' + data.posterClass;
-
+ 
       const detailView = document.getElementById('detailView');
       detailView.classList.add('active');
       detailView.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
-
+ 
     function closeDetailView() {
       const detailView = document.getElementById('detailView');
       detailView.classList.remove('active');
       detailView.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-
+ 
     // Card click → open detail view
     document.querySelectorAll('.case-card').forEach(card => {
       card.addEventListener('click', () => {
         openDetailView(card.getAttribute('data-case'));
       });
     });
-
+ 
     document.getElementById('detailBack').addEventListener('click', closeDetailView);
     document.getElementById('detailViewAll').addEventListener('click', closeDetailView);
     document.getElementById('detailOverlay').addEventListener('click', closeDetailView);
-
+ 
     // ========== Fullscreen player open/close ==========
     function openFullscreen() {
       if (!currentCase) return;
       const data = caseData[currentCase];
-
+ 
       document.getElementById('fullscreenTitle').textContent = data.title;
-
+ 
       const iframe = document.getElementById('fullscreenIframe');
       const empty = document.getElementById('fullscreenEmpty');
-
+ 
       if (data.vimeoUrl) {
         iframe.src = data.vimeoUrl;
         iframe.style.display = 'block';
@@ -272,12 +275,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         iframe.style.display = 'none';
         empty.style.display = 'flex';
       }
-
+ 
       const fs = document.getElementById('fullscreenPlayer');
       fs.classList.add('active');
       fs.setAttribute('aria-hidden', 'false');
     }
-
+ 
     function closeFullscreen() {
       const fs = document.getElementById('fullscreenPlayer');
       fs.classList.remove('active');
@@ -285,11 +288,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // Stop the video by clearing the iframe src
       document.getElementById('fullscreenIframe').src = '';
     }
-
+ 
     document.getElementById('detailWatch').addEventListener('click', openFullscreen);
     document.getElementById('detailPlayButton').addEventListener('click', openFullscreen);
     document.getElementById('fullscreenBack').addEventListener('click', closeFullscreen);
-
+ 
     // ========== ESC key handling ==========
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
@@ -301,19 +304,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         closeDetailView();
       }
     });
-
+ 
     // ========== Cursor-following play button (the signature interaction) ==========
     (function() {
       const container = document.getElementById('detailVideoContainer');
       const button = document.getElementById('detailPlayButton');
       if (!container || !button) return;
-
+ 
       // Skip on touch devices — the cursor-following has no value there
       const isTouch = window.matchMedia('(hover: none)').matches;
       if (isTouch) return;
-
+ 
       let following = false;
-
+ 
       container.addEventListener('mouseenter', (e) => {
         following = true;
         const rect = container.getBoundingClientRect();
@@ -323,7 +326,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         button.style.left = '0';
         button.style.transform = `translate(${x}px, ${y}px)`;
       });
-
+ 
       container.addEventListener('mousemove', (e) => {
         if (!following) return;
         const rect = container.getBoundingClientRect();
@@ -331,7 +334,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const y = e.clientY - rect.top - button.offsetHeight / 2;
         button.style.transform = `translate(${x}px, ${y}px)`;
       });
-
+ 
       container.addEventListener('mouseleave', () => {
         following = false;
         button.style.top = '50%';
@@ -340,20 +343,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     })();
   </script>
-
+ 
 </BaseLayout>
-
+ 
 <style>
   /* ============================================================
      WORK PAGE — Stories That Deliver
      ============================================================ */
-
+ 
   .work-page {
     background: var(--color-bg-deep, #0a1628);
     color: var(--color-text-primary, #f8fafc);
     min-height: 100vh;
+    position: relative;
   }
-
+ 
+  /* Horizontal accent line under the nav (work page only for now) */
+  .work-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(232, 197, 116, 0.4) 20%,
+      rgba(232, 197, 116, 0.4) 80%,
+      transparent
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+ 
   /* ============ HERO HEADER ============ */
   .work-hero {
     max-width: 1100px;
@@ -361,7 +383,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 7rem 2rem 4rem;
     text-align: center;
   }
-
+ 
   .work-eyebrow {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.75rem;
@@ -371,21 +393,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.5rem;
     font-weight: 400;
   }
-
+ 
   .work-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 300;
-    font-size: clamp(2.5rem, 8vw, 5.5rem);
-    line-height: 1.05;
+    font-size: clamp(2.5rem, 9vw, 6rem);
+    line-height: 1.0;
     letter-spacing: -0.025em;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.75rem;
+    text-transform: uppercase;
   }
-
-  .work-headline .word {
-    display: inline-block;
-    margin: 0 0.15em;
+ 
+  .work-headline .headline-line {
+    display: block;
+    line-height: 1.05;
   }
-
+ 
+  .work-headline .word-deliver {
+    color: var(--color-accent, #e8c574);
+  }
+ 
   .work-subtitle {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(1rem, 1.5vw, 1.15rem);
@@ -396,21 +423,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.65;
     text-wrap: pretty;
   }
-
+ 
   /* ============ CASES GRID ============ */
   .cases-section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 2rem 6rem;
   }
-
+ 
   .cases-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
     margin-bottom: 4rem;
   }
-
+ 
   .case-card {
     position: relative;
     border: 1px solid rgba(232, 197, 116, 0.2);
@@ -423,7 +450,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     display: flex;
     flex-direction: column;
   }
-
+ 
   .case-card:hover {
     background: linear-gradient(135deg, rgba(232, 197, 116, 0.08) 0%, rgba(232, 197, 116, 0.12) 100%);
     border-color: var(--color-accent, #e8c574);
@@ -434,26 +461,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       0 0 100px rgba(232, 197, 116, 0.1),
       inset 0 0 30px rgba(232, 197, 116, 0.06);
   }
-
+ 
   .case-card:hover .case-icon {
     transform: scale(1.2);
     filter: drop-shadow(0 0 25px rgba(232, 197, 116, 0.9)) drop-shadow(0 0 40px rgba(232, 197, 116, 0.5));
   }
-
+ 
   .case-card:hover .case-title {
     color: var(--color-accent, #e8c574);
     text-shadow: 0 0 18px rgba(232, 197, 116, 0.7);
   }
-
+ 
   .case-card:hover .case-number {
     color: var(--color-accent, #e8c574);
   }
-
-  .case-card:hover .video-poster .play-icon-static {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-
+ 
   /* ============ Video preview area (top of card) ============ */
   .case-video-preview {
     position: relative;
@@ -461,7 +483,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     aspect-ratio: 16 / 9;
     overflow: hidden;
   }
-
+ 
   .video-poster {
     width: 100%;
     height: 100%;
@@ -473,52 +495,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     justify-content: center;
     transition: transform 0.6s ease;
   }
-
+ 
   .case-card:hover .video-poster {
     transform: scale(1.05);
   }
-
+ 
   /* Geisinger Amish buggy still — replace path with actual upload location */
   .poster-healthcare {
     background-image: url('/images/geisinger-acts-of-kindness.jpg');
     background-color: #2a1810;
   }
-
+ 
   /* Placeholder poster for cases 02 and 03 */
   .poster-placeholder {
     background: linear-gradient(135deg, rgba(232, 197, 116, 0.08) 0%, rgba(13, 27, 50, 0.95) 100%);
   }
-
+ 
   .poster-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, transparent 50%, rgba(10, 22, 40, 0.4));
     pointer-events: none;
   }
-
-  .play-icon-static {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: rgba(232, 197, 116, 0.15);
-    backdrop-filter: blur(8px);
-    border: 1.5px solid rgba(232, 197, 116, 0.7);
-    color: var(--color-accent, #e8c574);
+ 
+  /* Small rectangular play indicator on cards (matches original) */
+  .play-indicator {
+    width: 60px;
+    height: 42px;
+    border: 2px solid rgba(232, 197, 116, 0.55);
+    border-radius: 4px;
+    background: rgba(232, 197, 116, 0.1);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
-    opacity: 0.85;
+    opacity: 0.9;
     transition: all 0.4s ease;
   }
-
-  .play-icon-static svg {
-    width: 20px;
-    height: 20px;
-    margin-left: 3px; /* optical centering of triangle */
+ 
+  .play-indicator-inner {
+    width: 0;
+    height: 0;
+    border-left: 14px solid rgba(232, 197, 116, 0.9);
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    margin-left: 3px;
   }
-
+ 
+  .case-card:hover .play-indicator {
+    opacity: 1;
+    border-color: var(--color-accent, #e8c574);
+    box-shadow: 0 0 20px rgba(232, 197, 116, 0.5);
+    transform: scale(1.08);
+  }
+ 
+  .case-card:hover .play-indicator-inner {
+    border-left-color: var(--color-accent, #e8c574);
+  }
+ 
   /* ============ Case info (bottom of card) ============ */
   .case-info {
     padding: 1.5rem 1.5rem 1.75rem;
@@ -526,7 +562,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     flex-direction: column;
     gap: 0.3rem;
   }
-
+ 
   .case-icon {
     width: 36px;
     height: 36px;
@@ -535,7 +571,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     opacity: 0.8;
     transition: all 0.4s ease;
   }
-
+ 
   .case-number {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.7rem;
@@ -546,7 +582,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 0.35rem;
     transition: color 0.4s ease;
   }
-
+ 
   .case-title {
     font-family: var(--font-sans, system-ui);
     font-size: 1.25rem;
@@ -557,7 +593,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: -0.01em;
     transition: all 0.4s ease;
   }
-
+ 
   .case-subtitle {
     font-family: var(--font-sans, system-ui);
     font-size: 0.8rem;
@@ -566,7 +602,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.25rem;
     font-weight: 300;
   }
-
+ 
   .case-outcome {
     font-family: var(--font-sans, system-ui);
     font-size: 0.8rem;
@@ -577,18 +613,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     font-weight: 300;
   }
-
+ 
   .case-outcome strong {
     color: var(--color-accent, #e8c574);
     font-weight: 500;
   }
-
+ 
   /* ============ Bottom CTA ============ */
   .work-cta-wrapper {
     text-align: center;
     margin-top: 2rem;
   }
-
+ 
   .work-cta {
     display: inline-flex;
     align-items: center;
@@ -606,20 +642,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-transform: uppercase;
     transition: all 0.3s ease;
   }
-
+ 
   .work-cta:hover {
     background: color-mix(in srgb, var(--color-accent, #e8c574) 20%, transparent);
     transform: translateY(-2px);
   }
-
+ 
   .cta-arrow {
     transition: transform 0.3s ease;
   }
-
+ 
   .work-cta:hover .cta-arrow {
     transform: translateX(4px);
   }
-
+ 
   /* ============================================================
      DETAIL VIEW MODAL
      ============================================================ */
@@ -631,31 +667,86 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     opacity: 0;
     transition: opacity 0.5s ease;
   }
-
+ 
   .detail-view.active {
     opacity: 1;
     pointer-events: auto;
   }
-
+ 
   .detail-overlay {
     position: absolute;
     inset: 0;
     background: rgba(10, 22, 40, 0.85);
     backdrop-filter: blur(15px);
   }
-
+ 
   .detail-container {
     position: relative;
     max-width: 1300px;
     height: 100%;
     margin: 0 auto;
-    padding: 5rem 2rem 3rem;
+    padding: 7rem 2rem 3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3.5rem;
     align-items: center;
   }
-
+ 
+  /* Vertical separator running down the middle of the detail container */
+  .detail-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background: linear-gradient(180deg,
+      transparent,
+      rgba(232, 197, 116, 0.35) 15%,
+      rgba(232, 197, 116, 0.35) 85%,
+      transparent
+    );
+    pointer-events: none;
+  }
+ 
+  /* BACK TO CASES button at the top of the detail view */
+  .detail-back-top {
+    position: absolute;
+    top: 1.75rem;
+    left: 2rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    background: transparent;
+    border: 1px solid rgba(232, 197, 116, 0.5);
+    border-radius: 2px;
+    color: var(--color-accent, #e8c574);
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+ 
+  .detail-back-top:hover {
+    background: rgba(232, 197, 116, 0.1);
+    border-color: var(--color-accent, #e8c574);
+    transform: translateX(-2px);
+  }
+ 
+  .detail-back-top .back-arrow {
+    font-size: 0.95rem;
+    transition: transform 0.3s ease;
+  }
+ 
+  .detail-back-top:hover .back-arrow {
+    transform: translateX(-3px);
+  }
+ 
   .detail-left {
     display: flex;
     flex-direction: column;
@@ -663,28 +754,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     height: 100%;
     max-height: 700px;
   }
-
+ 
   .detail-header-section {
     margin-bottom: 2rem;
   }
-
-  .detail-back {
-    background: none;
-    border: none;
-    color: var(--color-accent, #e8c574);
-    font-family: var(--font-sans, system-ui);
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 0;
-    margin-bottom: 1.75rem;
-    letter-spacing: 0.02em;
-    transition: opacity 0.3s ease;
-  }
-
-  .detail-back:hover {
-    opacity: 0.7;
-  }
-
+ 
   .detail-story-number {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.75rem;
@@ -694,7 +768,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-transform: uppercase;
     margin-bottom: 0.75rem;
   }
-
+ 
   .detail-title {
     font-family: var(--font-sans, system-ui);
     font-weight: 300;
@@ -704,7 +778,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-text-primary, #f8fafc);
     margin: 0 0 0.6rem;
   }
-
+ 
   .detail-subtitle {
     font-family: var(--font-sans, system-ui);
     font-size: 0.95rem;
@@ -713,17 +787,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     line-height: 1.5;
   }
-
+ 
   .detail-content {
     flex: 1;
     overflow-y: auto;
     padding-right: 0.5rem;
   }
-
+ 
   .detail-block {
+    position: relative;
     margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(232, 197, 116, 0.4);
   }
-
+ 
   .detail-label {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.7rem;
@@ -733,7 +810,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-transform: uppercase;
     margin-bottom: 0.5rem;
   }
-
+ 
   .detail-text {
     font-family: var(--font-sans, system-ui);
     font-size: 0.95rem;
@@ -741,24 +818,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(248, 250, 252, 0.85);
     font-weight: 300;
   }
-
+ 
   .detail-text strong {
     color: var(--color-accent, #e8c574);
     font-weight: 500;
   }
-
+ 
   .detail-actions {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
     flex-wrap: wrap;
   }
-
+ 
   .detail-button {
-    padding: 0.85rem 1.5rem;
+    padding: 0.85rem 1.75rem;
     background: transparent;
-    border: 1px solid rgba(248, 250, 252, 0.25);
-    color: rgba(248, 250, 252, 0.85);
+    border: 1px solid rgba(232, 197, 116, 0.45);
+    color: var(--color-accent, #e8c574);
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.75rem;
     font-weight: 400;
@@ -768,30 +845,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 2px;
     transition: all 0.3s ease;
   }
-
+ 
   .detail-button:hover {
-    border-color: rgba(248, 250, 252, 0.5);
-    color: #f8fafc;
-  }
-
-  .detail-button.primary {
-    background: color-mix(in srgb, var(--color-accent, #e8c574) 12%, transparent);
     border-color: var(--color-accent, #e8c574);
-    color: var(--color-accent, #e8c574);
+    background: rgba(232, 197, 116, 0.08);
   }
-
+ 
+  /* WATCH FULL STORY = solid filled (primary action) */
+  .detail-button.primary {
+    background: var(--color-accent, #e8c574);
+    border-color: var(--color-accent, #e8c574);
+    color: var(--color-bg-deep, #0a1628);
+    font-weight: 500;
+  }
+ 
   .detail-button.primary:hover {
-    background: color-mix(in srgb, var(--color-accent, #e8c574) 22%, transparent);
-    color: var(--color-accent, #e8c574);
+    background: #f0d28d;
+    border-color: #f0d28d;
+    color: var(--color-bg-deep, #0a1628);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(232, 197, 116, 0.35);
   }
-
+ 
   /* ============ Detail right (video preview + cursor-following play) ============ */
   .detail-right {
     height: 100%;
     display: flex;
     align-items: center;
   }
-
+ 
   .detail-video-container {
     position: relative;
     width: 100%;
@@ -801,65 +883,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border: 1px solid rgba(232, 197, 116, 0.25);
     cursor: pointer;
   }
-
+ 
   .detail-poster {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
   }
-
+ 
   .detail-poster.poster-healthcare {
     background-image: url('/images/geisinger-acts-of-kindness.jpg');
     background-color: #2a1810;
   }
-
+ 
   .detail-poster.poster-placeholder {
     background: linear-gradient(135deg, rgba(232, 197, 116, 0.1) 0%, rgba(13, 27, 50, 0.95) 100%);
   }
-
+ 
   .detail-video-gradient {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, transparent 40%, rgba(10, 22, 40, 0.5));
     pointer-events: none;
   }
-
-  /* THE SIGNATURE: cursor-following play button */
+ 
+  /* THE SIGNATURE: cursor-following PLAY box (rectangular, follows the mouse) */
   .detail-play-button {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 235, 180, 0.95), rgba(232, 197, 116, 0.85));
+    min-width: 110px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 3px;
+    background: rgba(10, 22, 40, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid var(--color-accent, #e8c574);
     box-shadow:
-      0 0 30px rgba(232, 197, 116, 0.6),
-      0 0 60px rgba(232, 197, 116, 0.3),
-      inset 0 0 15px rgba(255, 255, 255, 0.2);
-    color: #0a1628;
+      0 0 25px rgba(232, 197, 116, 0.35),
+      inset 0 0 10px rgba(232, 197, 116, 0.06);
+    color: var(--color-accent, #e8c574);
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    transition: top 0.4s ease, left 0.4s ease, transform 0.08s ease-out;
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: top 0.4s ease, left 0.4s ease, transform 0.08s ease-out, box-shadow 0.3s ease, background 0.3s ease;
   }
-
-  .detail-play-button svg {
-    width: 32px;
-    height: 32px;
-    margin-left: 4px; /* optical centering */
-  }
-
+ 
   .detail-video-container:hover .detail-play-button {
+    background: rgba(232, 197, 116, 0.12);
     box-shadow:
-      0 0 50px rgba(232, 197, 116, 0.85),
-      0 0 90px rgba(232, 197, 116, 0.45),
-      inset 0 0 20px rgba(255, 255, 255, 0.3);
+      0 0 40px rgba(232, 197, 116, 0.6),
+      0 0 80px rgba(232, 197, 116, 0.3),
+      inset 0 0 12px rgba(232, 197, 116, 0.12);
   }
-
+ 
   /* ============================================================
      FULLSCREEN VIDEO PLAYER
      ============================================================ */
@@ -874,12 +957,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     opacity: 0;
     transition: opacity 0.4s ease;
   }
-
+ 
   .fullscreen-mode.active {
     opacity: 1;
     pointer-events: auto;
   }
-
+ 
   .fullscreen-header {
     display: flex;
     align-items: center;
@@ -890,7 +973,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-bottom: 1px solid rgba(232, 197, 116, 0.15);
     z-index: 2;
   }
-
+ 
   .fullscreen-back-button {
     background: none;
     border: 1px solid rgba(232, 197, 116, 0.4);
@@ -902,12 +985,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 2px;
     transition: all 0.3s ease;
   }
-
+ 
   .fullscreen-back-button:hover {
     background: rgba(232, 197, 116, 0.1);
     border-color: var(--color-accent, #e8c574);
   }
-
+ 
   .fullscreen-title {
     font-family: var(--font-sans, system-ui);
     font-size: 1.1rem;
@@ -916,7 +999,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     letter-spacing: -0.01em;
   }
-
+ 
   .fullscreen-video-container {
     flex: 1;
     position: relative;
@@ -925,13 +1008,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     justify-content: center;
     background: #000;
   }
-
+ 
   .fullscreen-video-container iframe {
     width: 100%;
     height: 100%;
     border: 0;
   }
-
+ 
   .fullscreen-empty-state {
     color: rgba(248, 250, 252, 0.5);
     font-family: var(--font-sans, system-ui);
@@ -942,7 +1025,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     width: 100%;
     height: 100%;
   }
-
+ 
   /* ============================================================
      MOBILE
      ============================================================ */
@@ -950,31 +1033,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .work-hero {
       padding: 4.5rem 1.25rem 3rem;
     }
-
+ 
     .work-headline {
-      font-size: clamp(2.25rem, 11vw, 3.5rem);
-      line-height: 1.05;
+      font-size: clamp(2.5rem, 13vw, 4rem);
+      line-height: 1.0;
     }
-
-    .work-headline .word {
-      display: block;
-      margin: 0;
-    }
-
+ 
     .cases-section {
       padding: 1.5rem 1.25rem 4rem;
     }
-
+ 
     .cases-grid {
       grid-template-columns: 1fr;
       gap: 1.25rem;
       margin-bottom: 3rem;
     }
-
+ 
     .case-card:hover {
       transform: translateY(-6px) scale(1.01);
     }
-
+ 
     /* Detail view: stack columns */
     .detail-container {
       grid-template-columns: 1fr;
@@ -983,53 +1061,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       overflow-y: auto;
       align-items: start;
     }
-
+ 
+    /* Hide vertical separator on mobile (no longer makes sense with stacked columns) */
+    .detail-container::before {
+      display: none;
+    }
+ 
     .detail-left {
       max-height: none;
       order: 2;
     }
-
+ 
     .detail-right {
       order: 1;
     }
-
+ 
     .detail-content {
       overflow-y: visible;
     }
-
+ 
     .detail-actions {
       flex-direction: column;
       align-items: stretch;
     }
-
+ 
     .detail-button {
       text-align: center;
     }
-
-    /* Smaller play button on mobile */
+ 
+    /* Smaller PLAY box on mobile + repositioned BACK TO CASES */
     .detail-play-button {
-      width: 64px;
-      height: 64px;
+      min-width: 90px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
     }
-
-    .detail-play-button svg {
-      width: 26px;
-      height: 26px;
+ 
+    .detail-back-top {
+      top: 1rem;
+      left: 1.25rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.65rem;
     }
-
+ 
     .fullscreen-header {
       padding: 1rem 1.25rem;
       gap: 1rem;
     }
-
+ 
     .fullscreen-title {
       font-size: 0.95rem;
     }
   }
-
+ 
   @media (max-width: 600px) {
-    .detail-back {
-      font-size: 0.8rem;
+    .detail-back-top {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
     }
   }
 </style>
+ 
