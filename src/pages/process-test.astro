@@ -61,12 +61,10 @@ const phases = [
       <p class="test-intro mobile-intro">Scroll to explore each phase of the methodology.</p>
     </section>
  
-    <!-- MOBILE ONLY: mini PRISM preview -->
     <section class="mobile-preview" aria-hidden="true">
       <div class="mp-stage">
         <svg class="mp-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <!-- Rays end at x=210 (letter starts at x=216) so letter sits cleanly to the right of ray end -->
             <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="30">
               <stop offset="0%" stop-color="rgba(212, 117, 111, 0.4)"/>
               <stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/>
@@ -107,7 +105,6 @@ const phases = [
             </radialGradient>
           </defs>
  
-          <!-- Rays end at x=210, letters start at x=216 -->
           <polygon points="60,120 210,22 210,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,67 210,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,112 210,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
@@ -140,7 +137,6 @@ const phases = [
       </div>
     </section>
  
-    <!-- DESKTOP: full interactive prism -->
     <section class="prism-section">
       <div class="main-wrapper" id="prismRow">
  
@@ -287,7 +283,7 @@ const phases = [
  
   .mobile-preview { display: none; }
  
-  /* ============ OUTER CONTAINER — desktop ============ */
+  /* ============ DESKTOP ============ */
   .prism-section {
     max-width: 1100px;
     width: 100%;
@@ -645,7 +641,6 @@ const phases = [
       display: block;
     }
  
-    /* Letter boxes: OPAQUE background (so rays don't bleed through), centered at x=230, rays end at x=210 */
     .mp-letter {
       position: absolute;
       right: 36px;
@@ -659,7 +654,6 @@ const phases = [
       font-weight: 300;
       color: var(--phase-color);
       border: 1.2px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
-      /* Opaque dark base with phase tint — blocks the ray glow underneath */
       background: color-mix(in srgb, var(--phase-color) 22%, var(--color-bg-deep, #0a1628));
       border-radius: 3px;
       text-shadow:
@@ -675,7 +669,7 @@ const phases = [
     .mp-m { top: 196px; }
   }
  
-  /* ============ MOBILE PHASE CARDS ============ */
+  /* ============ MOBILE PHASE CARDS — grid-template-rows technique ============ */
   .mobile-cards-container { display: none; }
  
   @media (max-width: 900px) {
@@ -685,22 +679,23 @@ const phases = [
       gap: 12px;
       max-width: 480px;
       margin: 0 auto;
-      /* Bottom padding so the M card top can scroll up to the trigger line */
       padding: 0 1rem 70vh;
     }
  
+    /* CARD: visual properties (bg, border, shadow) animate smoothly.
+       Asymmetric timing — slower when entering revealed (luxurious),
+       slightly faster when leaving (cleaner). */
     .mobile-card {
       position: relative;
       padding: 0.95rem 1rem;
       border: 1px solid color-mix(in srgb, var(--phase-color) 25%, transparent);
       border-radius: 4px;
       background: color-mix(in srgb, var(--phase-color) 5%, transparent);
-      /* Specific transitions — not "all" — so layout changes don't compete with visual changes.
-         easeOutQuint = very smooth landing, no perceived bounce. */
+      /* Default state transition (used when LEAVING .revealed) */
       transition:
-        background 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        background 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
  
     .mobile-card.revealed {
@@ -709,6 +704,11 @@ const phases = [
       box-shadow:
         0 0 28px color-mix(in srgb, var(--phase-color) 35%, transparent),
         0 0 56px color-mix(in srgb, var(--phase-color) 18%, transparent);
+      /* Revealed state transition (used when ENTERING .revealed) — slower for luxury */
+      transition:
+        background 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
  
     .mc-header {
@@ -746,26 +746,42 @@ const phases = [
       text-shadow: 0 0 12px color-mix(in srgb, var(--phase-color) 50%, transparent);
     }
  
+    /* DESCRIPTION WRAP: uses grid-template-rows technique.
+       0fr = collapsed (natural 0 height), 1fr = expanded (natural content height).
+       Animates the ACTUAL content height instead of a max-height guess,
+       so there's no mid-animation snap. */
+    .mc-description-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      /* Default transition (used when LEAVING .revealed) — slightly faster */
+      transition: grid-template-rows 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+ 
+    .mobile-card.revealed .mc-description-wrap {
+      grid-template-rows: 1fr;
+      /* Revealed transition (used when ENTERING .revealed) — slower, more luxurious */
+      transition: grid-template-rows 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+ 
     .mc-description {
-      max-height: 0;
-      opacity: 0;
       overflow: hidden;
+      padding-top: 0.75rem;
       font-family: var(--font-sans);
       font-size: 0.88rem;
       font-weight: 300;
       line-height: 1.55;
       color: rgba(255, 255, 255, 0.88);
-      /* Smooth ease-out cubic-bezier (easeOutQuint) — gentle landing, no bounce */
-      transition:
-        max-height 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
-        margin-top 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0;
+      /* Default transition for fade out — quick, so content disappears
+         before height collapse fully clips it */
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
  
     .mobile-card.revealed .mc-description {
-      max-height: 280px;
       opacity: 1;
-      margin-top: 0.75rem;
+      /* Revealed transition for fade in — delayed so height opens first,
+         then text gently appears in the new space */
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
     }
  
     .mc-subtitle {
@@ -786,8 +802,10 @@ const phases = [
         <div class="mc-letter">{phase.letter}</div>
         <div class="mc-name">{phase.name}</div>
       </div>
-      <div class="mc-description">
-        <span class="mc-subtitle">{phase.subtitle}</span> {phase.description}
+      <div class="mc-description-wrap">
+        <div class="mc-description">
+          <span class="mc-subtitle">{phase.subtitle}</span> {phase.description}
+        </div>
       </div>
     </div>
   ))}
@@ -944,15 +962,6 @@ const phases = [
       }
     }
  
-    /**
-     * Mobile scrollspy: the active card is the LAST card whose top
-     * has crossed the trigger line. This means:
-     *  - At top of page: no card active (mini preview is the focus)
-     *  - As user scrolls, each card activates when its top crosses the trigger
-     *  - When the next card crosses, the previous one deactivates
-     *  - The LAST card (M) activates and stays active even if user can't
-     *    scroll further, because nothing else can take its place.
-     */
     function setupMobileScrollSpy() {
       if (!isMobile()) return;
  
@@ -963,7 +972,6 @@ const phases = [
         var triggerY = window.innerHeight * 0.4;
         var activeIdx = -1;
  
-        // Find the last card whose top has crossed (is at or above) the trigger line
         for (var i = 0; i < cards.length; i++) {
           var rect = cards[i].getBoundingClientRect();
           if (rect.top <= triggerY) {
@@ -1011,7 +1019,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Mobile scrollspy (last-crossed pattern) + opaque letters + smoother easing');
+      console.log('[Process Test] Smoother reveals: grid-template-rows + easeOutExpo + asymmetric timing');
     }
  
     if (document.readyState === 'loading') {
