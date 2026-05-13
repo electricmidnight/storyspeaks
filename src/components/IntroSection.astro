@@ -1,94 +1,91 @@
 ---
-// IntroSection.astro — story-driven introduction following the hero
+// IntroSection.astro — second section on home page
+// Renders different copy on desktop vs. mobile via CSS show/hide
 ---
 
-<section class="intro">
+<section class="intro-section">
   <div class="intro-inner">
-    <div class="eyebrow">A photojournalist&rsquo;s eye. A filmmaker&rsquo;s heart.</div>
-    <h2>Stories worth telling. <em>Told well.</em></h2>
-    <div class="intro-body">
+
+    <!-- DESKTOP COPY -->
+    <div class="intro-desktop">
       <p>
-        For twenty years I carried a camera for publications like the
-        <i>New York Times</i>, <i>Washington Post</i>, and <i>TIME</i> &mdash; a
-        photojournalist trained to find the real stories underneath what people
-        say first. The Story Speaks brings that same instinct to brand films,
-        documentaries, and impact narratives.
+        For twenty years I carried a camera for publications like the New York Times, Washington Post, and TIME — a photojournalist trained to find the real stories underneath what people say first. The Story Speaks brings that same instinct to brand films, documentaries, and impact narratives.
       </p>
+
       <p>
-        Five Emmys, a national Addy, and TED recognition for &ldquo;Ads Worth
-        Spreading,&rdquo; I work out of Boulder, Colorado &mdash; partnering
-        with mission-driven nonprofits, leading hospitals, research universities, 
-        and Fortune 500s across Denver, the Rockies, and the world.
+        Five Emmys, a national Addy, and TED recognition for "Ads Worth Spreading," I work out of Boulder, Colorado — partnering with mission-driven nonprofits, leading hospitals, research universities, and Fortune 500s across Denver, the Rockies, and the world.
       </p>
+
       <p>
-        No agency bloat. No formula. Just careful storytelling, with a crew
-        that scales to fit your project and a budget that respects it
-        &mdash; whether you&rsquo;re a global brand, a research institution,
-        or a nonprofit fighting for something that matters.
+        No agency bloat. No formula. Just careful storytelling, with a crew that scales to fit your project and a budget that respects it — whether you're a global brand, a research institution, or a nonprofit fighting for something that matters.
       </p>
     </div>
-   </div>
+
+    <!-- MOBILE COPY (shorter) -->
+    <div class="intro-mobile">
+      <p>
+        Twenty years carrying a camera for the New York Times, Washington Post, and TIME — trained as a photojournalist to find the real story underneath what people say first.
+      </p>
+
+      <p>
+        Five Emmys. A national Addy. TED-recognized work in 20+ countries. Based in Boulder, Colorado, working with mission-driven nonprofits, leading hospitals, research universities, and Fortune 500s.
+      </p>
+
+      <p>
+        No agency bloat. No formula. Just careful storytelling — for a global brand, a research institution, or a nonprofit fighting for something that matters.
+      </p>
+    </div>
+
+  </div>
 </section>
 
 <style>
-  .intro {
+  .intro-section {
     background: var(--color-bg-deep);
-    background-image: linear-gradient(
-      180deg,
-      var(--color-bg-deep) 0%,
-      var(--color-bg-mid) 100%
-    );
-    padding: 6rem 2rem 6.5rem;
-    color: var(--color-text);
-    margin: 0;
-    position: relative;
+    padding: 5rem 1.5rem;
   }
 
   .intro-inner {
-    max-width: var(--content-width);
+    max-width: 760px;
     margin: 0 auto;
-    text-align: left;
   }
 
-  .intro h2 {
-    font-size: clamp(1.85rem, 4vw, 3rem);
-    line-height: 1.12;
-    margin: 0 0 2.5rem 0;
-    color: var(--color-text);
-    text-align: left;
-  }
-
-  .intro h2 em {
-    font-style: italic;
-    color: var(--color-accent);
-    font-weight: 300;
-  }
-
-  .intro-body p {
-    font-size: 1.075rem;
-    line-height: 1.78;
+  .intro-section p {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    line-height: 1.75;
     color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
     font-weight: 300;
+    margin: 0 0 1.5rem;
+    text-wrap: pretty;
   }
 
-  .intro-body p i {
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.96);
-  }
-
-  .intro-body p:last-of-type {
+  .intro-section p:last-child {
     margin-bottom: 0;
   }
 
-  
-  @media (max-width: 768px) {
-    .intro {
-      padding: 4rem 1.5rem 4.5rem;
+  /* Default: show desktop, hide mobile */
+  .intro-desktop { display: block; }
+  .intro-mobile { display: none; }
+
+  @media (max-width: 900px) {
+    .intro-section {
+      padding: 3.5rem 1.25rem;
     }
-    .intro-body p {
+
+    .intro-desktop { display: none; }
+    .intro-mobile { display: block; }
+
+    .intro-mobile p {
       font-size: 1rem;
       line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .intro-section {
+      padding: 7rem 2rem;
     }
   }
 </style>
