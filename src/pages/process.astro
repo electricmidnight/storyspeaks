@@ -51,10 +51,8 @@ const phases = [
 >
   <main class="process-page">
  
-    <!-- ============ HEADER (unchanged from original) ============ -->
+    <!-- ============ HEADER ============ -->
     <section class="process-hero">
-      <p class="eyebrow">Our Process</p>
- 
       <h1 class="process-headline">
         The <span class="prism-multicolor">
           <span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span>
@@ -64,7 +62,7 @@ const phases = [
       <p class="process-subtitle">Architecture for Unforgettable Stories</p>
  
       <p class="process-intro">
-        Most agencies promise creative magic. PRISM delivers strategic certainty with a proprietary narrative architecture designed to translate complex truth into resonant human experience. It's a rigorous, five-phase process that ensures every film is built with the clarity, precision and purpose required to drive real results.
+        Most agencies promise creative magic. PRISM delivers strategic certainty with a proprietary narrative architecture designed to translate complex truth into resonant human experience.<span class="desktop-only-text"> It's a rigorous, five-phase process that ensures every film is built with the clarity, precision and purpose required to drive real results.</span>
       </p>
     </section>
  
@@ -253,7 +251,7 @@ const phases = [
     <!-- ============ CTA TO SCIENCE SECTION (desktop + mobile) ============ -->
     <div class="section-cta-wrapper">
       <a href="#science" class="section-cta">
-        <span>UNLOCK THE SCIENCE OF STORY</span>
+        <span>LEARN THE SCIENCE OF STORY</span>
         <span class="cta-arrow">↓</span>
       </a>
     </div>
@@ -386,20 +384,14 @@ const phases = [
     margin: 0 auto 2rem;
     max-width: 600px;
     font-weight: 300;
+    /* Prevent single-word orphan on the last line (avoids "results" hanging alone) */
+    text-wrap: pretty;
   }
  
-  .process-instruction {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin: 0;
-    font-weight: 300;
-    font-style: italic;
-    opacity: 0.75;
+  /* Inline content visible on desktop only (hidden on mobile via media query) */
+  .desktop-only-text {
+    display: inline;
   }
- 
-  .desktop-instruction { display: block; }
-  .mobile-instruction { display: none; }
  
   /* ============ DESKTOP INTERACTIVE PRISM ============ */
   .prism-section {
@@ -663,8 +655,7 @@ const phases = [
  
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
-    .desktop-instruction { display: none; }
-    .mobile-instruction { display: block; }
+    .desktop-only-text { display: none; }
  
     .prism-section { display: none; }
  
