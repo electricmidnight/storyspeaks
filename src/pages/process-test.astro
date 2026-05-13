@@ -63,7 +63,6 @@ const phases = [
     <section class="prism-section">
       <div class="prism-row" id="prismRow">
  
-        <!-- Full-row SVG layer with overflow: visible -->
         <svg class="rays-svg" id="raysSvg" viewBox="0 0 1400 500" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
@@ -90,7 +89,6 @@ const phases = [
           <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
         </svg>
  
-        <!-- LEFT zone: RAW STORY (on left) + prism + orb -->
         <div class="prism-side">
           <div class="raw-story-label">RAW STORY</div>
  
@@ -125,7 +123,6 @@ const phases = [
           </div>
         </div>
  
-        <!-- RIGHT zone: items -->
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -203,21 +200,24 @@ const phases = [
     font-weight: 300;
   }
  
-  /* ============ THE PRISM SECTION ============ */
-  /* Section uses near-full viewport width so the scene can really stretch out */
+  /* ============ PRISM SECTION — FILLS THE VIEWPORT ============ */
+  /* NO max-width. NO centering margins. The section spans the full page width
+     so the prism scene scales with however wide the screen is. */
   .prism-section {
-    max-width: 1800px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
  
-  /* The row is a 3-column grid that fills the section width:
-     [prism-side fixed]  [ray-zone 1fr — EXPANDABLE]  [items-container fixed]
-     The 1fr column eats whatever space remains, which is what makes rays long. */
+  /* Grid columns are PERCENTAGES of the row width.
+     17% prism-side + 31% ray zone + 52% items-container = 100%
+     This puts the LETTER BOX at exactly 48% of the viewport — just left of center.
+     The ray zone is always 31% of viewport, scaling up on wider screens. */
   .prism-row {
     position: relative;
+    width: 100%;
     display: grid;
-    grid-template-columns: 320px 1fr 760px;
+    grid-template-columns: 17% 31% 52%;
     align-items: center;
     min-height: 620px;
   }
@@ -242,22 +242,22 @@ const phases = [
     cursor: pointer;
   }
  
-  /* ============ LEFT: prism-side holds RAW STORY (left) + prism (right) ============ */
+  /* ============ LEFT: prism-side ============ */
   .prism-side {
     position: relative;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;  /* prism at right edge of this column */
+    justify-content: flex-end;
+    padding-right: 10px;
     z-index: 2;
   }
  
-  /* RAW STORY sits to the LEFT of the prism (not inside the orb).
-     With prism-side 320px, prism container at right takes ~170px,
-     leaving ~150px on the left for the RAW STORY label. */
+  /* RAW STORY at the far left of prism-side, vertically centered.
+     Sits well outside the orb (the orb is ~200px wide centered on the prism on the right). */
   .raw-story-label {
     position: absolute;
-    left: 0;
+    left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--font-sans);
@@ -295,7 +295,6 @@ const phases = [
     position: relative;
     width: 170px;
     height: 170px;
-    margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -360,6 +359,8 @@ const phases = [
   }
  
   /* ============ RIGHT: items-container ============ */
+  /* This takes 52% of the viewport. On a 1920 screen that's ~998px wide.
+     Plenty of room for description without overlap. */
   .items-container {
     position: relative;
     z-index: 4;
@@ -368,6 +369,7 @@ const phases = [
     justify-content: center;
     gap: 0;
     align-self: stretch;
+    padding-right: 3vw;
   }
  
   .prism-item {
@@ -418,17 +420,19 @@ const phases = [
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Description anchored at left:290px from prism-item left edge.
-     With items-container 760px: 760 - 290 - 24 = 446px width. */
+  /* Description: anchored 290px from prism-item's left edge.
+     With items-container taking 52% of a 1920 viewport = ~998px, and prism-item filling it:
+     description width = 998 - 290 - 24 = 684px, capped at max-width 600px.
+     On wider screens it stays at 600px, with empty space to the right. */
   .description {
     position: absolute;
     top: 50%;
     left: 290px;
     right: 1.5rem;
-    max-width: 450px;
+    max-width: 600px;
     transform: translateY(-50%) translateX(40px);
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 300;
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.88);
@@ -470,29 +474,15 @@ const phases = [
   }
  
   /* ============ MEDIUM SCREENS ============ */
-  @media (max-width: 1500px) {
+  @media (max-width: 1400px) {
     .prism-row {
-      grid-template-columns: 280px 1fr 700px;
+      grid-template-columns: 18% 30% 52%;
       min-height: 580px;
     }
  
     .description {
-      left: 280px;
-      max-width: 400px;
-      font-size: 0.86rem;
-    }
-  }
- 
-  @media (max-width: 1250px) {
-    .prism-row {
-      grid-template-columns: 240px 1fr 640px;
-      min-height: 560px;
-    }
- 
-    .description {
-      left: 270px;
-      max-width: 350px;
-      font-size: 0.84rem;
+      font-size: 0.88rem;
+      max-width: 480px;
     }
  
     .glass-glow {
@@ -504,9 +494,18 @@ const phases = [
       width: 110px;
       height: 110px;
     }
+  }
  
-    .raw-story-label {
-      font-size: 0.78rem;
+  @media (max-width: 1100px) {
+    .prism-row {
+      grid-template-columns: 20% 28% 52%;
+      min-height: 560px;
+    }
+ 
+    .description {
+      font-size: 0.85rem;
+      max-width: 360px;
+      left: 280px;
     }
   }
  
@@ -543,14 +542,11 @@ const phases = [
       text-align: center;
     }
  
-    .prism-container {
-      margin-right: 0;
-    }
- 
     .items-container {
       width: 100%;
       max-width: 480px;
       gap: 8px;
+      padding-right: 0;
     }
  
     .prism-item {
@@ -765,7 +761,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Prism — scene fills full section width');
+      console.log('[Process Test] Full-viewport prism — letters at 48%');
     }
  
     if (document.readyState === 'loading') {
