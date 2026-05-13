@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
- 
+
 const phases = [
   {
     letter: 'P',
@@ -44,23 +44,34 @@ const phases = [
   },
 ];
 ---
- 
+
 <BaseLayout
-  title="Process Animation Test — The Story Speaks"
-  description="Interactive PRISM prototype."
+  title="Our Process — The Story Speaks"
+  description="The PRISM Method: a proprietary five-phase narrative architecture for translating complex truth into resonant human experience."
 >
-  <main class="test-page">
- 
-    <div class="test-banner">
-      <p class="test-banner-label">TEST PAGE — Interactive PRISM</p>
-      <a href="/process/" class="test-banner-link">← Back to /process/</a>
-    </div>
- 
-    <section class="test-hero">
-      <p class="test-intro desktop-intro">Hover or tap each ray to reveal that phase of the methodology.</p>
-      <p class="test-intro mobile-intro">Scroll to explore each phase of the methodology.</p>
+  <main class="process-page">
+
+    <!-- ============ HEADER (unchanged from original) ============ -->
+    <section class="process-hero">
+      <p class="eyebrow">Our Process</p>
+
+      <h1 class="process-headline">
+        The <span class="prism-multicolor">
+          <span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span>
+        </span> Method
+      </h1>
+
+      <p class="process-subtitle">The Architecture for Unforgettable Stories</p>
+
+      <p class="process-intro">
+        Most agencies promise creative magic. PRISM delivers strategic certainty. A proprietary narrative architecture designed to translate complex truth into resonant human experience.
+      </p>
+
+      <p class="process-instruction desktop-instruction">Hover over each ray to reveal that phase of the methodology.</p>
+      <p class="process-instruction mobile-instruction">Scroll to explore each phase of the methodology.</p>
     </section>
- 
+
+    <!-- ============ MOBILE PREVIEW (decorative mini PRISM) ============ -->
     <section class="mobile-preview" aria-hidden="true">
       <div class="mp-stage">
         <svg class="mp-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
@@ -104,14 +115,14 @@ const phases = [
               <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
             </radialGradient>
           </defs>
- 
+
           <polygon points="60,120 210,22 210,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,67 210,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,112 210,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,157 210,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
           <polygon points="60,120 210,202 210,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
         </svg>
- 
+
         <div class="mp-prism-wrap">
           <div class="mp-orb"></div>
           <div class="mp-gem">
@@ -123,12 +134,12 @@ const phases = [
             </svg>
           </div>
         </div>
- 
+
         <div class="mp-label">
           <span>RAW</span>
           <span>STORY</span>
         </div>
- 
+
         <div class="mp-letter mp-p" style="--phase-color: #d4756f;">P</div>
         <div class="mp-letter mp-r" style="--phase-color: #f5d589;">R</div>
         <div class="mp-letter mp-i" style="--phase-color: #a3bc7e;">I</div>
@@ -136,12 +147,13 @@ const phases = [
         <div class="mp-letter mp-m" style="--phase-color: #a583b5;">M</div>
       </div>
     </section>
- 
+
+    <!-- ============ DESKTOP: interactive PRISM ============ -->
     <section class="prism-section">
       <div class="main-wrapper" id="prismRow">
- 
+
         <div class="prism-animation-container">
- 
+
           <svg class="animation-svg" id="raysSvg" viewBox="0 0 1200 550" preserveAspectRatio="xMinYMid meet">
             <defs>
               <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
@@ -149,30 +161,30 @@ const phases = [
               <linearGradient id="ray-grad-i" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(163, 188, 126, 0.35)"/><stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/></linearGradient>
               <linearGradient id="ray-grad-s" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(134, 168, 201, 0.35)"/><stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/></linearGradient>
               <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
- 
+
               <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
               </filter>
             </defs>
- 
+
             <polygon id="ray-p" class="prism-ray" data-phase="p" points="0,0 0,0 0,0" fill="url(#ray-grad-p)" style="filter: url(#ray-glow); opacity: 0;"/>
             <polygon id="ray-r" class="prism-ray" data-phase="r" points="0,0 0,0 0,0" fill="url(#ray-grad-r)" style="filter: url(#ray-glow); opacity: 0;"/>
             <polygon id="ray-i" class="prism-ray" data-phase="i" points="0,0 0,0 0,0" fill="url(#ray-grad-i)" style="filter: url(#ray-glow); opacity: 0;"/>
             <polygon id="ray-s" class="prism-ray" data-phase="s" points="0,0 0,0 0,0" fill="url(#ray-grad-s)" style="filter: url(#ray-glow); opacity: 0;"/>
             <polygon id="ray-m" class="prism-ray" data-phase="m" points="0,0 0,0 0,0" fill="url(#ray-grad-m)" style="filter: url(#ray-glow); opacity: 0;"/>
- 
+
             <polygon id="hover-p" class="hover-area" data-phase="p" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
             <polygon id="hover-r" class="hover-area" data-phase="r" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
             <polygon id="hover-i" class="hover-area" data-phase="i" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
             <polygon id="hover-s" class="hover-area" data-phase="s" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
             <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
           </svg>
- 
+
           <div class="raw-story-label">RAW STORY</div>
- 
+
           <div class="prism-center">
             <div class="glass-glow"></div>
- 
+
             <div class="prism-gem" id="prismGem">
               <svg class="prism-pyramid-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
                 <defs>
@@ -200,7 +212,7 @@ const phases = [
             </div>
           </div>
         </div>
- 
+
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -216,81 +228,190 @@ const phases = [
             </div>
           ))}
         </div>
- 
+
       </div>
     </section>
- 
+
+    <!-- ============ MOBILE: scrollspy cards ============ -->
+    <div class="mobile-cards-container" id="mobileCards">
+      {phases.map((phase) => (
+        <div
+          class="mobile-card"
+          data-phase={phase.letter.toLowerCase()}
+          style={`--phase-color: ${phase.colorHex}; --phase-color-rgb: ${phase.colorRgb};`}
+        >
+          <div class="mc-header">
+            <div class="mc-letter">{phase.letter}</div>
+            <div class="mc-name">{phase.name}</div>
+          </div>
+          <div class="mc-description-wrap">
+            <div class="mc-description">
+              <span class="mc-subtitle">{phase.subtitle}</span> {phase.description}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- ============ MOBILE-ONLY CTA TO SCIENCE SECTION ============ -->
+    <div class="section-cta-wrapper">
+      <a href="#science" class="section-cta">
+        <span>THE SCIENCE BEHIND PRISM</span>
+        <span class="cta-arrow">↓</span>
+      </a>
+    </div>
+
+    <!-- ============ SCIENCE PANEL (normal word spacing) ============ -->
+    <section class="science-section" id="science">
+      <div class="science-section-inner">
+        <div class="science-eyebrow-wrapper">
+          <span class="science-eyebrow-rule"></span>
+          <p class="eyebrow science-eyebrow">The Science</p>
+          <span class="science-eyebrow-rule"></span>
+        </div>
+
+        <h2 class="science-headline">
+          <span class="science-headline-stories">STORIES</span>
+          <span class="science-headline-engineer">ENGINEER</span>
+          <span class="science-headline-influence">INFLUENCE.</span>
+        </h2>
+
+        <p class="science-subtitle">
+          Story is the only evolutionary technology proven to synchronize the brain, bypass logic, and compel action. <span class="prism-multicolor"><span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span></span> is the architecture for harnessing these biological levers.
+        </p>
+
+        <div class="science-cards">
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                <line x1="30" y1="22" x2="30" y2="10" stroke="currentColor" stroke-width="2"/>
+                <line x1="30" y1="38" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
+                <line x1="38" y1="30" x2="50" y2="30" stroke="currentColor" stroke-width="2"/>
+                <line x1="22" y1="30" x2="10" y2="30" stroke="currentColor" stroke-width="2"/>
+                <line x1="36" y1="36" x2="45" y2="45" stroke="currentColor" stroke-width="2"/>
+                <line x1="24" y1="24" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Attention Hack</h3>
+            <p class="science-card-subtitle">(Cortisol)</p>
+            <p class="science-card-body">
+              The brain is wired to ignore the predictable. It craves conflict. A narrative structured around high-stakes tension triggers a biological response — focus, in a distracted world. The work doesn't ask for attention; it seizes it.
+            </p>
+          </article>
+
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <path d="M5 30 L15 20 L25 35 L35 15 L45 40 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 30 L15 25 L25 32 L35 20 L45 38 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Empathy Engine</h3>
+            <p class="science-card-subtitle">(Oxytocin)</p>
+            <p class="science-card-body">
+              Facts inform, but stories connect. When an audience identifies with a character's struggle, their brain releases oxytocin — the "trust molecule." This bridges the gap between your brand and your audience, turning skepticism into solidarity.
+            </p>
+          </article>
+
+          <article class="science-card">
+            <div class="science-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="4" fill="currentColor"/>
+                <circle cx="30" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+                <circle cx="30" cy="30" r="20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+              </svg>
+            </div>
+            <h3 class="science-card-title">The Action Protocol</h3>
+            <p class="science-card-subtitle">(Narrative Transportation)</p>
+            <p class="science-card-body">
+              When a story is architected correctly, the viewer enters a state of "Narrative Transportation." They cease to be an observer and become a participant. In this state, beliefs are malleable, and the impulse to act becomes internal, not external.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="final-cta">
+      <h2 class="final-cta-headline">Let's build your story.</h2>
+      <p class="final-cta-tagline">Five Emmys. National Addys. TED-honored work in 20+ countries.</p>
+      <a href="/contact/" class="btn btn-primary final-cta-btn">Start a Conversation</a>
+    </section>
+
   </main>
 </BaseLayout>
- 
+
 <style>
-  .test-page {
+  .process-page {
     background: var(--color-bg-deep);
     min-height: 100vh;
-    padding-top: 5rem;
-    padding-bottom: 4rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
- 
-  .test-banner {
-    max-width: 1200px;
-    margin: 0 auto 2rem;
-    padding: 0.85rem 1.75rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-    border-radius: 4px;
+
+  .prism-multicolor {
+    font-weight: 300;
+    letter-spacing: 0.02em;
   }
- 
-  .test-banner-label {
-    font-family: var(--font-wordmark, 'Fjalla One', sans-serif);
-    font-size: 0.7rem;
-    color: var(--color-accent);
-    letter-spacing: 0.2em;
-    margin: 0;
-  }
- 
-  .test-banner-link {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
- 
-  .test-banner-link:hover {
-    color: var(--color-accent);
-  }
- 
-  .test-hero {
+
+  /* ============ HEADER ============ */
+  .process-hero {
     max-width: 760px;
     margin: 0 auto 2.5rem;
     padding: 0 2rem;
     text-align: center;
   }
- 
-  .test-intro {
-    font-size: 0.95rem;
+
+  .process-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 1.25rem 0 1rem;
+  }
+
+  .process-subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-accent);
+    margin: 0 0 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .process-intro {
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    margin: 0 auto 2rem;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .process-instruction {
+    font-size: 0.9rem;
     line-height: 1.6;
     color: var(--color-text-muted);
     margin: 0;
     font-weight: 300;
+    font-style: italic;
+    opacity: 0.75;
   }
- 
-  .desktop-intro { display: block; }
-  .mobile-intro { display: none; }
- 
-  .mobile-preview { display: none; }
- 
-  /* ============ DESKTOP ============ */
+
+  .desktop-instruction { display: block; }
+  .mobile-instruction { display: none; }
+
+  /* ============ DESKTOP INTERACTIVE PRISM ============ */
   .prism-section {
     max-width: 1100px;
     width: 100%;
-    margin: 0 auto;
+    margin: 3rem auto 4rem;
     padding: 0 40px;
   }
- 
+
   .main-wrapper {
     position: relative;
     display: flex;
@@ -299,7 +420,7 @@ const phases = [
     gap: 40px;
     pointer-events: auto;
   }
- 
+
   .prism-animation-container {
     position: relative;
     width: 350px;
@@ -307,7 +428,7 @@ const phases = [
     flex-shrink: 0;
     overflow: visible;
   }
- 
+
   .animation-svg {
     position: absolute;
     width: 1200px;
@@ -317,17 +438,17 @@ const phases = [
     overflow: visible;
     pointer-events: none;
   }
- 
+
   .prism-ray {
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
   }
- 
+
   .hover-area {
     pointer-events: all;
     cursor: pointer;
   }
- 
+
   .raw-story-label {
     position: absolute;
     left: 0;
@@ -347,7 +468,7 @@ const phases = [
       0 0 30px rgba(245, 213, 137, 0.3);
     animation: rawStoryPulse 4s ease-in-out infinite;
   }
- 
+
   @keyframes rawStoryPulse {
     0%, 100% {
       text-shadow:
@@ -362,7 +483,7 @@ const phases = [
         0 0 42px rgba(245, 213, 137, 0.45);
     }
   }
- 
+
   .prism-center {
     position: absolute;
     left: 50%;
@@ -372,7 +493,7 @@ const phases = [
     height: 100px;
     z-index: 4;
   }
- 
+
   .glass-glow {
     position: absolute;
     width: 120px;
@@ -392,7 +513,7 @@ const phases = [
     animation: orbPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
- 
+
   @keyframes orbPulse {
     0%, 100% {
       transform: translate(-50%, -50%) scale(1);
@@ -403,7 +524,7 @@ const phases = [
       opacity: 1;
     }
   }
- 
+
   .prism-gem {
     position: absolute;
     left: 50%;
@@ -416,13 +537,13 @@ const phases = [
     animation: prismPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
- 
+
   .prism-pyramid-svg {
     width: 100%;
     height: 100%;
     display: block;
   }
- 
+
   @keyframes prismPulse {
     0%, 100% {
       filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
@@ -431,7 +552,7 @@ const phases = [
       filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.55));
     }
   }
- 
+
   .items-container {
     width: 750px;
     flex-shrink: 0;
@@ -442,7 +563,7 @@ const phases = [
     position: relative;
     z-index: 5;
   }
- 
+
   .prism-item {
     position: relative;
     display: flex;
@@ -456,7 +577,7 @@ const phases = [
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
- 
+
   .letter-box {
     flex-shrink: 0;
     width: 55px;
@@ -477,7 +598,7 @@ const phases = [
     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
- 
+
   .word-title {
     flex-shrink: 0;
     font-family: var(--font-sans);
@@ -490,7 +611,7 @@ const phases = [
     text-shadow: 0 0 14px color-mix(in srgb, var(--phase-color) 50%, transparent);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
- 
+
   .description {
     position: absolute;
     top: 50%;
@@ -508,12 +629,12 @@ const phases = [
                 opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
   }
- 
+
   .desc-subtitle {
     font-style: italic;
     color: var(--phase-color);
   }
- 
+
   .prism-item.active {
     background: color-mix(in srgb, var(--phase-color) 22%, transparent);
     border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
@@ -524,41 +645,45 @@ const phases = [
     transform: translateY(-3px);
     z-index: 10;
   }
- 
+
   .prism-item.active .letter-box {
     opacity: 0;
     transform: scale(0.7);
   }
- 
+
   .prism-item.active .word-title {
     transform: translateX(-72px);
   }
- 
+
   .prism-item.active .description {
     transform: translateY(-50%) translateX(0);
     opacity: 1;
   }
- 
+
+  /* ============ MOBILE PREVIEW + CARDS — hidden on desktop ============ */
+  .mobile-preview { display: none; }
+  .mobile-cards-container { display: none; }
+
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
-    .desktop-intro { display: none; }
-    .mobile-intro { display: block; }
- 
+    .desktop-instruction { display: none; }
+    .mobile-instruction { display: block; }
+
     .prism-section { display: none; }
- 
+
     .mobile-preview {
       display: block;
       max-width: 280px;
       margin: 0 auto 3rem;
     }
- 
+
     .mp-stage {
       position: relative;
       width: 280px;
       height: 240px;
       margin: 0 auto;
     }
- 
+
     .mp-rays-svg {
       position: absolute;
       inset: 0;
@@ -568,7 +693,7 @@ const phases = [
       pointer-events: none;
       z-index: 1;
     }
- 
+
     .mp-prism-wrap {
       position: absolute;
       left: 25px;
@@ -580,7 +705,7 @@ const phases = [
       align-items: center;
       justify-content: center;
     }
- 
+
     .mp-orb {
       position: absolute;
       width: 90px;
@@ -600,7 +725,7 @@ const phases = [
       animation: orbPulse 4s ease-in-out infinite;
       pointer-events: none;
     }
- 
+
     .mp-gem {
       position: relative;
       z-index: 2;
@@ -609,13 +734,13 @@ const phases = [
       filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.45));
       animation: prismPulse 4s ease-in-out infinite;
     }
- 
+
     .mp-gem svg {
       width: 100%;
       height: 100%;
       display: block;
     }
- 
+
     .mp-label {
       position: absolute;
       left: 60px;
@@ -636,11 +761,11 @@ const phases = [
       pointer-events: none;
       z-index: 4;
     }
- 
+
     .mp-label span {
       display: block;
     }
- 
+
     .mp-letter {
       position: absolute;
       right: 36px;
@@ -661,62 +786,54 @@ const phases = [
         0 0 16px color-mix(in srgb, var(--phase-color) 45%, transparent);
       z-index: 5;
     }
- 
+
     .mp-p { top: 16px; }
     .mp-r { top: 61px; }
     .mp-i { top: 106px; }
     .mp-s { top: 151px; }
     .mp-m { top: 196px; }
-  }
- 
-  /* ============ MOBILE PHASE CARDS — grid-template-rows technique ============ */
-  .mobile-cards-container { display: none; }
- 
-  @media (max-width: 900px) {
+
+    /* MOBILE CARDS — minimal padding-bottom since content (section-cta, science, final-cta)
+       provides ample scroll room for M's top to reach the trigger line */
     .mobile-cards-container {
       display: flex;
       flex-direction: column;
       gap: 12px;
       max-width: 480px;
       margin: 0 auto;
-      padding: 0 1rem 70vh;
+      padding: 0 1rem;
     }
- 
-    /* CARD: visual properties (bg, border, shadow) animate smoothly.
-       Asymmetric timing — slower when entering revealed (luxurious),
-       slightly faster when leaving (cleaner). */
+
     .mobile-card {
       position: relative;
       padding: 0.95rem 1rem;
       border: 1px solid color-mix(in srgb, var(--phase-color) 25%, transparent);
       border-radius: 4px;
       background: color-mix(in srgb, var(--phase-color) 5%, transparent);
-      /* Default state transition (used when LEAVING .revealed) */
       transition:
         background 0.65s cubic-bezier(0.16, 1, 0.3, 1),
         border-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
         box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
- 
+
     .mobile-card.revealed {
       background: color-mix(in srgb, var(--phase-color) 16%, transparent);
       border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
       box-shadow:
         0 0 28px color-mix(in srgb, var(--phase-color) 35%, transparent),
         0 0 56px color-mix(in srgb, var(--phase-color) 18%, transparent);
-      /* Revealed state transition (used when ENTERING .revealed) — slower for luxury */
       transition:
         background 0.9s cubic-bezier(0.16, 1, 0.3, 1),
         border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
         box-shadow 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
- 
+
     .mc-header {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
- 
+
     .mc-letter {
       flex-shrink: 0;
       width: 48px;
@@ -735,7 +852,7 @@ const phases = [
         0 0 10px color-mix(in srgb, var(--phase-color) 70%, transparent),
         0 0 20px color-mix(in srgb, var(--phase-color) 45%, transparent);
     }
- 
+
     .mc-name {
       font-family: var(--font-sans);
       font-size: 1rem;
@@ -745,24 +862,18 @@ const phases = [
       line-height: 1;
       text-shadow: 0 0 12px color-mix(in srgb, var(--phase-color) 50%, transparent);
     }
- 
-    /* DESCRIPTION WRAP: uses grid-template-rows technique.
-       0fr = collapsed (natural 0 height), 1fr = expanded (natural content height).
-       Animates the ACTUAL content height instead of a max-height guess,
-       so there's no mid-animation snap. */
+
     .mc-description-wrap {
       display: grid;
       grid-template-rows: 0fr;
-      /* Default transition (used when LEAVING .revealed) — slightly faster */
       transition: grid-template-rows 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
- 
+
     .mobile-card.revealed .mc-description-wrap {
       grid-template-rows: 1fr;
-      /* Revealed transition (used when ENTERING .revealed) — slower, more luxurious */
       transition: grid-template-rows 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
- 
+
     .mc-description {
       overflow: hidden;
       padding-top: 0.75rem;
@@ -772,103 +883,334 @@ const phases = [
       line-height: 1.55;
       color: rgba(255, 255, 255, 0.88);
       opacity: 0;
-      /* Default transition for fade out — quick, so content disappears
-         before height collapse fully clips it */
       transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
- 
+
     .mobile-card.revealed .mc-description {
       opacity: 1;
-      /* Revealed transition for fade in — delayed so height opens first,
-         then text gently appears in the new space */
       transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
     }
- 
+
     .mc-subtitle {
       font-style: italic;
       color: var(--phase-color);
     }
   }
+
+  /* ============ MOBILE-ONLY CTA TO SCIENCE ============ */
+  .section-cta-wrapper {
+    text-align: center;
+    margin: 4rem auto 3rem;
+    padding: 0 2rem;
+  }
+
+  .section-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.5rem;
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    border: 1px solid var(--color-accent);
+    border-radius: 2px;
+    color: var(--color-accent);
+    font-family: var(--font-wordmark);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    max-width: 280px;
+  }
+
+  .section-cta:hover {
+    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
+  }
+
+  .cta-arrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0;
+  }
+
+  /* ============ SCIENCE SECTION ============ */
+  .science-section {
+    background: var(--color-bg-mid);
+    padding: 6rem 0 5rem;
+    margin: 5rem 0 4rem;
+    text-align: center;
+    scroll-margin-top: 100px;
+    position: relative;
+  }
+
+  .science-section::before,
+  .science-section::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(340px, 70%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    opacity: 0.6;
+  }
+
+  .science-section::before { top: 0; }
+  .science-section::after { bottom: 0; }
+
+  .science-section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .science-eyebrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .science-eyebrow-rule {
+    display: block;
+    width: 50px;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+
+  .science-eyebrow {
+    margin: 0;
+  }
+
+  .science-headline {
+    font-family: var(--font-wordmark);
+    font-size: clamp(1.75rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    margin: 0 0 2rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Normal word spacing — no margin-right between spans (natural single space between words) */
+  .science-headline-stories {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .science-headline-engineer {
+    color: var(--color-accent);
+  }
+
+  .science-headline-influence {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .science-subtitle {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin: 0 auto 4rem;
+    font-weight: 300;
+  }
+
+  .science-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .science-card {
+    padding: 2rem 1.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .science-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .science-card-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.25rem;
+    color: var(--color-accent);
+  }
+
+  .science-card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .science-card-title {
+    font-family: var(--font-wordmark);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    letter-spacing: 0.15em;
+    margin: 0 0 0.3rem;
+    line-height: 1.1;
+  }
+
+  .science-card-subtitle {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--color-text-subtle);
+    margin: 0 0 1rem;
+  }
+
+  .science-card-body {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    margin: 0;
+  }
+
+  /* ============ FINAL CTA ============ */
+  .final-cta {
+    max-width: 720px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .final-cta-headline {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: -0.025em;
+    margin: 0 0 1rem;
+  }
+
+  .final-cta-tagline {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    color: var(--color-text-muted);
+    margin: 0 0 2rem;
+    font-weight: 300;
+  }
+
+  .final-cta-btn {
+    text-decoration: none;
+  }
+
+  /* ============ DESKTOP BREAKPOINT ============ */
+  @media (min-width: 992px) {
+    .process-page {
+      padding-top: 8rem;
+    }
+
+    .process-hero {
+      max-width: 920px;
+      margin-bottom: 3rem;
+    }
+
+    .section-cta-wrapper {
+      display: none;
+    }
+
+    .science-section {
+      margin: 7rem 0 5rem;
+      padding: 7rem 0 6rem;
+    }
+
+    .science-section::before,
+    .science-section::after {
+      width: min(420px, 50%);
+    }
+
+    .science-cards {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .science-card {
+      padding: 2.5rem 2rem;
+    }
+
+    .science-card-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    .science-card-title {
+      font-size: 1.25rem;
+    }
+
+    .science-card-body {
+      font-size: 1rem;
+    }
+
+    .final-cta {
+      margin-top: 5rem;
+    }
+  }
 </style>
- 
-<div class="mobile-cards-container" id="mobileCards">
-  {phases.map((phase) => (
-    <div
-      class="mobile-card"
-      data-phase={phase.letter.toLowerCase()}
-      style={`--phase-color: ${phase.colorHex}; --phase-color-rgb: ${phase.colorRgb};`}
-    >
-      <div class="mc-header">
-        <div class="mc-letter">{phase.letter}</div>
-        <div class="mc-name">{phase.name}</div>
-      </div>
-      <div class="mc-description-wrap">
-        <div class="mc-description">
-          <span class="mc-subtitle">{phase.subtitle}</span> {phase.description}
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
- 
+
 <script is:inline>
   (function () {
     'use strict';
- 
+
     var THIN_HALF = 1.5;
     var WEDGE_HALF = 40;
     var HOVER_HALF = 54;
- 
+
     var phases = ['p', 'r', 'i', 's', 'm'];
- 
+
     function isMobile() {
       return window.innerWidth < 901;
     }
- 
+
     function computeGeometry() {
       if (isMobile()) return;
- 
+
       var container = document.querySelector('.prism-animation-container');
       var gem = document.getElementById('prismGem');
       var svg = document.getElementById('raysSvg');
       if (!container || !gem || !svg) return;
- 
+
       var containerRect = container.getBoundingClientRect();
       var gemRect = gem.getBoundingClientRect();
- 
+
       var prismX = gemRect.left - containerRect.left + gemRect.width / 2;
       var prismY = gemRect.top - containerRect.top + gemRect.height / 2;
- 
+
       phases.forEach(function (phase) {
         var item = document.querySelector('.prism-item[data-phase="' + phase + '"]');
         if (!item) return;
         var itemRect = item.getBoundingClientRect();
- 
+
         var targetX = itemRect.left - containerRect.left;
         var targetY = itemRect.top - containerRect.top + itemRect.height / 2;
- 
+
         var thinPoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - THIN_HALF) + ' ' +
           targetX + ',' + (targetY + THIN_HALF);
- 
+
         var wedgePoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - WEDGE_HALF) + ' ' +
           targetX + ',' + (targetY + WEDGE_HALF);
- 
+
         var hoverPoints =
           prismX + ',' + prismY + ' ' +
           targetX + ',' + (targetY - HOVER_HALF) + ' ' +
           targetX + ',' + (targetY + HOVER_HALF);
- 
+
         var ray = document.getElementById('ray-' + phase);
         if (ray) {
           ray.dataset.thinPoints = thinPoints;
           ray.dataset.wedgePoints = wedgePoints;
           ray.setAttribute('points', thinPoints);
           ray.style.opacity = '0.9';
- 
+
           var grad = document.getElementById('ray-grad-' + phase);
           if (grad) {
             grad.setAttribute('x1', String(prismX));
@@ -877,14 +1219,14 @@ const phases = [
             grad.setAttribute('y2', String(targetY));
           }
         }
- 
+
         var hoverArea = document.getElementById('hover-' + phase);
         if (hoverArea) {
           hoverArea.setAttribute('points', hoverPoints);
         }
       });
     }
- 
+
     function activate(phase) {
       phases.forEach(function (p) {
         var ray = document.getElementById('ray-' + p);
@@ -898,7 +1240,7 @@ const phases = [
           ray.style.opacity = '0.5';
         }
       });
- 
+
       var items = document.querySelectorAll('.prism-item');
       for (var i = 0; i < items.length; i++) {
         if (items[i].getAttribute('data-phase') === phase) {
@@ -908,7 +1250,7 @@ const phases = [
         }
       }
     }
- 
+
     function deactivateAll() {
       phases.forEach(function (p) {
         var ray = document.getElementById('ray-' + p);
@@ -922,7 +1264,7 @@ const phases = [
         items[i].classList.remove('active');
       }
     }
- 
+
     function attachDesktopHandlers() {
       phases.forEach(function (phase) {
         var hoverArea = document.getElementById('hover-' + phase);
@@ -941,7 +1283,7 @@ const phases = [
           });
         }
       });
- 
+
       var items = document.querySelectorAll('.prism-item');
       for (var i = 0; i < items.length; i++) {
         (function (item) {
@@ -961,24 +1303,24 @@ const phases = [
         })(items[i]);
       }
     }
- 
+
     function setupMobileScrollSpy() {
       if (!isMobile()) return;
- 
+
       var cards = document.querySelectorAll('.mobile-card');
       if (cards.length === 0) return;
- 
+
       function updateActiveCard() {
         var triggerY = window.innerHeight * 0.4;
         var activeIdx = -1;
- 
+
         for (var i = 0; i < cards.length; i++) {
           var rect = cards[i].getBoundingClientRect();
           if (rect.top <= triggerY) {
             activeIdx = i;
           }
         }
- 
+
         for (var j = 0; j < cards.length; j++) {
           if (j === activeIdx) {
             cards[j].classList.add('revealed');
@@ -987,7 +1329,7 @@ const phases = [
           }
         }
       }
- 
+
       var rafId = null;
       function onScroll() {
         if (rafId) return;
@@ -996,20 +1338,20 @@ const phases = [
           rafId = null;
         });
       }
- 
+
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
- 
+
       updateActiveCard();
     }
- 
+
     function init() {
       requestAnimationFrame(function () {
         computeGeometry();
         attachDesktopHandlers();
         setupMobileScrollSpy();
       });
- 
+
       var resizeTimer = null;
       window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
@@ -1018,10 +1360,10 @@ const phases = [
           computeGeometry();
         }, 150);
       });
- 
-      console.log('[Process Test] Smoother reveals: grid-template-rows + easeOutExpo + asymmetric timing');
+
+      console.log('[Process] Interactive PRISM integrated — desktop hover, mobile scrollspy');
     }
- 
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -1029,4 +1371,3 @@ const phases = [
     }
   })();
 </script>
- 
