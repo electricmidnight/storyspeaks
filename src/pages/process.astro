@@ -6,6 +6,7 @@ const phases = [
     letter: 'P',
     name: 'PEOPLE',
     colorHex: '#d4756f',
+    colorRgb: '212, 117, 111',
     subtitle: 'The Heart of every story.',
     description: 'Characters with desire, uniqueness, and complexity — found, drawn out, and revealed so your audience sees themselves in them.',
   },
@@ -13,6 +14,7 @@ const phases = [
     letter: 'R',
     name: 'RESONANCE',
     colorHex: '#f5d589',
+    colorRgb: '245, 213, 137',
     subtitle: 'The Why behind the narrative.',
     description: 'Stories crafted with clear purpose that resonate deeply — changing attitudes and driving action.',
   },
@@ -20,6 +22,7 @@ const phases = [
     letter: 'I',
     name: 'IMMERSION',
     colorHex: '#a3bc7e',
+    colorRgb: '163, 188, 126',
     subtitle: 'The Story Structure that transports.',
     description: 'Stories built to be so engaging that audiences become fully absorbed in your narrative world.',
   },
@@ -27,6 +30,7 @@ const phases = [
     letter: 'S',
     name: 'STORYFINDING',
     colorHex: '#86a8c9',
+    colorRgb: '134, 168, 201',
     subtitle: 'The Discovery process.',
     description: 'A systematic search for authentic narratives — pre-interviews, uncovering the specific moments.',
   },
@@ -34,6 +38,7 @@ const phases = [
     letter: 'M',
     name: 'MOMENTS',
     colorHex: '#a583b5',
+    colorRgb: '165, 131, 181',
     subtitle: 'The Visual language.',
     description: 'Moments captured to show rather than tell, using symbolism and surprise to amplify meaning.',
   },
@@ -41,635 +46,987 @@ const phases = [
 ---
  
 <BaseLayout
-  title="Our Process — The Story Speaks"
-  description="The PRISM Method: a proprietary five-phase narrative architecture for translating complex truth into resonant human experience."
+  title="Process Animation Test — The Story Speaks"
+  description="Interactive PRISM prototype."
 >
-  <main class="process-page">
+  <main class="test-page">
  
-    <section class="process-hero">
-      <p class="eyebrow">Our Process</p>
- 
-      <h1 class="process-headline">
-        The <span class="prism-multicolor">
-          <span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span>
-        </span> Method
-      </h1>
- 
-      <p class="process-subtitle">The Architecture for Unforgettable Stories</p>
- 
-      <p class="process-intro">
-        Most agencies promise creative magic. PRISM delivers strategic certainty. A proprietary narrative architecture designed to translate complex truth into resonant human experience.
-      </p>
-    </section>
- 
-    <!-- Prism illustration — own container, wider than the text hero -->
-    <div class="hero-prism">
-      <svg class="prism-svg" viewBox="0 0 280 175" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <defs>
-          <linearGradient id="incoming-hero" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f5d589" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#f5d589" stop-opacity="1"/>
-          </linearGradient>
-          <linearGradient id="ray-p-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d4756f" stop-opacity="1"/><stop offset="100%" stop-color="#d4756f" stop-opacity="0.45"/></linearGradient>
-          <linearGradient id="ray-r-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f5d589" stop-opacity="1"/><stop offset="100%" stop-color="#f5d589" stop-opacity="0.45"/></linearGradient>
-          <linearGradient id="ray-i-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a3bc7e" stop-opacity="1"/><stop offset="100%" stop-color="#a3bc7e" stop-opacity="0.45"/></linearGradient>
-          <linearGradient id="ray-s-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#86a8c9" stop-opacity="1"/><stop offset="100%" stop-color="#86a8c9" stop-opacity="0.45"/></linearGradient>
-          <linearGradient id="ray-m-hero" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a583b5" stop-opacity="1"/><stop offset="100%" stop-color="#a583b5" stop-opacity="0.45"/></linearGradient>
-          <linearGradient id="prism-glass-hero" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#d4756f" stop-opacity="0.65"/>
-            <stop offset="25%"  stop-color="#f5d589" stop-opacity="0.65"/>
-            <stop offset="50%"  stop-color="#a3bc7e" stop-opacity="0.65"/>
-            <stop offset="75%"  stop-color="#86a8c9" stop-opacity="0.65"/>
-            <stop offset="100%" stop-color="#a583b5" stop-opacity="0.65"/>
-          </linearGradient>
-          <filter id="ray-glow-hero" x="-20%" y="-50%" width="140%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
- 
-        <text x="32" y="80" text-anchor="end" class="raw-label">RAW</text>
-        <text x="32" y="92" text-anchor="end" class="raw-label">STORY</text>
- 
-        <line x1="36" y1="87" x2="48" y2="87" stroke="url(#incoming-hero)" stroke-width="2.5"/>
- 
-        <polygon points="50,50 50,124 76,87" fill="url(#prism-glass-hero)" stroke="#ffffff" stroke-opacity="0.4" stroke-width="1.2"/>
- 
-        <g filter="url(#ray-glow-hero)">
-          <polygon points="76,87 240,15 240,28" fill="url(#ray-p-hero)"/>
-          <polygon points="76,87 240,50 240,63" fill="url(#ray-r-hero)"/>
-          <polygon points="76,87 240,82 240,95" fill="url(#ray-i-hero)"/>
-          <polygon points="76,87 240,114 240,127" fill="url(#ray-s-hero)"/>
-          <polygon points="76,87 240,146 240,159" fill="url(#ray-m-hero)"/>
-        </g>
- 
-        <g class="prism-cap-letters">
-          <text x="260" y="27" text-anchor="middle" fill="#d4756f">P</text>
-          <text x="260" y="60" text-anchor="middle" fill="#f5d589">R</text>
-          <text x="260" y="93" text-anchor="middle" fill="#a3bc7e">I</text>
-          <text x="260" y="124" text-anchor="middle" fill="#86a8c9">S</text>
-          <text x="260" y="158" text-anchor="middle" fill="#a583b5">M</text>
-        </g>
-      </svg>
+    <div class="test-banner">
+      <p class="test-banner-label">TEST PAGE — Interactive PRISM</p>
+      <a href="/process/" class="test-banner-link">← Back to /process/</a>
     </div>
  
-    <section class="phases-section">
-      <div class="phases-row">
-        {phases.map((phase) => (
-          <article
-            class="phase-block"
-            style={`--phase-color: ${phase.colorHex};`}
-          >
-            <div class="phase-letter">{phase.letter}</div>
-            <div class="phase-content">
-              <h3 class="phase-name">{phase.name}</h3>
-              <p class="phase-subtitle">{phase.subtitle}</p>
-              <p class="phase-description">{phase.description}</p>
-            </div>
-          </article>
-        ))}
+    <section class="test-hero">
+      <p class="test-intro desktop-intro">Hover or tap each ray to reveal that phase of the methodology.</p>
+      <p class="test-intro mobile-intro">Scroll to explore each phase of the methodology.</p>
+    </section>
+ 
+    <section class="mobile-preview" aria-hidden="true">
+      <div class="mp-stage">
+        <svg class="mp-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="30">
+              <stop offset="0%" stop-color="rgba(212, 117, 111, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="mp-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="75">
+              <stop offset="0%" stop-color="rgba(245, 213, 137, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="mp-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="120">
+              <stop offset="0%" stop-color="rgba(163, 188, 126, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="mp-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="165">
+              <stop offset="0%" stop-color="rgba(134, 168, 201, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="mp-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="210">
+              <stop offset="0%" stop-color="rgba(165, 131, 181, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/>
+            </linearGradient>
+            <filter id="mp-blur" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur stdDeviation="1.5"/>
+            </filter>
+            <linearGradient id="mp-prism-front" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
+              <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
+              <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
+              <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
+            </linearGradient>
+            <linearGradient id="mp-prism-side" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.45)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.45)"/>
+            </linearGradient>
+            <radialGradient id="mp-prism-highlight">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0.6)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+          </defs>
+ 
+          <polygon points="60,120 210,22 210,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,67 210,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,112 210,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,157 210,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,202 210,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
+        </svg>
+ 
+        <div class="mp-prism-wrap">
+          <div class="mp-orb"></div>
+          <div class="mp-gem">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <polygon points="50,10 8,82 90,82" fill="url(#mp-prism-front)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+              <polygon points="50,10 90,82 95,86" fill="url(#mp-prism-side)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#mp-prism-highlight)"/>
+              <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
+            </svg>
+          </div>
+        </div>
+ 
+        <div class="mp-label">
+          <span>RAW</span>
+          <span>STORY</span>
+        </div>
+ 
+        <div class="mp-letter mp-p" style="--phase-color: #d4756f;">P</div>
+        <div class="mp-letter mp-r" style="--phase-color: #f5d589;">R</div>
+        <div class="mp-letter mp-i" style="--phase-color: #a3bc7e;">I</div>
+        <div class="mp-letter mp-s" style="--phase-color: #86a8c9;">S</div>
+        <div class="mp-letter mp-m" style="--phase-color: #a583b5;">M</div>
       </div>
     </section>
  
-    <div class="section-cta-wrapper">
-      <a href="#science" class="section-cta">
-        <span>THE SCIENCE BEHIND PRISM</span>
-        <span class="cta-arrow">↓</span>
-      </a>
-    </div>
+    <section class="prism-section">
+      <div class="main-wrapper" id="prismRow">
  
-    <!-- Science section is now a full-width panel with lifted background + gold gradient rule markers -->
-    <section class="science-section" id="science">
-      <div class="science-section-inner">
-        <div class="science-eyebrow-wrapper">
-          <span class="science-eyebrow-rule"></span>
-          <p class="eyebrow science-eyebrow">The Science</p>
-          <span class="science-eyebrow-rule"></span>
+        <div class="prism-animation-container">
+ 
+          <svg class="animation-svg" id="raysSvg" viewBox="0 0 1200 550" preserveAspectRatio="xMinYMid meet">
+            <defs>
+              <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-r" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(245, 213, 137, 0.35)"/><stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-i" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(163, 188, 126, 0.35)"/><stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-s" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(134, 168, 201, 0.35)"/><stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
+ 
+              <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+              </filter>
+            </defs>
+ 
+            <polygon id="ray-p" class="prism-ray" data-phase="p" points="0,0 0,0 0,0" fill="url(#ray-grad-p)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-r" class="prism-ray" data-phase="r" points="0,0 0,0 0,0" fill="url(#ray-grad-r)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-i" class="prism-ray" data-phase="i" points="0,0 0,0 0,0" fill="url(#ray-grad-i)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-s" class="prism-ray" data-phase="s" points="0,0 0,0 0,0" fill="url(#ray-grad-s)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-m" class="prism-ray" data-phase="m" points="0,0 0,0 0,0" fill="url(#ray-grad-m)" style="filter: url(#ray-glow); opacity: 0;"/>
+ 
+            <polygon id="hover-p" class="hover-area" data-phase="p" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-r" class="hover-area" data-phase="r" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-i" class="hover-area" data-phase="i" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-s" class="hover-area" data-phase="s" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+          </svg>
+ 
+          <div class="raw-story-label">RAW STORY</div>
+ 
+          <div class="prism-center">
+            <div class="glass-glow"></div>
+ 
+            <div class="prism-gem" id="prismGem">
+              <svg class="prism-pyramid-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="prism-front-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
+                    <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
+                    <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
+                    <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
+                    <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
+                  </linearGradient>
+                  <linearGradient id="prism-side-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.45)"/>
+                    <stop offset="100%" stop-color="rgba(165, 131, 181, 0.45)"/>
+                  </linearGradient>
+                  <radialGradient id="prism-highlight-grad">
+                    <stop offset="0%"   stop-color="rgba(255,255,255,0.6)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                  </radialGradient>
+                </defs>
+                <polygon points="50,10 8,82 90,82" fill="url(#prism-front-grad)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <polygon points="50,10 90,82 95,86" fill="url(#prism-side-grad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#prism-highlight-grad)"/>
+                <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
+              </svg>
+            </div>
+          </div>
         </div>
  
-        <h2 class="science-headline">
-          <span class="science-headline-stories">STORIES</span>
-          <span class="science-headline-engineer">ENGINEER</span>
-          <span class="science-headline-influence">INFLUENCE.</span>
-        </h2>
- 
-        <p class="science-subtitle">
-          Story is the only evolutionary technology proven to synchronize the brain, bypass logic, and compel action. <span class="prism-multicolor"><span style="color:#d4756f">P</span><span style="color:#f5d589">R</span><span style="color:#a3bc7e">I</span><span style="color:#86a8c9">S</span><span style="color:#a583b5">M</span></span> is the architecture for harnessing these biological levers.
-        </p>
- 
-        <div class="science-cards">
-          <article class="science-card">
-            <div class="science-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none">
-                <circle cx="30" cy="30" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
-                <line x1="30" y1="22" x2="30" y2="10" stroke="currentColor" stroke-width="2"/>
-                <line x1="30" y1="38" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
-                <line x1="38" y1="30" x2="50" y2="30" stroke="currentColor" stroke-width="2"/>
-                <line x1="22" y1="30" x2="10" y2="30" stroke="currentColor" stroke-width="2"/>
-                <line x1="36" y1="36" x2="45" y2="45" stroke="currentColor" stroke-width="2"/>
-                <line x1="24" y1="24" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
-              </svg>
+        <div class="items-container" id="itemsContainer">
+          {phases.map((phase) => (
+            <div
+              class={`prism-item letter-${phase.letter.toLowerCase()}`}
+              data-phase={phase.letter.toLowerCase()}
+              style={`--phase-color: ${phase.colorHex}; --phase-color-rgb: ${phase.colorRgb};`}
+            >
+              <div class="letter-box">{phase.letter}</div>
+              <div class="word-title">{phase.name}</div>
+              <div class="description">
+                <span class="desc-subtitle">{phase.subtitle}</span> {phase.description}
+              </div>
             </div>
-            <h3 class="science-card-title">The Attention Hack</h3>
-            <p class="science-card-subtitle">(Cortisol)</p>
-            <p class="science-card-body">
-              The brain is wired to ignore the predictable. It craves conflict. A narrative structured around high-stakes tension triggers a biological response — focus, in a distracted world. The work doesn't ask for attention; it seizes it.
-            </p>
-          </article>
- 
-          <article class="science-card">
-            <div class="science-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none">
-                <path d="M5 30 L15 20 L25 35 L35 15 L45 40 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5 30 L15 25 L25 32 L35 20 L45 38 L55 30" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-              </svg>
-            </div>
-            <h3 class="science-card-title">The Empathy Engine</h3>
-            <p class="science-card-subtitle">(Oxytocin)</p>
-            <p class="science-card-body">
-              Facts inform, but stories connect. When an audience identifies with a character's struggle, their brain releases oxytocin — the "trust molecule." This bridges the gap between your brand and your audience, turning skepticism into solidarity.
-            </p>
-          </article>
- 
-          <article class="science-card">
-            <div class="science-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 60 60" fill="none">
-                <circle cx="30" cy="30" r="4" fill="currentColor"/>
-                <circle cx="30" cy="30" r="12" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
-                <circle cx="30" cy="30" r="20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
-              </svg>
-            </div>
-            <h3 class="science-card-title">The Action Protocol</h3>
-            <p class="science-card-subtitle">(Narrative Transportation)</p>
-            <p class="science-card-body">
-              When a story is architected correctly, the viewer enters a state of "Narrative Transportation." They cease to be an observer and become a participant. In this state, beliefs are malleable, and the impulse to act becomes internal, not external.
-            </p>
-          </article>
+          ))}
         </div>
+ 
       </div>
-    </section>
- 
-    <section class="final-cta">
-      <h2 class="final-cta-headline">Let's build your story.</h2>
-      <p class="final-cta-tagline">Five Emmys. National Addys. TED-honored work in 20+ countries.</p>
-      <a href="/contact/" class="btn btn-primary final-cta-btn">Start a Conversation</a>
     </section>
  
   </main>
 </BaseLayout>
  
 <style>
-  .process-page {
+  .test-page {
     background: var(--color-bg-deep);
     min-height: 100vh;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
   }
  
-  .raw-label {
-    font-family: var(--font-sans);
-    font-size: 7px;
-    font-weight: 600;
-    fill: rgba(255, 255, 255, 0.55);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
- 
-  .prism-cap-letters text {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 400;
-  }
- 
-  .prism-multicolor {
-    font-weight: 300;
-    letter-spacing: 0.02em;
-  }
- 
-  /* ============ HERO SECTION ============ */
-  .process-hero {
-    max-width: 760px;
+  .test-banner {
+    max-width: 1200px;
     margin: 0 auto 2rem;
-    padding: 0 2rem;
-    text-align: center;
-  }
- 
-  .process-headline {
-    font-family: var(--font-sans);
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    margin: 1.25rem 0 1rem;
-  }
- 
-  .process-subtitle {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.6vw, 1.25rem);
-    font-style: italic;
-    font-weight: 300;
-    color: var(--color-accent);
-    margin: 0 0 2rem;
-    letter-spacing: -0.01em;
-  }
- 
-  .process-intro {
-    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-    line-height: 1.75;
-    color: var(--color-text-muted);
-    margin: 0 auto;
-    max-width: 600px;
-    font-weight: 300;
-  }
- 
-  /* ============ HERO PRISM (now wider, own container) ============ */
-  .hero-prism {
-    max-width: 700px;
-    margin: 0 auto 4rem;
-    padding: 0 1.5rem;
-  }
- 
-  .prism-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
- 
-  /* ============ PHASES — HORIZONTAL CARDS (letter left, content right) ============ */
-  .phases-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1.25rem;
-  }
- 
-  .phases-row {
+    padding: 0.85rem 1.75rem;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
- 
-  .phase-block {
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1.25rem;
-    padding: 1.5rem 1.5rem;
-    background: color-mix(in srgb, var(--phase-color) 7%, transparent);
-    border: 1px solid color-mix(in srgb, var(--phase-color) 40%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
     border-radius: 4px;
-    transition: all 0.3s ease;
-    text-align: left;
   }
  
-  .phase-block:hover {
-    background: color-mix(in srgb, var(--phase-color) 12%, transparent);
-    border-color: color-mix(in srgb, var(--phase-color) 60%, transparent);
-  }
- 
-  .phase-letter {
-    flex-shrink: 0;
-    width: clamp(3.5rem, 14vw, 5rem);
-    text-align: center;
-    font-family: var(--font-sans);
-    font-size: clamp(3.5rem, 13vw, 5.25rem);
-    font-weight: 200;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    color: var(--phase-color);
-  }
- 
-  .phase-content {
-    flex: 1;
-    min-width: 0;
-  }
- 
-  .phase-name {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--phase-color);
-    margin: 0 0 0.4rem;
-    line-height: 1;
-  }
- 
-  .phase-subtitle {
-    font-family: var(--font-sans);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 0.95rem;
-    color: var(--phase-color);
-    margin: 0 0 0.6rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-  }
- 
-  .phase-description {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 300;
-    line-height: 1.55;
-    color: var(--color-text-muted);
+  .test-banner-label {
+    font-family: var(--font-wordmark, 'Fjalla One', sans-serif);
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    letter-spacing: 0.2em;
     margin: 0;
   }
  
-  /* ============ SECTION CTA (mobile only) ============ */
-  .section-cta-wrapper {
-    text-align: center;
-    margin: 4rem auto 3rem;
-    padding: 0 2rem;
-  }
- 
-  .section-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.9rem 1.5rem;
-    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
-    border: 1px solid var(--color-accent);
-    border-radius: 2px;
-    color: var(--color-accent);
-    font-family: var(--font-wordmark);
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    max-width: 280px;
-  }
- 
-  .section-cta:hover {
-    background: color-mix(in srgb, var(--color-accent) 20%, transparent);
-  }
- 
-  .cta-arrow {
+  .test-banner-link {
     font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
  
-  /* ============ SCIENCE SECTION — full-width panel with bg-mid + gold rules ============ */
-  .science-section {
-    background: var(--color-bg-mid);
-    padding: 6rem 0 5rem;
-    margin: 5rem 0 4rem;
-    text-align: center;
-    scroll-margin-top: 100px;
-    position: relative;
+  .test-banner-link:hover {
+    color: var(--color-accent);
   }
  
-  /* Gold gradient rules mark the top and bottom boundaries of the panel */
-  .science-section::before,
-  .science-section::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(340px, 70%);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
-    opacity: 0.6;
-  }
- 
-  .science-section::before {
-    top: 0;
-  }
- 
-  .science-section::after {
-    bottom: 0;
-  }
- 
-  .science-section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
+  .test-hero {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
     padding: 0 2rem;
+    text-align: center;
   }
  
-  .science-eyebrow-wrapper {
+  .test-intro {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+    font-weight: 300;
+  }
+ 
+  .desktop-intro { display: block; }
+  .mobile-intro { display: none; }
+ 
+  .mobile-preview { display: none; }
+ 
+  /* ============ DESKTOP ============ */
+  .prism-section {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+ 
+  .main-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 40px;
+    pointer-events: auto;
   }
  
-  .science-eyebrow-rule {
-    display: block;
-    width: 50px;
-    height: 1px;
-    background: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  .prism-animation-container {
+    position: relative;
+    width: 350px;
+    height: 550px;
+    flex-shrink: 0;
+    overflow: visible;
   }
  
-  .science-eyebrow {
-    margin: 0;
+  .animation-svg {
+    position: absolute;
+    width: 1200px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: visible;
+    pointer-events: none;
   }
  
-  .science-headline {
-    font-family: var(--font-wordmark);
-    font-size: clamp(1.75rem, 5vw, 3.25rem);
-    line-height: 1.05;
-    margin: 0 0 2rem;
-    letter-spacing: 0.04em;
+  .prism-ray {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
   }
  
-  /* ENGINEER is the gold anchor; STORIES and INFLUENCE in muted white */
-  .science-headline-stories {
-    color: rgba(255, 255, 255, 0.75);
-    margin-right: 0.4em;
+  .hover-area {
+    pointer-events: all;
+    cursor: pointer;
   }
  
-  .science-headline-engineer {
-    color: var(--color-accent);
-    margin-right: 0.4em;
+  .raw-story-label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: rgba(248, 250, 252, 0.95);
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    z-index: 3;
+    white-space: nowrap;
+    text-shadow:
+      0 0 10px rgba(248, 250, 252, 0.75),
+      0 0 20px rgba(248, 250, 252, 0.45),
+      0 0 30px rgba(245, 213, 137, 0.3);
+    animation: rawStoryPulse 4s ease-in-out infinite;
   }
  
-  .science-headline-influence {
-    color: rgba(255, 255, 255, 0.75);
+  @keyframes rawStoryPulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px rgba(248, 250, 252, 0.75),
+        0 0 20px rgba(248, 250, 252, 0.45),
+        0 0 30px rgba(245, 213, 137, 0.3);
+    }
+    50% {
+      text-shadow:
+        0 0 14px rgba(248, 250, 252, 0.9),
+        0 0 28px rgba(248, 250, 252, 0.6),
+        0 0 42px rgba(245, 213, 137, 0.45);
+    }
   }
  
-  .science-subtitle {
-    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    max-width: 720px;
-    margin: 0 auto 4rem;
-    font-weight: 300;
+  .prism-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    z-index: 4;
   }
  
-  .science-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .glass-glow {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+      rgba(212, 117, 111, 0.22) 0%,
+      rgba(245, 213, 137, 0.22) 20%,
+      rgba(163, 188, 126, 0.22) 40%,
+      rgba(134, 168, 201, 0.24) 60%,
+      rgba(165, 131, 181, 0.18) 80%,
+      transparent 100%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: orbPulse 4s ease-in-out infinite;
+    pointer-events: none;
   }
  
-  .science-card {
-    padding: 2rem 1.75rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-    border-radius: 4px;
-    text-align: center;
-    transition: all 0.3s ease;
+  @keyframes orbPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 1;
+    }
   }
  
-  .science-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
-    transform: translateY(-2px);
+  .prism-gem {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 95px;
+    height: 90px;
+    z-index: 3;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.4));
+    animation: prismPulse 4s ease-in-out infinite;
+    pointer-events: none;
   }
  
-  .science-card-icon {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 1.25rem;
-    color: var(--color-accent);
-  }
- 
-  .science-card-icon svg {
+  .prism-pyramid-svg {
     width: 100%;
     height: 100%;
+    display: block;
   }
  
-  .science-card-title {
-    font-family: var(--font-wordmark);
-    font-size: 1.1rem;
-    color: var(--color-accent);
-    letter-spacing: 0.15em;
-    margin: 0 0 0.3rem;
-    line-height: 1.1;
+  @keyframes prismPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
+    }
+    50% {
+      filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.55));
+    }
   }
  
-  .science-card-subtitle {
+  .items-container {
+    width: 750px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    z-index: 5;
+  }
+ 
+  .prism-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0 1.5rem;
+    height: 90px;
+    border: 1px solid transparent;
+    border-left: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+ 
+  .letter-box {
+    flex-shrink: 0;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--phase-color);
+    border: 1.5px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
+    background: color-mix(in srgb, var(--phase-color) 14%, transparent);
+    border-radius: 4px;
+    text-shadow:
+      0 0 12px color-mix(in srgb, var(--phase-color) 70%, transparent),
+      0 0 24px color-mix(in srgb, var(--phase-color) 50%, transparent);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+ 
+  .word-title {
+    flex-shrink: 0;
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--phase-color);
+    line-height: 1;
+    white-space: nowrap;
+    text-shadow: 0 0 14px color-mix(in srgb, var(--phase-color) 50%, transparent);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+ 
+  .description {
+    position: absolute;
+    top: 50%;
+    left: 280px;
+    right: 1.5rem;
+    max-width: 460px;
+    transform: translateY(-50%) translateX(40px);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.88);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+ 
+  .desc-subtitle {
     font-style: italic;
-    font-size: 0.85rem;
-    color: var(--color-text-subtle);
-    margin: 0 0 1rem;
+    color: var(--phase-color);
   }
  
-  .science-card-body {
-    font-family: var(--font-sans);
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    font-weight: 300;
-    margin: 0;
+  .prism-item.active {
+    background: color-mix(in srgb, var(--phase-color) 22%, transparent);
+    border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
+    border-left: none;
+    box-shadow:
+      0 0 36px color-mix(in srgb, var(--phase-color) 55%, transparent),
+      0 0 72px color-mix(in srgb, var(--phase-color) 28%, transparent);
+    transform: translateY(-3px);
+    z-index: 10;
   }
  
-  /* ============ FINAL CTA ============ */
-  .final-cta {
-    max-width: 720px;
-    margin: 4rem auto 0;
-    padding: 0 2rem;
-    text-align: center;
+  .prism-item.active .letter-box {
+    opacity: 0;
+    transform: scale(0.7);
   }
  
-  .final-cta-headline {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    letter-spacing: -0.025em;
-    margin: 0 0 1rem;
+  .prism-item.active .word-title {
+    transform: translateX(-72px);
   }
  
-  .final-cta-tagline {
-    font-size: clamp(0.85rem, 1.2vw, 1rem);
-    color: var(--color-text-muted);
-    margin: 0 0 2rem;
-    font-weight: 300;
+  .prism-item.active .description {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
   }
  
-  .final-cta-btn {
-    text-decoration: none;
-  }
+  /* ============ MOBILE ============ */
+  @media (max-width: 900px) {
+    .desktop-intro { display: none; }
+    .mobile-intro { display: block; }
  
-  /* ============ DESKTOP BREAKPOINT ============ */
-  @media (min-width: 992px) {
-    .process-page {
-      padding-top: 8rem;
+    .prism-section { display: none; }
+ 
+    .mobile-preview {
+      display: block;
+      max-width: 280px;
+      margin: 0 auto 3rem;
     }
  
-    .process-hero {
-      max-width: 920px;
-      margin-bottom: 3rem;
+    .mp-stage {
+      position: relative;
+      width: 280px;
+      height: 240px;
+      margin: 0 auto;
     }
  
-    .hero-prism {
-      max-width: 1000px;
-      margin-bottom: 5rem;
-      padding: 0 2rem;
+    .mp-rays-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 1;
     }
  
-    .phases-section {
-      max-width: 860px;
-      padding: 0 2rem;
+    .mp-prism-wrap {
+      position: absolute;
+      left: 25px;
+      top: 85px;
+      width: 70px;
+      height: 70px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
  
-    .phases-row {
-      gap: 1.75rem;
+    .mp-orb {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle,
+        rgba(212, 117, 111, 0.22) 0%,
+        rgba(245, 213, 137, 0.22) 20%,
+        rgba(163, 188, 126, 0.22) 40%,
+        rgba(134, 168, 201, 0.24) 60%,
+        rgba(165, 131, 181, 0.18) 80%,
+        transparent 100%);
+      border-radius: 50%;
+      z-index: 1;
+      animation: orbPulse 4s ease-in-out infinite;
+      pointer-events: none;
     }
  
-    .phase-block {
-      padding: 2rem 2.25rem;
-      gap: 2rem;
+    .mp-gem {
+      position: relative;
+      z-index: 2;
+      width: 50px;
+      height: 50px;
+      filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.45));
+      animation: prismPulse 4s ease-in-out infinite;
     }
  
-    .phase-letter {
-      width: clamp(5rem, 9vw, 6rem);
-      font-size: clamp(5rem, 8vw, 6rem);
+    .mp-gem svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
  
-    .phase-name {
-      font-size: 1rem;
+    .mp-label {
+      position: absolute;
+      left: 60px;
+      top: 172px;
+      transform: translateX(-50%);
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: rgba(248, 250, 252, 0.95);
+      text-shadow:
+        0 0 8px rgba(248, 250, 252, 0.75),
+        0 0 16px rgba(248, 250, 252, 0.45),
+        0 0 24px rgba(245, 213, 137, 0.3);
+      animation: rawStoryPulse 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 4;
     }
  
-    .phase-subtitle {
-      font-size: 1.2rem;
+    .mp-label span {
+      display: block;
     }
  
-    .phase-description {
+    .mp-letter {
+      position: absolute;
+      right: 36px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
       font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--phase-color);
+      border: 1.2px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
+      background: color-mix(in srgb, var(--phase-color) 22%, var(--color-bg-deep, #0a1628));
+      border-radius: 3px;
+      text-shadow:
+        0 0 8px color-mix(in srgb, var(--phase-color) 70%, transparent),
+        0 0 16px color-mix(in srgb, var(--phase-color) 45%, transparent);
+      z-index: 5;
     }
  
-    .section-cta-wrapper {
-      display: none;
+    .mp-p { top: 16px; }
+    .mp-r { top: 61px; }
+    .mp-i { top: 106px; }
+    .mp-s { top: 151px; }
+    .mp-m { top: 196px; }
+  }
+ 
+  /* ============ MOBILE PHASE CARDS — grid-template-rows technique ============ */
+  .mobile-cards-container { display: none; }
+ 
+  @media (max-width: 900px) {
+    .mobile-cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 1rem 70vh;
     }
  
-    /* Science panel: more breathing room and slightly wider boundary rules on desktop */
-    .science-section {
-      margin: 7rem 0 5rem;
-      padding: 7rem 0 6rem;
+    /* CARD: visual properties (bg, border, shadow) animate smoothly.
+       Asymmetric timing — slower when entering revealed (luxurious),
+       slightly faster when leaving (cleaner). */
+    .mobile-card {
+      position: relative;
+      padding: 0.95rem 1rem;
+      border: 1px solid color-mix(in srgb, var(--phase-color) 25%, transparent);
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--phase-color) 5%, transparent);
+      /* Default state transition (used when LEAVING .revealed) */
+      transition:
+        background 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
  
-    .science-section::before,
-    .science-section::after {
-      width: min(420px, 50%);
+    .mobile-card.revealed {
+      background: color-mix(in srgb, var(--phase-color) 16%, transparent);
+      border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
+      box-shadow:
+        0 0 28px color-mix(in srgb, var(--phase-color) 35%, transparent),
+        0 0 56px color-mix(in srgb, var(--phase-color) 18%, transparent);
+      /* Revealed state transition (used when ENTERING .revealed) — slower for luxury */
+      transition:
+        background 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
  
-    .science-cards {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+    .mc-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
  
-    .science-card {
-      padding: 2.5rem 2rem;
+    .mc-letter {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 1.75rem;
+      font-weight: 300;
+      color: var(--phase-color);
+      border: 1.5px solid color-mix(in srgb, var(--phase-color) 75%, transparent);
+      background: color-mix(in srgb, var(--phase-color) 14%, transparent);
+      border-radius: 4px;
+      text-shadow:
+        0 0 10px color-mix(in srgb, var(--phase-color) 70%, transparent),
+        0 0 20px color-mix(in srgb, var(--phase-color) 45%, transparent);
     }
  
-    .science-card-icon {
-      width: 60px;
-      height: 60px;
-    }
- 
-    .science-card-title {
-      font-size: 1.25rem;
-    }
- 
-    .science-card-body {
+    .mc-name {
+      font-family: var(--font-sans);
       font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--phase-color);
+      line-height: 1;
+      text-shadow: 0 0 12px color-mix(in srgb, var(--phase-color) 50%, transparent);
     }
  
-    .final-cta {
-      margin-top: 5rem;
+    /* DESCRIPTION WRAP: uses grid-template-rows technique.
+       0fr = collapsed (natural 0 height), 1fr = expanded (natural content height).
+       Animates the ACTUAL content height instead of a max-height guess,
+       so there's no mid-animation snap. */
+    .mc-description-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      /* Default transition (used when LEAVING .revealed) — slightly faster */
+      transition: grid-template-rows 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+ 
+    .mobile-card.revealed .mc-description-wrap {
+      grid-template-rows: 1fr;
+      /* Revealed transition (used when ENTERING .revealed) — slower, more luxurious */
+      transition: grid-template-rows 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+ 
+    .mc-description {
+      overflow: hidden;
+      padding-top: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.88);
+      opacity: 0;
+      /* Default transition for fade out — quick, so content disappears
+         before height collapse fully clips it */
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+ 
+    .mobile-card.revealed .mc-description {
+      opacity: 1;
+      /* Revealed transition for fade in — delayed so height opens first,
+         then text gently appears in the new space */
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+ 
+    .mc-subtitle {
+      font-style: italic;
+      color: var(--phase-color);
     }
   }
 </style>
+ 
+<div class="mobile-cards-container" id="mobileCards">
+  {phases.map((phase) => (
+    <div
+      class="mobile-card"
+      data-phase={phase.letter.toLowerCase()}
+      style={`--phase-color: ${phase.colorHex}; --phase-color-rgb: ${phase.colorRgb};`}
+    >
+      <div class="mc-header">
+        <div class="mc-letter">{phase.letter}</div>
+        <div class="mc-name">{phase.name}</div>
+      </div>
+      <div class="mc-description-wrap">
+        <div class="mc-description">
+          <span class="mc-subtitle">{phase.subtitle}</span> {phase.description}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+ 
+<script is:inline>
+  (function () {
+    'use strict';
+ 
+    var THIN_HALF = 1.5;
+    var WEDGE_HALF = 40;
+    var HOVER_HALF = 54;
+ 
+    var phases = ['p', 'r', 'i', 's', 'm'];
+ 
+    function isMobile() {
+      return window.innerWidth < 901;
+    }
+ 
+    function computeGeometry() {
+      if (isMobile()) return;
+ 
+      var container = document.querySelector('.prism-animation-container');
+      var gem = document.getElementById('prismGem');
+      var svg = document.getElementById('raysSvg');
+      if (!container || !gem || !svg) return;
+ 
+      var containerRect = container.getBoundingClientRect();
+      var gemRect = gem.getBoundingClientRect();
+ 
+      var prismX = gemRect.left - containerRect.left + gemRect.width / 2;
+      var prismY = gemRect.top - containerRect.top + gemRect.height / 2;
+ 
+      phases.forEach(function (phase) {
+        var item = document.querySelector('.prism-item[data-phase="' + phase + '"]');
+        if (!item) return;
+        var itemRect = item.getBoundingClientRect();
+ 
+        var targetX = itemRect.left - containerRect.left;
+        var targetY = itemRect.top - containerRect.top + itemRect.height / 2;
+ 
+        var thinPoints =
+          prismX + ',' + prismY + ' ' +
+          targetX + ',' + (targetY - THIN_HALF) + ' ' +
+          targetX + ',' + (targetY + THIN_HALF);
+ 
+        var wedgePoints =
+          prismX + ',' + prismY + ' ' +
+          targetX + ',' + (targetY - WEDGE_HALF) + ' ' +
+          targetX + ',' + (targetY + WEDGE_HALF);
+ 
+        var hoverPoints =
+          prismX + ',' + prismY + ' ' +
+          targetX + ',' + (targetY - HOVER_HALF) + ' ' +
+          targetX + ',' + (targetY + HOVER_HALF);
+ 
+        var ray = document.getElementById('ray-' + phase);
+        if (ray) {
+          ray.dataset.thinPoints = thinPoints;
+          ray.dataset.wedgePoints = wedgePoints;
+          ray.setAttribute('points', thinPoints);
+          ray.style.opacity = '0.9';
+ 
+          var grad = document.getElementById('ray-grad-' + phase);
+          if (grad) {
+            grad.setAttribute('x1', String(prismX));
+            grad.setAttribute('y1', String(prismY));
+            grad.setAttribute('x2', String(targetX));
+            grad.setAttribute('y2', String(targetY));
+          }
+        }
+ 
+        var hoverArea = document.getElementById('hover-' + phase);
+        if (hoverArea) {
+          hoverArea.setAttribute('points', hoverPoints);
+        }
+      });
+    }
+ 
+    function activate(phase) {
+      phases.forEach(function (p) {
+        var ray = document.getElementById('ray-' + p);
+        if (!ray) return;
+        ray.style.transition = 'opacity 0.4s ease, points 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        if (p === phase) {
+          ray.setAttribute('points', ray.dataset.wedgePoints);
+          ray.style.opacity = '0.95';
+        } else {
+          ray.setAttribute('points', ray.dataset.thinPoints);
+          ray.style.opacity = '0.5';
+        }
+      });
+ 
+      var items = document.querySelectorAll('.prism-item');
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].getAttribute('data-phase') === phase) {
+          items[i].classList.add('active');
+        } else {
+          items[i].classList.remove('active');
+        }
+      }
+    }
+ 
+    function deactivateAll() {
+      phases.forEach(function (p) {
+        var ray = document.getElementById('ray-' + p);
+        if (!ray) return;
+        ray.style.transition = 'opacity 0.4s ease, points 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        ray.setAttribute('points', ray.dataset.thinPoints);
+        ray.style.opacity = '0.9';
+      });
+      var items = document.querySelectorAll('.prism-item');
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove('active');
+      }
+    }
+ 
+    function attachDesktopHandlers() {
+      phases.forEach(function (phase) {
+        var hoverArea = document.getElementById('hover-' + phase);
+        if (hoverArea) {
+          hoverArea.addEventListener('mouseenter', function () {
+            if (isMobile()) return;
+            activate(phase);
+          });
+          hoverArea.addEventListener('mouseleave', function (e) {
+            if (isMobile()) return;
+            var toEl = e.relatedTarget;
+            if (toEl && toEl.closest && toEl.closest('.prism-item[data-phase="' + phase + '"]')) {
+              return;
+            }
+            deactivateAll();
+          });
+        }
+      });
+ 
+      var items = document.querySelectorAll('.prism-item');
+      for (var i = 0; i < items.length; i++) {
+        (function (item) {
+          var phase = item.getAttribute('data-phase');
+          item.addEventListener('mouseenter', function () {
+            if (isMobile()) return;
+            activate(phase);
+          });
+          item.addEventListener('mouseleave', function (e) {
+            if (isMobile()) return;
+            var toEl = e.relatedTarget;
+            if (toEl && toEl.id === 'hover-' + phase) {
+              return;
+            }
+            deactivateAll();
+          });
+        })(items[i]);
+      }
+    }
+ 
+    function setupMobileScrollSpy() {
+      if (!isMobile()) return;
+ 
+      var cards = document.querySelectorAll('.mobile-card');
+      if (cards.length === 0) return;
+ 
+      function updateActiveCard() {
+        var triggerY = window.innerHeight * 0.4;
+        var activeIdx = -1;
+ 
+        for (var i = 0; i < cards.length; i++) {
+          var rect = cards[i].getBoundingClientRect();
+          if (rect.top <= triggerY) {
+            activeIdx = i;
+          }
+        }
+ 
+        for (var j = 0; j < cards.length; j++) {
+          if (j === activeIdx) {
+            cards[j].classList.add('revealed');
+          } else {
+            cards[j].classList.remove('revealed');
+          }
+        }
+      }
+ 
+      var rafId = null;
+      function onScroll() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(function () {
+          updateActiveCard();
+          rafId = null;
+        });
+      }
+ 
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+ 
+      updateActiveCard();
+    }
+ 
+    function init() {
+      requestAnimationFrame(function () {
+        computeGeometry();
+        attachDesktopHandlers();
+        setupMobileScrollSpy();
+      });
+ 
+      var resizeTimer = null;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          deactivateAll();
+          computeGeometry();
+        }, 150);
+      });
+ 
+      console.log('[Process Test] Smoother reveals: grid-template-rows + easeOutExpo + asymmetric timing');
+    }
+ 
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+ 
