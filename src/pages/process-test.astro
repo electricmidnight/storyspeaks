@@ -61,30 +61,28 @@ const phases = [
       <p class="test-intro mobile-intro">Scroll to explore each phase of the methodology.</p>
     </section>
  
-    <!-- MOBILE ONLY: mini PRISM preview (decorative, shows the rainbow concept) -->
+    <!-- MOBILE ONLY: mini PRISM preview -->
     <section class="mobile-preview" aria-hidden="true">
-      <div class="mp-label">RAW STORY</div>
- 
       <div class="mp-stage">
-        <svg class="mp-rays-svg" viewBox="0 0 320 240" preserveAspectRatio="xMidYMid meet">
+        <svg class="mp-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="280" y2="30">
+            <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="30">
               <stop offset="0%" stop-color="rgba(212, 117, 111, 0.4)"/>
               <stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="280" y2="75">
+            <linearGradient id="mp-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="75">
               <stop offset="0%" stop-color="rgba(245, 213, 137, 0.4)"/>
               <stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="280" y2="120">
+            <linearGradient id="mp-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="120">
               <stop offset="0%" stop-color="rgba(163, 188, 126, 0.4)"/>
               <stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="280" y2="165">
+            <linearGradient id="mp-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="165">
               <stop offset="0%" stop-color="rgba(134, 168, 201, 0.4)"/>
               <stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="280" y2="210">
+            <linearGradient id="mp-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="210">
               <stop offset="0%" stop-color="rgba(165, 131, 181, 0.4)"/>
               <stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/>
             </linearGradient>
@@ -108,15 +106,14 @@ const phases = [
             </radialGradient>
           </defs>
  
-          <!-- 5 rays fanning from prism center to mini letter boxes -->
-          <polygon points="60,120 280,22 280,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 280,67 280,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 280,112 280,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 280,157 280,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 280,202 280,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 230,22 230,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 230,67 230,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 230,112 230,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 230,157 230,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 230,202 230,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
         </svg>
  
-        <!-- Orb + prism gem in absolute position (over the SVG, at prism center 60,120) -->
+        <!-- Prism gem + glow, centered at SVG coord (60, 120) -->
         <div class="mp-prism-wrap">
           <div class="mp-orb"></div>
           <div class="mp-gem">
@@ -129,7 +126,13 @@ const phases = [
           </div>
         </div>
  
-        <!-- Mini letter boxes (positioned absolute, no interaction) -->
+        <!-- RAW STORY label - under the prism, two lines -->
+        <div class="mp-label">
+          <span>RAW</span>
+          <span>STORY</span>
+        </div>
+ 
+        <!-- Mini letter boxes -->
         <div class="mp-letter mp-p" style="--phase-color: #d4756f;">P</div>
         <div class="mp-letter mp-r" style="--phase-color: #f5d589;">R</div>
         <div class="mp-letter mp-i" style="--phase-color: #a3bc7e;">I</div>
@@ -138,7 +141,7 @@ const phases = [
       </div>
     </section>
  
-    <!-- DESKTOP: full interactive prism + items -->
+    <!-- DESKTOP: full interactive prism -->
     <section class="prism-section">
       <div class="main-wrapper" id="prismRow">
  
@@ -283,7 +286,6 @@ const phases = [
   .desktop-intro { display: block; }
   .mobile-intro { display: none; }
  
-  /* ============ MOBILE PREVIEW (hidden on desktop) ============ */
   .mobile-preview { display: none; }
  
   /* ============ OUTER CONTAINER — desktop ============ */
@@ -303,7 +305,6 @@ const phases = [
     pointer-events: auto;
   }
  
-  /* ============ PRISM ANIMATION CONTAINER ============ */
   .prism-animation-container {
     position: relative;
     width: 350px;
@@ -436,7 +437,6 @@ const phases = [
     }
   }
  
-  /* ============ ITEMS CONTAINER ============ */
   .items-container {
     width: 750px;
     flex-shrink: 0;
@@ -519,7 +519,6 @@ const phases = [
     color: var(--phase-color);
   }
  
-  /* ============ ACTIVE STATE ============ */
   .prism-item.active {
     background: color-mix(in srgb, var(--phase-color) 22%, transparent);
     border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
@@ -547,41 +546,20 @@ const phases = [
  
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
- 
-    /* Swap intro copy */
     .desktop-intro { display: none; }
     .mobile-intro { display: block; }
  
-    /* Hide desktop prism+items setup */
     .prism-section { display: none; }
  
-    /* Show mobile preview */
     .mobile-preview {
       display: block;
-      max-width: 360px;
-      margin: 0 auto 2.5rem;
-      padding: 0 1rem;
-    }
- 
-    .mp-label {
-      text-align: center;
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: rgba(248, 250, 252, 0.95);
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      margin: 0 0 1.25rem;
-      text-shadow:
-        0 0 8px rgba(248, 250, 252, 0.75),
-        0 0 18px rgba(248, 250, 252, 0.45),
-        0 0 28px rgba(245, 213, 137, 0.3);
-      animation: rawStoryPulse 4s ease-in-out infinite;
+      max-width: 280px;
+      margin: 0 auto 3rem;
     }
  
     .mp-stage {
       position: relative;
-      width: 320px;
+      width: 280px;
       height: 240px;
       margin: 0 auto;
     }
@@ -595,10 +573,10 @@ const phases = [
       pointer-events: none;
     }
  
-    /* Prism wrapper - centered at SVG coord (60, 120) */
+    /* Prism centered at SVG coord (60, 120) — left side of stage */
     .mp-prism-wrap {
       position: absolute;
-      left: 25px;            /* 60 - 35 (half of 70px container) */
+      left: 25px;            /* 60 - 35 */
       top: 85px;             /* 120 - 35 */
       width: 70px;
       height: 70px;
@@ -643,10 +621,38 @@ const phases = [
       display: block;
     }
  
-    /* Mini letter boxes - positioned absolute at the end of each ray */
+    /* RAW STORY label under the prism, two lines, centered on prism x */
+    .mp-label {
+      position: absolute;
+      left: 60px;            /* prism center x in stage coords */
+      top: 172px;            /* just below prism wrap (which ends at 155) */
+      transform: translateX(-50%);
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: rgba(248, 250, 252, 0.95);
+      text-shadow:
+        0 0 8px rgba(248, 250, 252, 0.75),
+        0 0 16px rgba(248, 250, 252, 0.45),
+        0 0 24px rgba(245, 213, 137, 0.3);
+      animation: rawStoryPulse 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 4;
+    }
+ 
+    .mp-label span {
+      display: block;
+    }
+ 
+    /* Mini letter boxes - center x at 230 in SVG coords (230/280 = 82.1% from left)
+       Letter width 28, so right edge at 230+14=244, left at 216 in stage.
+       From stage right: 280 - 244 = 36px */
     .mp-letter {
       position: absolute;
-      right: 12px;
+      right: 36px;
       width: 28px;
       height: 28px;
       display: flex;
@@ -665,51 +671,42 @@ const phases = [
       z-index: 4;
     }
  
-    /* Letter Y positions match SVG ray endpoints (center y of letter at the ray's target y) */
+    /* Y positions match SVG ray endpoint centers (y - 14 for 28px tall box) */
     .mp-p { top: 16px; }    /* 30 - 14 */
     .mp-r { top: 61px; }    /* 75 - 14 */
     .mp-i { top: 106px; }   /* 120 - 14 */
     .mp-s { top: 151px; }   /* 165 - 14 */
     .mp-m { top: 196px; }   /* 210 - 14 */
- 
-    /* ============ MOBILE PHASE CARDS (the scrollable list below the preview) ============ */
-    /* Rebuild items-container in a separate location for mobile */
-    /* Since .prism-section is hidden, we need a different container.
-       Add the items below the mobile-preview. */
   }
  
-  /* ============ MOBILE PHASE CARDS — render in a separate container ============ */
+  /* ============ MOBILE PHASE CARDS — scrollspy (one active at a time) ============ */
   .mobile-cards-container { display: none; }
  
   @media (max-width: 900px) {
     .mobile-cards-container {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
       max-width: 480px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 0 1rem 30vh;     /* bottom padding so user can scroll the last card into focus */
     }
  
     .mobile-card {
       position: relative;
       padding: 0.95rem 1rem;
-      border: 1px solid color-mix(in srgb, var(--phase-color) 30%, transparent);
+      border: 1px solid color-mix(in srgb, var(--phase-color) 25%, transparent);
       border-radius: 4px;
-      background: color-mix(in srgb, var(--phase-color) 6%, transparent);
+      background: color-mix(in srgb, var(--phase-color) 5%, transparent);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0.5;
-      transform: translateY(10px);
     }
  
     .mobile-card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-      background: color-mix(in srgb, var(--phase-color) 14%, transparent);
-      border-color: color-mix(in srgb, var(--phase-color) 45%, transparent);
+      background: color-mix(in srgb, var(--phase-color) 16%, transparent);
+      border-color: color-mix(in srgb, var(--phase-color) 50%, transparent);
       box-shadow:
-        0 0 24px color-mix(in srgb, var(--phase-color) 30%, transparent),
-        0 0 48px color-mix(in srgb, var(--phase-color) 15%, transparent);
+        0 0 28px color-mix(in srgb, var(--phase-color) 35%, transparent),
+        0 0 56px color-mix(in srgb, var(--phase-color) 18%, transparent);
     }
  
     .mc-header {
@@ -756,13 +753,13 @@ const phases = [
       font-weight: 300;
       line-height: 1.55;
       color: rgba(255, 255, 255, 0.88);
-      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                  margin-top 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+                  margin-top 0.55s cubic-bezier(0.4, 0, 0.2, 1);
     }
  
     .mobile-card.revealed .mc-description {
-      max-height: 200px;
+      max-height: 280px;
       opacity: 1;
       margin-top: 0.75rem;
     }
@@ -774,8 +771,7 @@ const phases = [
   }
 </style>
  
-<!-- Mobile cards: a separate render of the phase items, only visible on mobile.
-     Rendered via Astro template, but only displayed via the mobile-cards-container class. -->
+<!-- Mobile cards (rendered always, displayed via @media on .mobile-cards-container) -->
 <div class="mobile-cards-container" id="mobileCards">
   {phases.map((phase) => (
     <div
@@ -809,7 +805,7 @@ const phases = [
     }
  
     function computeGeometry() {
-      if (isMobile()) return; // Skip on mobile, desktop SVG is hidden
+      if (isMobile()) return;
  
       var container = document.querySelector('.prism-animation-container');
       var gem = document.getElementById('prismGem');
@@ -945,49 +941,68 @@ const phases = [
       }
     }
  
-    // Mobile: scroll-triggered reveal for cards
-    function setupMobileScrollReveal() {
+    // Mobile scrollspy: only one card revealed at a time, based on scroll position
+    function setupMobileScrollSpy() {
       if (!isMobile()) return;
-      if (!('IntersectionObserver' in window)) {
-        // Fallback: just reveal everything immediately for older browsers
-        var allCards = document.querySelectorAll('.mobile-card');
-        for (var i = 0; i < allCards.length; i++) {
-          allCards[i].classList.add('revealed');
-        }
-        return;
-      }
  
       var cards = document.querySelectorAll('.mobile-card');
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          // Reveal when at least 30% of the card is in view
-          if (entry.intersectionRatio >= 0.3) {
-            entry.target.classList.add('revealed');
-            // Once revealed, no need to keep observing
-            observer.unobserve(entry.target);
+      if (cards.length === 0) return;
+ 
+      function updateActiveCard() {
+        // Focus line at 40% from top of viewport — the card whose center
+        // is closest to this line is the "active" one
+        var focusY = window.innerHeight * 0.4;
+ 
+        var activeCard = null;
+        var bestDistance = Infinity;
+ 
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var rect = card.getBoundingClientRect();
+ 
+          // Skip cards completely off-screen
+          if (rect.bottom <= 0 || rect.top >= window.innerHeight) continue;
+ 
+          var cardCenter = rect.top + rect.height / 2;
+          var distance = Math.abs(cardCenter - focusY);
+ 
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            activeCard = card;
           }
-        });
-      }, {
-        threshold: [0, 0.15, 0.3, 0.5]
-      });
+        }
  
-      cards.forEach(function (card) {
-        observer.observe(card);
-      });
- 
-      // Always reveal the first card immediately (it's likely above the fold)
-      if (cards.length > 0) {
-        setTimeout(function () {
-          cards[0].classList.add('revealed');
-        }, 200);
+        for (var j = 0; j < cards.length; j++) {
+          if (cards[j] === activeCard) {
+            cards[j].classList.add('revealed');
+          } else {
+            cards[j].classList.remove('revealed');
+          }
+        }
       }
+ 
+      // Throttle scroll with requestAnimationFrame
+      var rafId = null;
+      function onScroll() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(function () {
+          updateActiveCard();
+          rafId = null;
+        });
+      }
+ 
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+ 
+      // Initial activation
+      updateActiveCard();
     }
  
     function init() {
       requestAnimationFrame(function () {
         computeGeometry();
         attachDesktopHandlers();
-        setupMobileScrollReveal();
+        setupMobileScrollSpy();
       });
  
       var resizeTimer = null;
@@ -999,7 +1014,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Mobile-aware: scroll reveal + mini preview');
+      console.log('[Process Test] Mobile scrollspy + compact mini preview with under-prism RAW STORY');
     }
  
     if (document.readyState === 'loading') {
