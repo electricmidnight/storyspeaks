@@ -66,23 +66,24 @@ const phases = [
       <div class="mp-stage">
         <svg class="mp-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="30">
+            <!-- Rays end at x=210 (letter starts at x=216) so letter sits cleanly to the right of ray end -->
+            <linearGradient id="mp-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="30">
               <stop offset="0%" stop-color="rgba(212, 117, 111, 0.4)"/>
               <stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="75">
+            <linearGradient id="mp-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="75">
               <stop offset="0%" stop-color="rgba(245, 213, 137, 0.4)"/>
               <stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="120">
+            <linearGradient id="mp-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="120">
               <stop offset="0%" stop-color="rgba(163, 188, 126, 0.4)"/>
               <stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="165">
+            <linearGradient id="mp-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="165">
               <stop offset="0%" stop-color="rgba(134, 168, 201, 0.4)"/>
               <stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/>
             </linearGradient>
-            <linearGradient id="mp-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="230" y2="210">
+            <linearGradient id="mp-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="210">
               <stop offset="0%" stop-color="rgba(165, 131, 181, 0.4)"/>
               <stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/>
             </linearGradient>
@@ -106,14 +107,14 @@ const phases = [
             </radialGradient>
           </defs>
  
-          <polygon points="60,120 230,22 230,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 230,67 230,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 230,112 230,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 230,157 230,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
-          <polygon points="60,120 230,202 230,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
+          <!-- Rays end at x=210, letters start at x=216 -->
+          <polygon points="60,120 210,22 210,38" fill="url(#mp-ray-p)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,67 210,83" fill="url(#mp-ray-r)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,112 210,128" fill="url(#mp-ray-i)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,157 210,173" fill="url(#mp-ray-s)" filter="url(#mp-blur)"/>
+          <polygon points="60,120 210,202 210,218" fill="url(#mp-ray-m)" filter="url(#mp-blur)"/>
         </svg>
  
-        <!-- Prism gem + glow, centered at SVG coord (60, 120) -->
         <div class="mp-prism-wrap">
           <div class="mp-orb"></div>
           <div class="mp-gem">
@@ -126,13 +127,11 @@ const phases = [
           </div>
         </div>
  
-        <!-- RAW STORY label - under the prism, two lines -->
         <div class="mp-label">
           <span>RAW</span>
           <span>STORY</span>
         </div>
  
-        <!-- Mini letter boxes -->
         <div class="mp-letter mp-p" style="--phase-color: #d4756f;">P</div>
         <div class="mp-letter mp-r" style="--phase-color: #f5d589;">R</div>
         <div class="mp-letter mp-i" style="--phase-color: #a3bc7e;">I</div>
@@ -571,13 +570,13 @@ const phases = [
       height: 100%;
       overflow: visible;
       pointer-events: none;
+      z-index: 1;
     }
  
-    /* Prism centered at SVG coord (60, 120) — left side of stage */
     .mp-prism-wrap {
       position: absolute;
-      left: 25px;            /* 60 - 35 */
-      top: 85px;             /* 120 - 35 */
+      left: 25px;
+      top: 85px;
       width: 70px;
       height: 70px;
       z-index: 3;
@@ -621,11 +620,10 @@ const phases = [
       display: block;
     }
  
-    /* RAW STORY label under the prism, two lines, centered on prism x */
     .mp-label {
       position: absolute;
-      left: 60px;            /* prism center x in stage coords */
-      top: 172px;            /* just below prism wrap (which ends at 155) */
+      left: 60px;
+      top: 172px;
       transform: translateX(-50%);
       text-align: center;
       font-family: var(--font-sans);
@@ -647,9 +645,7 @@ const phases = [
       display: block;
     }
  
-    /* Mini letter boxes - center x at 230 in SVG coords (230/280 = 82.1% from left)
-       Letter width 28, so right edge at 230+14=244, left at 216 in stage.
-       From stage right: 280 - 244 = 36px */
+    /* Letter boxes: OPAQUE background (so rays don't bleed through), centered at x=230, rays end at x=210 */
     .mp-letter {
       position: absolute;
       right: 36px;
@@ -663,23 +659,23 @@ const phases = [
       font-weight: 300;
       color: var(--phase-color);
       border: 1.2px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
-      background: color-mix(in srgb, var(--phase-color) 14%, transparent);
+      /* Opaque dark base with phase tint — blocks the ray glow underneath */
+      background: color-mix(in srgb, var(--phase-color) 22%, var(--color-bg-deep, #0a1628));
       border-radius: 3px;
       text-shadow:
         0 0 8px color-mix(in srgb, var(--phase-color) 70%, transparent),
         0 0 16px color-mix(in srgb, var(--phase-color) 45%, transparent);
-      z-index: 4;
+      z-index: 5;
     }
  
-    /* Y positions match SVG ray endpoint centers (y - 14 for 28px tall box) */
-    .mp-p { top: 16px; }    /* 30 - 14 */
-    .mp-r { top: 61px; }    /* 75 - 14 */
-    .mp-i { top: 106px; }   /* 120 - 14 */
-    .mp-s { top: 151px; }   /* 165 - 14 */
-    .mp-m { top: 196px; }   /* 210 - 14 */
+    .mp-p { top: 16px; }
+    .mp-r { top: 61px; }
+    .mp-i { top: 106px; }
+    .mp-s { top: 151px; }
+    .mp-m { top: 196px; }
   }
  
-  /* ============ MOBILE PHASE CARDS — scrollspy (one active at a time) ============ */
+  /* ============ MOBILE PHASE CARDS ============ */
   .mobile-cards-container { display: none; }
  
   @media (max-width: 900px) {
@@ -689,7 +685,8 @@ const phases = [
       gap: 12px;
       max-width: 480px;
       margin: 0 auto;
-      padding: 0 1rem 30vh;     /* bottom padding so user can scroll the last card into focus */
+      /* Bottom padding so the M card top can scroll up to the trigger line */
+      padding: 0 1rem 70vh;
     }
  
     .mobile-card {
@@ -698,7 +695,12 @@ const phases = [
       border: 1px solid color-mix(in srgb, var(--phase-color) 25%, transparent);
       border-radius: 4px;
       background: color-mix(in srgb, var(--phase-color) 5%, transparent);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Specific transitions — not "all" — so layout changes don't compete with visual changes.
+         easeOutQuint = very smooth landing, no perceived bounce. */
+      transition:
+        background 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
  
     .mobile-card.revealed {
@@ -753,9 +755,11 @@ const phases = [
       font-weight: 300;
       line-height: 1.55;
       color: rgba(255, 255, 255, 0.88);
-      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-                  margin-top 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Smooth ease-out cubic-bezier (easeOutQuint) — gentle landing, no bounce */
+      transition:
+        max-height 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+        margin-top 0.75s cubic-bezier(0.22, 1, 0.36, 1);
     }
  
     .mobile-card.revealed .mc-description {
@@ -771,7 +775,6 @@ const phases = [
   }
 </style>
  
-<!-- Mobile cards (rendered always, displayed via @media on .mobile-cards-container) -->
 <div class="mobile-cards-container" id="mobileCards">
   {phases.map((phase) => (
     <div
@@ -941,7 +944,15 @@ const phases = [
       }
     }
  
-    // Mobile scrollspy: only one card revealed at a time, based on scroll position
+    /**
+     * Mobile scrollspy: the active card is the LAST card whose top
+     * has crossed the trigger line. This means:
+     *  - At top of page: no card active (mini preview is the focus)
+     *  - As user scrolls, each card activates when its top crosses the trigger
+     *  - When the next card crosses, the previous one deactivates
+     *  - The LAST card (M) activates and stays active even if user can't
+     *    scroll further, because nothing else can take its place.
+     */
     function setupMobileScrollSpy() {
       if (!isMobile()) return;
  
@@ -949,31 +960,19 @@ const phases = [
       if (cards.length === 0) return;
  
       function updateActiveCard() {
-        // Focus line at 40% from top of viewport — the card whose center
-        // is closest to this line is the "active" one
-        var focusY = window.innerHeight * 0.4;
+        var triggerY = window.innerHeight * 0.4;
+        var activeIdx = -1;
  
-        var activeCard = null;
-        var bestDistance = Infinity;
- 
+        // Find the last card whose top has crossed (is at or above) the trigger line
         for (var i = 0; i < cards.length; i++) {
-          var card = cards[i];
-          var rect = card.getBoundingClientRect();
- 
-          // Skip cards completely off-screen
-          if (rect.bottom <= 0 || rect.top >= window.innerHeight) continue;
- 
-          var cardCenter = rect.top + rect.height / 2;
-          var distance = Math.abs(cardCenter - focusY);
- 
-          if (distance < bestDistance) {
-            bestDistance = distance;
-            activeCard = card;
+          var rect = cards[i].getBoundingClientRect();
+          if (rect.top <= triggerY) {
+            activeIdx = i;
           }
         }
  
         for (var j = 0; j < cards.length; j++) {
-          if (cards[j] === activeCard) {
+          if (j === activeIdx) {
             cards[j].classList.add('revealed');
           } else {
             cards[j].classList.remove('revealed');
@@ -981,7 +980,6 @@ const phases = [
         }
       }
  
-      // Throttle scroll with requestAnimationFrame
       var rafId = null;
       function onScroll() {
         if (rafId) return;
@@ -994,7 +992,6 @@ const phases = [
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll, { passive: true });
  
-      // Initial activation
       updateActiveCard();
     }
  
@@ -1014,7 +1011,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Mobile scrollspy + compact mini preview with under-prism RAW STORY');
+      console.log('[Process Test] Mobile scrollspy (last-crossed pattern) + opaque letters + smoother easing');
     }
  
     if (document.readyState === 'loading') {
