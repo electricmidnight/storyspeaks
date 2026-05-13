@@ -60,39 +60,48 @@ const phases = [
       <p class="test-intro">Hover or tap each ray to reveal that phase of the methodology.</p>
     </section>
  
+    <!-- Outer container — Luminous max-width: 1100px, centered -->
     <section class="prism-section">
-      <div class="prism-row" id="prismRow">
+      <!-- main-wrapper — flex, justify-content: center, gap: 40px -->
+      <div class="main-wrapper" id="prismRow">
  
-        <svg class="rays-svg" id="raysSvg" viewBox="0 0 1400 500" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
-            <linearGradient id="ray-grad-r" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(245, 213, 137, 0.35)"/><stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/></linearGradient>
-            <linearGradient id="ray-grad-i" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(163, 188, 126, 0.35)"/><stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/></linearGradient>
-            <linearGradient id="ray-grad-s" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(134, 168, 201, 0.35)"/><stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/></linearGradient>
-            <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
+        <!-- prism-animation-container — 350×550, flex-shrink: 0, overflow: visible.
+             The SVG inside is 1200px wide and overflows the container so rays
+             extend across into the items area. -->
+        <div class="prism-animation-container">
  
-            <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
-            </filter>
-          </defs>
+          <!-- SVG: width 1200px overflows the 350px parent -->
+          <svg class="animation-svg" id="raysSvg" viewBox="0 0 1200 550" preserveAspectRatio="xMinYMid meet">
+            <defs>
+              <linearGradient id="ray-grad-p" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(212, 117, 111, 0.35)"/><stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-r" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(245, 213, 137, 0.35)"/><stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-i" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(163, 188, 126, 0.35)"/><stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-s" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(134, 168, 201, 0.35)"/><stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/></linearGradient>
+              <linearGradient id="ray-grad-m" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(165, 131, 181, 0.35)"/><stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/></linearGradient>
  
-          <polygon id="ray-p" class="prism-ray" data-phase="p" points="0,0 0,0 0,0" fill="url(#ray-grad-p)" style="filter: url(#ray-glow); opacity: 0;"/>
-          <polygon id="ray-r" class="prism-ray" data-phase="r" points="0,0 0,0 0,0" fill="url(#ray-grad-r)" style="filter: url(#ray-glow); opacity: 0;"/>
-          <polygon id="ray-i" class="prism-ray" data-phase="i" points="0,0 0,0 0,0" fill="url(#ray-grad-i)" style="filter: url(#ray-glow); opacity: 0;"/>
-          <polygon id="ray-s" class="prism-ray" data-phase="s" points="0,0 0,0 0,0" fill="url(#ray-grad-s)" style="filter: url(#ray-glow); opacity: 0;"/>
-          <polygon id="ray-m" class="prism-ray" data-phase="m" points="0,0 0,0 0,0" fill="url(#ray-grad-m)" style="filter: url(#ray-glow); opacity: 0;"/>
+              <filter id="ray-glow" x="-20%" y="-50%" width="140%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5"/>
+              </filter>
+            </defs>
  
-          <polygon id="hover-p" class="hover-area" data-phase="p" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
-          <polygon id="hover-r" class="hover-area" data-phase="r" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
-          <polygon id="hover-i" class="hover-area" data-phase="i" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
-          <polygon id="hover-s" class="hover-area" data-phase="s" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
-          <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
-        </svg>
+            <polygon id="ray-p" class="prism-ray" data-phase="p" points="0,0 0,0 0,0" fill="url(#ray-grad-p)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-r" class="prism-ray" data-phase="r" points="0,0 0,0 0,0" fill="url(#ray-grad-r)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-i" class="prism-ray" data-phase="i" points="0,0 0,0 0,0" fill="url(#ray-grad-i)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-s" class="prism-ray" data-phase="s" points="0,0 0,0 0,0" fill="url(#ray-grad-s)" style="filter: url(#ray-glow); opacity: 0;"/>
+            <polygon id="ray-m" class="prism-ray" data-phase="m" points="0,0 0,0 0,0" fill="url(#ray-grad-m)" style="filter: url(#ray-glow); opacity: 0;"/>
  
-        <div class="prism-side">
+            <polygon id="hover-p" class="hover-area" data-phase="p" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-r" class="hover-area" data-phase="r" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-i" class="hover-area" data-phase="i" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-s" class="hover-area" data-phase="s" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+            <polygon id="hover-m" class="hover-area" data-phase="m" points="0,0 0,0 0,0" fill="transparent" style="pointer-events: all; cursor: pointer;"/>
+          </svg>
+ 
+          <!-- RAW STORY label at left:0 of prism-animation-container -->
           <div class="raw-story-label">RAW STORY</div>
  
-          <div class="prism-container">
+          <!-- prism-center: 100×100, centered in the prism-animation-container at 50%/50% -->
+          <div class="prism-center">
             <div class="glass-glow"></div>
  
             <div class="prism-gem" id="prismGem">
@@ -123,6 +132,7 @@ const phases = [
           </div>
         </div>
  
+        <!-- items-container — 750px wide, flex-shrink: 0 -->
         <div class="items-container" id="itemsContainer">
           {phases.map((phase) => (
             <div
@@ -200,36 +210,47 @@ const phases = [
     font-weight: 300;
   }
  
-  /* ============ PRISM SECTION — FILLS THE VIEWPORT ============ */
-  /* NO max-width. NO centering margins. The section spans the full page width
-     so the prism scene scales with however wide the screen is. */
+  /* ============ OUTER CONTAINER — Luminous max-width 1100, centered ============ */
   .prism-section {
+    max-width: 1100px;
     width: 100%;
-    padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    padding: 0 40px;
   }
  
-  /* Grid columns are PERCENTAGES of the row width.
-     17% prism-side + 31% ray zone + 52% items-container = 100%
-     This puts the LETTER BOX at exactly 48% of the viewport — just left of center.
-     The ray zone is always 31% of viewport, scaling up on wider screens. */
-  .prism-row {
+  /* main-wrapper — flex with centered children, 40px gap.
+     This is the key to centering: the prism + items composition
+     centers as a UNIT on the page, regardless of viewport width. */
+  .main-wrapper {
     position: relative;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 17% 31% 52%;
+    display: flex;
     align-items: center;
-    min-height: 620px;
+    justify-content: center;
+    gap: 40px;
+    pointer-events: auto;
   }
  
-  .rays-svg {
+  /* ============ PRISM ANIMATION CONTAINER ============ */
+  /* 350×550 fixed size, no shrinking, overflow visible
+     so the SVG inside can extend beyond. */
+  .prism-animation-container {
+    position: relative;
+    width: 350px;
+    height: 550px;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+ 
+  /* SVG is 1200px wide — much wider than its 350px parent.
+     With overflow:visible on both, rays can extend across the items area. */
+  .animation-svg {
     position: absolute;
-    inset: 0;
-    width: 100%;
+    width: 1200px;
     height: 100%;
+    left: 0;
+    top: 0;
     overflow: visible;
     pointer-events: none;
-    z-index: 1;
   }
  
   .prism-ray {
@@ -242,68 +263,59 @@ const phases = [
     cursor: pointer;
   }
  
-  /* ============ LEFT: prism-side ============ */
-  .prism-side {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
-    z-index: 2;
-  }
- 
-  /* RAW STORY at the far left of prism-side, vertically centered.
-     Sits well outside the orb (the orb is ~200px wide centered on the prism on the right). */
+  /* RAW STORY label — TIGHT letter-spacing (Luminous's -0.02em),
+     weight 800, so it stays narrow and doesn't overlap the orb */
   .raw-story-label {
     position: absolute;
-    left: 1.5rem;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.92);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: rgba(248, 250, 252, 0.95);
+    letter-spacing: -0.02em;
     pointer-events: none;
     z-index: 3;
     white-space: nowrap;
     text-shadow:
-      0 0 10px rgba(248, 250, 252, 0.7),
-      0 0 22px rgba(248, 250, 252, 0.45),
-      0 0 36px rgba(245, 213, 137, 0.35);
+      0 0 10px rgba(248, 250, 252, 0.75),
+      0 0 20px rgba(248, 250, 252, 0.45),
+      0 0 30px rgba(245, 213, 137, 0.3);
     animation: rawStoryPulse 4s ease-in-out infinite;
   }
  
   @keyframes rawStoryPulse {
     0%, 100% {
       text-shadow:
-        0 0 10px rgba(248, 250, 252, 0.7),
-        0 0 22px rgba(248, 250, 252, 0.45),
-        0 0 36px rgba(245, 213, 137, 0.35);
+        0 0 10px rgba(248, 250, 252, 0.75),
+        0 0 20px rgba(248, 250, 252, 0.45),
+        0 0 30px rgba(245, 213, 137, 0.3);
     }
     50% {
       text-shadow:
-        0 0 16px rgba(248, 250, 252, 0.95),
-        0 0 32px rgba(248, 250, 252, 0.65),
-        0 0 50px rgba(245, 213, 137, 0.55);
+        0 0 14px rgba(248, 250, 252, 0.9),
+        0 0 28px rgba(248, 250, 252, 0.6),
+        0 0 42px rgba(245, 213, 137, 0.45);
     }
   }
  
-  .prism-container {
-    position: relative;
-    width: 170px;
-    height: 170px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* prism-center: 100×100 box at the geometric center of prism-animation-container */
+  .prism-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    z-index: 4;
   }
  
+  /* glass-glow: 120×120 radial gradient orb (Luminous exact size) */
   .glass-glow {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -326,17 +338,21 @@ const phases = [
       opacity: 0.85;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.18);
+      transform: translate(-50%, -50%) scale(1.2);
       opacity: 1;
     }
   }
  
+  /* prism gem: 95×90 (Luminous exact size) */
   .prism-gem {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 95px;
+    height: 90px;
     z-index: 3;
-    width: 120px;
-    height: 120px;
-    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.45));
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.4));
     animation: prismPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
@@ -349,27 +365,23 @@ const phases = [
  
   @keyframes prismPulse {
     0%, 100% {
-      transform: scale(1);
-      filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.4));
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
     }
     50% {
-      transform: scale(1.08);
-      filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.6));
+      filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.55));
     }
   }
  
-  /* ============ RIGHT: items-container ============ */
-  /* This takes 52% of the viewport. On a 1920 screen that's ~998px wide.
-     Plenty of room for description without overlap. */
+  /* ============ ITEMS CONTAINER — 750px wide, flex-shrink: 0 ============ */
   .items-container {
-    position: relative;
-    z-index: 4;
+    width: 750px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0;
-    align-self: stretch;
-    padding-right: 3vw;
+    position: relative;
+    z-index: 5;
   }
  
   .prism-item {
@@ -388,8 +400,8 @@ const phases = [
  
   .letter-box {
     flex-shrink: 0;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,19 +432,17 @@ const phases = [
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
  
-  /* Description: anchored 290px from prism-item's left edge.
-     With items-container taking 52% of a 1920 viewport = ~998px, and prism-item filling it:
-     description width = 998 - 290 - 24 = 684px, capped at max-width 600px.
-     On wider screens it stays at 600px, with empty space to the right. */
+  /* Description: anchored at left: 280px relative to prism-item.
+     items-container 750 - left 280 - right 24 = 446px description width. */
   .description {
     position: absolute;
     top: 50%;
-    left: 290px;
+    left: 280px;
     right: 1.5rem;
-    max-width: 600px;
+    max-width: 460px;
     transform: translateY(-50%) translateX(40px);
     font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 300;
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.88);
@@ -465,48 +475,12 @@ const phases = [
   }
  
   .prism-item.active .word-title {
-    transform: translateX(-76px);
+    transform: translateX(-72px);
   }
  
   .prism-item.active .description {
     transform: translateY(-50%) translateX(0);
     opacity: 1;
-  }
- 
-  /* ============ MEDIUM SCREENS ============ */
-  @media (max-width: 1400px) {
-    .prism-row {
-      grid-template-columns: 18% 30% 52%;
-      min-height: 580px;
-    }
- 
-    .description {
-      font-size: 0.88rem;
-      max-width: 480px;
-    }
- 
-    .glass-glow {
-      width: 180px;
-      height: 180px;
-    }
- 
-    .prism-gem {
-      width: 110px;
-      height: 110px;
-    }
-  }
- 
-  @media (max-width: 1100px) {
-    .prism-row {
-      grid-template-columns: 20% 28% 52%;
-      min-height: 560px;
-    }
- 
-    .description {
-      font-size: 0.85rem;
-      max-width: 360px;
-      left: 280px;
-    }
   }
  
   /* ============ MOBILE ============ */
@@ -515,23 +489,19 @@ const phases = [
       padding: 0 1rem;
     }
  
-    .prism-row {
-      display: flex;
+    .main-wrapper {
       flex-direction: column;
       align-items: center;
-      min-height: auto;
       gap: 2rem;
     }
  
-    .rays-svg {
-      display: none;
+    .prism-animation-container {
+      width: 280px;
+      height: 280px;
     }
  
-    .prism-side {
-      width: auto;
-      height: auto;
-      padding: 1rem 0;
-      justify-content: center;
+    .animation-svg {
+      display: none;
     }
  
     .raw-story-label {
@@ -540,13 +510,19 @@ const phases = [
       margin-bottom: 1.5rem;
       display: block;
       text-align: center;
+      font-size: 1rem;
+    }
+ 
+    .prism-center {
+      position: static;
+      transform: none;
+      margin: 1rem auto;
     }
  
     .items-container {
       width: 100%;
       max-width: 480px;
       gap: 8px;
-      padding-right: 0;
     }
  
     .prism-item {
@@ -598,33 +574,37 @@ const phases = [
   (function () {
     'use strict';
  
+    // SVG is 1200×550 viewBox, and we use xMinYMid meet preserveAspectRatio
+    // SVG container is 350px wide. With viewBox 1200 and width 1200px (CSS),
+    // SVG renders at its natural 1200px size. Coords match pixels 1:1.
+ 
     var THIN_HALF = 1.5;
-    var WEDGE_HALF = 44;
-    var HOVER_HALF = 58;
+    var WEDGE_HALF = 40;
+    var HOVER_HALF = 54;
  
     var phases = ['p', 'r', 'i', 's', 'm'];
  
     function computeGeometry() {
-      var row = document.getElementById('prismRow');
+      var container = document.querySelector('.prism-animation-container');
       var gem = document.getElementById('prismGem');
       var svg = document.getElementById('raysSvg');
-      if (!row || !gem || !svg) return;
+      if (!container || !gem || !svg) return;
  
-      var rowRect = row.getBoundingClientRect();
+      var containerRect = container.getBoundingClientRect();
       var gemRect = gem.getBoundingClientRect();
  
-      svg.setAttribute('viewBox', '0 0 ' + rowRect.width + ' ' + rowRect.height);
- 
-      var prismX = gemRect.left - rowRect.left + gemRect.width / 2;
-      var prismY = gemRect.top - rowRect.top + gemRect.height / 2;
+      // Prism gem center in container-local coords (matches SVG viewBox coords since width is 1:1 with the SVG)
+      var prismX = gemRect.left - containerRect.left + gemRect.width / 2;
+      var prismY = gemRect.top - containerRect.top + gemRect.height / 2;
  
       phases.forEach(function (phase) {
         var item = document.querySelector('.prism-item[data-phase="' + phase + '"]');
         if (!item) return;
         var itemRect = item.getBoundingClientRect();
  
-        var targetX = itemRect.left - rowRect.left;
-        var targetY = itemRect.top - rowRect.top + itemRect.height / 2;
+        // Letter box position in container-local coords
+        var targetX = itemRect.left - containerRect.left;
+        var targetY = itemRect.top - containerRect.top + itemRect.height / 2;
  
         var thinPoints =
           prismX + ',' + prismY + ' ' +
@@ -761,7 +741,7 @@ const phases = [
         }, 150);
       });
  
-      console.log('[Process Test] Full-viewport prism — letters at 48%');
+      console.log('[Process Test] Faithful Luminous Story layout — max-width 1100, flex centered');
     }
  
     if (document.readyState === 'loading') {
