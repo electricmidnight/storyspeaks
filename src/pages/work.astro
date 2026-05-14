@@ -44,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h3 class="case-title">Acts of Kindness</h3>
             <p class="case-subtitle">Geisinger Health · $1.5B Pennsylvania Health System</p>
             <p class="case-outcome">
-              <strong>An internal film festival.</strong> Six employee story films inspired the system to launch its own.
+              <strong>Campaign:</strong> Six employee films inspired Geisinger to launch its own mini film festival.
             </p>
           </div>
         </article>
@@ -167,9 +167,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
   </main>
  
-  <!-- ============ Vimeo Player API (for inline playback control) ============ -->
-  <script is:inline src="https://player.vimeo.com/api/player.js"></script>
- 
   <!-- ============ DATA + INTERACTIVITY ============ -->
   <script is:inline>
     // Case data (kept inline so it can be edited as text content)
@@ -179,7 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         title: 'Acts of Kindness',
         subtitle: 'Geisinger Health · $1.5B Pennsylvania Health System',
         challenge: 'Six films for an internal employee campaign across a $1.5B healthcare system. Under deadline.',
-        process: 'Storyfinding refused the generic. Pre-interviews surfaced six subjects with surprising, specific moments worth filming.',
+        process: 'Storyfinding and pre-interviews surfaced six subjects with surprising, specific moments worth filming.',
         outcome: 'The series resonated so deeply Geisinger launched an internal film festival across the system. <strong>From brief to legacy in six films.</strong>',
         vimeoUrl: 'https://player.vimeo.com/video/412818275?h=36dd52c40e&badge=0&autopause=0&dnt=1'
       },
@@ -204,7 +201,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     };
  
     let currentCase = null;
-    let vimeoPlayer = null;
  
     // ========== Detail view open ==========
     function openDetailView(caseId) {
@@ -225,20 +221,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const empty = document.getElementById('detailVideoEmpty');
       container.classList.remove('playing');
  
-      // Tear down any existing Vimeo player so a fresh one binds to the new src
-      if (vimeoPlayer) {
-        try { vimeoPlayer.destroy(); } catch (e) {}
-        vimeoPlayer = null;
-      }
- 
       if (data.vimeoUrl) {
         iframe.src = data.vimeoUrl;
         iframe.style.display = 'block';
         empty.style.display = 'none';
-        // Create Vimeo Player instance for programmatic control
-        if (window.Vimeo && window.Vimeo.Player) {
-          vimeoPlayer = new window.Vimeo.Player(iframe);
-        }
       } else {
         iframe.src = '';
         iframe.style.display = 'none';
@@ -258,17 +244,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       detailView.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
  
-      // Stop and tear down the Vimeo player so audio doesn't keep playing
-      if (vimeoPlayer) {
-        try {
-          vimeoPlayer.pause();
-          vimeoPlayer.destroy();
-        } catch (e) {}
-        vimeoPlayer = null;
-      }
-      // Also clear iframe src as a hard stop
+      // Hard-stop the video by clearing iframe src — this kills any audio/playback
       document.getElementById('detailVideoIframe').src = '';
       document.getElementById('detailVideoContainer').classList.remove('playing');
+      currentCase = null;
     }
  
     // Card click → open detail view
@@ -282,31 +261,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     document.getElementById('detailViewAll').addEventListener('click', closeDetailView);
     document.getElementById('detailOverlay').addEventListener('click', closeDetailView);
  
-    // ========== PLAY action — play video inline ==========
+    // ========== PLAY action — start video inline by reloading iframe with autoplay ==========
     function playInline() {
       if (!currentCase) return;
       const data = caseData[currentCase];
       if (!data.vimeoUrl) return;
  
       const container = document.getElementById('detailVideoContainer');
+      const iframe = document.getElementById('detailVideoIframe');
  
-      // Use Vimeo Player API to start playback
-      if (vimeoPlayer) {
-        vimeoPlayer.play().catch(err => {
-          // Some browsers block programmatic play without explicit user gesture on the iframe
-          // Fall back: reload iframe with autoplay parameter
-          const iframe = document.getElementById('detailVideoIframe');
-          const separator = data.vimeoUrl.includes('?') ? '&' : '?';
-          iframe.src = data.vimeoUrl + separator + 'autoplay=1';
-        });
-      } else {
-        // Vimeo Player API not yet loaded — reload iframe with autoplay param
-        const iframe = document.getElementById('detailVideoIframe');
-        const separator = data.vimeoUrl.includes('?') ? '&' : '?';
-        iframe.src = data.vimeoUrl + separator + 'autoplay=1';
-      }
+      // Reload iframe with autoplay parameter — guaranteed to work, no Player API state issues
+      const separator = data.vimeoUrl.includes('?') ? '&' : '?';
+      iframe.src = data.vimeoUrl + separator + 'autoplay=1';
  
-      // Hide PLAY overlay + click zone, exposing the iframe controls
+      // Hide PLAY overlay + click zone, exposing Vimeo's native controls
       container.classList.add('playing');
     }
  
@@ -701,13 +669,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
   .detail-container {
     position: relative;
-    max-width: 1300px;
+    max-width: 1400px;
     height: 100%;
     margin: 0 auto;
     padding: 7rem 2rem 3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
     align-items: center;
   }
  
@@ -715,7 +683,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .detail-container::before {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 33.33%;
     top: 10%;
     bottom: 10%;
     width: 1px;
