@@ -151,9 +151,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
         <div class="detail-right">
           <div class="detail-video-container" id="detailVideoContainer">
-            <div class="detail-poster" id="detailPoster"></div>
-            <div class="detail-video-gradient"></div>
-            <div class="detail-play-button" id="detailPlayButton" role="button" aria-label="Play full film">
+            <iframe class="detail-video-iframe" id="detailVideoIframe" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Featured film"></iframe>
+            <div class="detail-video-empty" id="detailVideoEmpty">
+              <p>Film coming soon</p>
+            </div>
+            <button class="detail-video-clickzone" id="detailVideoClickzone" type="button" aria-label="Play full film"></button>
+            <div class="detail-play-button" id="detailPlayButton" aria-hidden="true">
               <span>PLAY</span>
             </div>
           </div>
@@ -162,21 +165,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
  
-    <!-- ============ FULLSCREEN PLAYER MODAL ============ -->
-    <div class="fullscreen-mode" id="fullscreenPlayer" aria-hidden="true" role="dialog">
-      <div class="fullscreen-header">
-        <button class="fullscreen-back-button" id="fullscreenBack" type="button">← Back</button>
-        <h3 class="fullscreen-title" id="fullscreenTitle"></h3>
-      </div>
-      <div class="fullscreen-video-container" id="fullscreenVideoContainer">
-        <iframe id="fullscreenIframe" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Film player"></iframe>
-        <div class="fullscreen-empty-state" id="fullscreenEmpty">
-          <p>Film coming soon.</p>
-        </div>
-      </div>
-    </div>
- 
   </main>
+ 
+  <!-- ============ Vimeo Player API (for inline playback control) ============ -->
+  <script is:inline src="https://player.vimeo.com/api/player.js"></script>
  
   <!-- ============ DATA + INTERACTIVITY ============ -->
   <script is:inline>
@@ -189,8 +181,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         challenge: 'Six films for an internal employee campaign across a $1.5B healthcare system. Under deadline.',
         process: 'Storyfinding refused the generic. Pre-interviews surfaced six subjects with surprising, specific moments worth filming.',
         outcome: 'The series resonated so deeply Geisinger launched an internal film festival across the system. <strong>From brief to legacy in six films.</strong>',
-        posterClass: 'poster-healthcare',
-        vimeoUrl: 'https://player.vimeo.com/video/412818275?h=36dd52c40e&autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479'
+        vimeoUrl: 'https://player.vimeo.com/video/412818275?h=36dd52c40e&badge=0&autopause=0&dnt=1'
       },
       nonprofit: {
         number: 'Case 02 — Nonprofit',
@@ -199,7 +190,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         challenge: 'Full case study coming soon.',
         process: 'Full case study coming soon.',
         outcome: 'Emmy-winning documentary. <strong>Full details coming soon.</strong>',
-        posterClass: 'poster-placeholder',
         vimeoUrl: ''
       },
       corporate: {
@@ -209,14 +199,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         challenge: 'Full case study coming soon.',
         process: 'Full case study coming soon.',
         outcome: 'Emmy-winning film series. <strong>Full details coming soon.</strong>',
-        posterClass: 'poster-placeholder',
         vimeoUrl: ''
       }
     };
  
     let currentCase = null;
+    let vimeoPlayer = null;
  
-    // ========== Detail view open/close ==========
+    // ========== Detail view open ==========
     function openDetailView(caseId) {
       const data = caseData[caseId];
       if (!data) return;
@@ -229,8 +219,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       document.getElementById('detailProcess').textContent = data.process;
       document.getElementById('detailOutcome').innerHTML = data.outcome;
  
-      const poster = document.getElementById('detailPoster');
-      poster.className = 'detail-poster ' + data.posterClass;
+      // Reset video container to pre-play state
+      const container = document.getElementById('detailVideoContainer');
+      const iframe = document.getElementById('detailVideoIframe');
+      const empty = document.getElementById('detailVideoEmpty');
+      container.classList.remove('playing');
+ 
+      // Tear down any existing Vimeo player so a fresh one binds to the new src
+      if (vimeoPlayer) {
+        try { vimeoPlayer.destroy(); } catch (e) {}
+        vimeoPlayer = null;
+      }
+ 
+      if (data.vimeoUrl) {
+        iframe.src = data.vimeoUrl;
+        iframe.style.display = 'block';
+        empty.style.display = 'none';
+        // Create Vimeo Player instance for programmatic control
+        if (window.Vimeo && window.Vimeo.Player) {
+          vimeoPlayer = new window.Vimeo.Player(iframe);
+        }
+      } else {
+        iframe.src = '';
+        iframe.style.display = 'none';
+        empty.style.display = 'flex';
+      }
  
       const detailView = document.getElementById('detailView');
       detailView.classList.add('active');
@@ -238,11 +251,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       document.body.style.overflow = 'hidden';
     }
  
+    // ========== Detail view close (also stops playback) ==========
     function closeDetailView() {
       const detailView = document.getElementById('detailView');
       detailView.classList.remove('active');
       detailView.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+ 
+      // Stop and tear down the Vimeo player so audio doesn't keep playing
+      if (vimeoPlayer) {
+        try {
+          vimeoPlayer.pause();
+          vimeoPlayer.destroy();
+        } catch (e) {}
+        vimeoPlayer = null;
+      }
+      // Also clear iframe src as a hard stop
+      document.getElementById('detailVideoIframe').src = '';
+      document.getElementById('detailVideoContainer').classList.remove('playing');
     }
  
     // Card click → open detail view
@@ -256,56 +282,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     document.getElementById('detailViewAll').addEventListener('click', closeDetailView);
     document.getElementById('detailOverlay').addEventListener('click', closeDetailView);
  
-    // ========== Fullscreen player open/close ==========
-    function openFullscreen() {
+    // ========== PLAY action — play video inline ==========
+    function playInline() {
       if (!currentCase) return;
       const data = caseData[currentCase];
+      if (!data.vimeoUrl) return;
  
-      document.getElementById('fullscreenTitle').textContent = data.title;
+      const container = document.getElementById('detailVideoContainer');
  
-      const iframe = document.getElementById('fullscreenIframe');
-      const empty = document.getElementById('fullscreenEmpty');
- 
-      if (data.vimeoUrl) {
-        iframe.src = data.vimeoUrl;
-        iframe.style.display = 'block';
-        empty.style.display = 'none';
+      // Use Vimeo Player API to start playback
+      if (vimeoPlayer) {
+        vimeoPlayer.play().catch(err => {
+          // Some browsers block programmatic play without explicit user gesture on the iframe
+          // Fall back: reload iframe with autoplay parameter
+          const iframe = document.getElementById('detailVideoIframe');
+          const separator = data.vimeoUrl.includes('?') ? '&' : '?';
+          iframe.src = data.vimeoUrl + separator + 'autoplay=1';
+        });
       } else {
-        iframe.src = '';
-        iframe.style.display = 'none';
-        empty.style.display = 'flex';
+        // Vimeo Player API not yet loaded — reload iframe with autoplay param
+        const iframe = document.getElementById('detailVideoIframe');
+        const separator = data.vimeoUrl.includes('?') ? '&' : '?';
+        iframe.src = data.vimeoUrl + separator + 'autoplay=1';
       }
  
-      const fs = document.getElementById('fullscreenPlayer');
-      fs.classList.add('active');
-      fs.setAttribute('aria-hidden', 'false');
+      // Hide PLAY overlay + click zone, exposing the iframe controls
+      container.classList.add('playing');
     }
  
-    function closeFullscreen() {
-      const fs = document.getElementById('fullscreenPlayer');
-      fs.classList.remove('active');
-      fs.setAttribute('aria-hidden', 'true');
-      // Stop the video by clearing the iframe src
-      document.getElementById('fullscreenIframe').src = '';
-    }
- 
-    document.getElementById('detailWatch').addEventListener('click', openFullscreen);
-    document.getElementById('detailPlayButton').addEventListener('click', openFullscreen);
-    document.getElementById('fullscreenBack').addEventListener('click', closeFullscreen);
+    // Click zone (transparent overlay on top of iframe) triggers play
+    document.getElementById('detailVideoClickzone').addEventListener('click', playInline);
+    // "Watch Full Story" button also triggers play
+    document.getElementById('detailWatch').addEventListener('click', playInline);
  
     // ========== ESC key handling ==========
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
-      const fs = document.getElementById('fullscreenPlayer');
       const dv = document.getElementById('detailView');
-      if (fs.classList.contains('active')) {
-        closeFullscreen();
-      } else if (dv.classList.contains('active')) {
+      if (dv.classList.contains('active')) {
         closeDetailView();
       }
     });
  
-    // ========== Cursor-following play button (the signature interaction) ==========
+    // ========== Cursor-following PLAY box (the signature interaction) ==========
     (function() {
       const container = document.getElementById('detailVideoContainer');
       const button = document.getElementById('detailPlayButton');
@@ -884,27 +903,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     cursor: pointer;
   }
  
-  .detail-poster {
+  /* Inline Vimeo iframe player */
+  .detail-video-iframe {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 1;
+    background: #000;
   }
  
-  .detail-poster.poster-healthcare {
-    background-image: url('/images/geisinger-acts-of-kindness.jpg');
-    background-color: #2a1810;
-  }
- 
-  .detail-poster.poster-placeholder {
-    background: linear-gradient(135deg, rgba(232, 197, 116, 0.1) 0%, rgba(13, 27, 50, 0.95) 100%);
-  }
- 
-  .detail-video-gradient {
+  /* Empty state for cases without a video URL yet */
+  .detail-video-empty {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(10, 22, 40, 0.5));
-    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(232, 197, 116, 0.08) 0%, rgba(13, 27, 50, 0.95) 100%);
+    color: rgba(248, 250, 252, 0.55);
+    font-family: var(--font-sans, system-ui);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 300;
+    display: none; /* JS toggles to flex */
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .detail-video-empty p {
+    margin: 0;
+  }
+ 
+  /* Transparent click overlay — sits on top of the iframe so clicks/cursor work
+     before playback starts. Hidden once .playing is set so Vimeo controls are reachable. */
+  .detail-video-clickzone {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    /* Subtle vignette to make the PLAY box pop on bright Vimeo posters */
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.25));
+  }
+ 
+  .detail-video-clickzone:focus-visible {
+    outline: 2px solid var(--color-accent, #e8c574);
+    outline-offset: -3px;
   }
  
   /* THE SIGNATURE: cursor-following PLAY box (rectangular, follows the mouse) */
@@ -913,6 +959,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 3;
     min-width: 110px;
     padding: 0.85rem 1.5rem;
     border-radius: 3px;
@@ -932,7 +979,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    transition: top 0.4s ease, left 0.4s ease, transform 0.08s ease-out, box-shadow 0.3s ease, background 0.3s ease;
+    transition: top 0.4s ease, left 0.4s ease, transform 0.08s ease-out, box-shadow 0.3s ease, background 0.3s ease, opacity 0.3s ease;
   }
  
   .detail-video-container:hover .detail-play-button {
@@ -943,87 +990,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       inset 0 0 12px rgba(232, 197, 116, 0.12);
   }
  
-  /* ============================================================
-     FULLSCREEN VIDEO PLAYER
-     ============================================================ */
-  .fullscreen-mode {
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    background: #000;
-    display: flex;
-    flex-direction: column;
-    pointer-events: none;
+  /* Once video starts playing, hide the click overlay and the PLAY box
+     so Vimeo's native controls become reachable */
+  .detail-video-container.playing .detail-video-clickzone,
+  .detail-video-container.playing .detail-play-button {
     opacity: 0;
-    transition: opacity 0.4s ease;
-  }
- 
-  .fullscreen-mode.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
- 
-  .fullscreen-header {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 1.5rem 2rem;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(232, 197, 116, 0.15);
-    z-index: 2;
-  }
- 
-  .fullscreen-back-button {
-    background: none;
-    border: 1px solid rgba(232, 197, 116, 0.4);
-    color: var(--color-accent, #e8c574);
-    font-family: var(--font-sans, system-ui);
-    font-size: 0.85rem;
-    padding: 0.55rem 1rem;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
- 
-  .fullscreen-back-button:hover {
-    background: rgba(232, 197, 116, 0.1);
-    border-color: var(--color-accent, #e8c574);
-  }
- 
-  .fullscreen-title {
-    font-family: var(--font-sans, system-ui);
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--color-text-primary, #f8fafc);
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
- 
-  .fullscreen-video-container {
-    flex: 1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000;
-  }
- 
-  .fullscreen-video-container iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
- 
-  .fullscreen-empty-state {
-    color: rgba(248, 250, 252, 0.5);
-    font-family: var(--font-sans, system-ui);
-    font-size: 1.1rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    pointer-events: none;
+    visibility: hidden;
   }
  
   /* ============================================================
@@ -1103,15 +1076,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       padding: 0.5rem 0.9rem;
       font-size: 0.65rem;
     }
- 
-    .fullscreen-header {
-      padding: 1rem 1.25rem;
-      gap: 1rem;
-    }
- 
-    .fullscreen-title {
-      font-size: 0.95rem;
-    }
   }
  
   @media (max-width: 600px) {
@@ -1121,4 +1085,3 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
- 
