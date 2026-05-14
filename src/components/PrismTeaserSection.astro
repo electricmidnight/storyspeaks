@@ -4,10 +4,10 @@
 // Reuses the animated prism illustration from the /process/ page mobile preview.
 // SVG IDs are prefixed with "pt-" to keep them unique on the home page.
 ---
-
+ 
 <section class="prism-teaser-section">
   <div class="pt-inner">
-
+ 
     <!-- Animated prism illustration -->
     <div class="pt-visual">
       <div class="pt-stage" aria-hidden="true">
@@ -52,14 +52,14 @@
               <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
             </radialGradient>
           </defs>
-
+ 
           <polygon points="60,120 210,22 210,38" fill="url(#pt-ray-p)" filter="url(#pt-blur)"/>
           <polygon points="60,120 210,67 210,83" fill="url(#pt-ray-r)" filter="url(#pt-blur)"/>
           <polygon points="60,120 210,112 210,128" fill="url(#pt-ray-i)" filter="url(#pt-blur)"/>
           <polygon points="60,120 210,157 210,173" fill="url(#pt-ray-s)" filter="url(#pt-blur)"/>
           <polygon points="60,120 210,202 210,218" fill="url(#pt-ray-m)" filter="url(#pt-blur)"/>
         </svg>
-
+ 
         <div class="pt-prism-wrap">
           <div class="pt-orb"></div>
           <div class="pt-gem">
@@ -71,12 +71,12 @@
             </svg>
           </div>
         </div>
-
+ 
         <div class="pt-label">
           <span>RAW</span>
           <span>STORY</span>
         </div>
-
+ 
         <div class="pt-letter pt-p" style="--phase-color: #d4756f;">P</div>
         <div class="pt-letter pt-r" style="--phase-color: #f5d589;">R</div>
         <div class="pt-letter pt-i" style="--phase-color: #a3bc7e;">I</div>
@@ -84,7 +84,7 @@
         <div class="pt-letter pt-m" style="--phase-color: #a583b5;">M</div>
       </div>
     </div>
-
+ 
     <!-- Copy + CTA -->
     <div class="pt-copy">
       <p class="pt-eyebrow">The Method</p>
@@ -98,10 +98,10 @@
         <span class="pt-cta-arrow">→</span>
       </a>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <style>
   .prism-teaser-section {
     background: var(--color-bg-deep, #0a1628);
@@ -109,7 +109,7 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   /* Subtle gold hairline rules top & bottom (matches diagnostic section treatment) */
   .prism-teaser-section::before,
   .prism-teaser-section::after {
@@ -123,29 +123,30 @@
   }
   .prism-teaser-section::before { top: 0; }
   .prism-teaser-section::after { bottom: 0; }
-
+ 
   .pt-inner {
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: center;
   }
-
+ 
   /* ============ VISUAL (prism illustration) ============ */
   .pt-visual {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
   }
-
+ 
   .pt-stage {
     position: relative;
     width: 320px;
     height: 280px;
   }
-
+ 
   .pt-rays-svg {
     position: absolute;
     inset: 0;
@@ -155,7 +156,7 @@
     pointer-events: none;
     z-index: 1;
   }
-
+ 
   .pt-prism-wrap {
     position: absolute;
     left: 29px;
@@ -167,7 +168,7 @@
     align-items: center;
     justify-content: center;
   }
-
+ 
   .pt-orb {
     position: absolute;
     width: 100px;
@@ -187,7 +188,7 @@
     animation: pt-orbPulse 4s ease-in-out infinite;
     pointer-events: none;
   }
-
+ 
   .pt-gem {
     position: relative;
     z-index: 2;
@@ -196,13 +197,13 @@
     filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.45));
     animation: pt-prismPulse 4s ease-in-out infinite;
   }
-
+ 
   .pt-gem svg {
     width: 100%;
     height: 100%;
     display: block;
   }
-
+ 
   .pt-label {
     position: absolute;
     left: 69px;
@@ -223,11 +224,11 @@
     pointer-events: none;
     z-index: 4;
   }
-
+ 
   .pt-label span {
     display: block;
   }
-
+ 
   .pt-letter {
     position: absolute;
     right: 42px;
@@ -248,13 +249,13 @@
       0 0 16px color-mix(in srgb, var(--phase-color) 45%, transparent);
     z-index: 5;
   }
-
+ 
   .pt-p { top: 18px; }
   .pt-r { top: 73px; }
   .pt-i { top: 128px; }
   .pt-s { top: 183px; }
   .pt-m { top: 238px; }
-
+ 
   /* ============ ANIMATIONS (scoped to this section) ============ */
   @keyframes pt-orbPulse {
     0%, 100% {
@@ -266,7 +267,7 @@
       opacity: 1;
     }
   }
-
+ 
   @keyframes pt-prismPulse {
     0%, 100% {
       filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
@@ -275,7 +276,7 @@
       filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.55));
     }
   }
-
+ 
   @keyframes pt-rawStoryPulse {
     0%, 100% {
       text-shadow:
@@ -290,12 +291,12 @@
         0 0 42px rgba(245, 213, 137, 0.45);
     }
   }
-
+ 
   /* ============ COPY ============ */
   .pt-copy {
     max-width: 460px;
   }
-
+ 
   .pt-eyebrow {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.75rem;
@@ -305,7 +306,7 @@
     margin: 0 0 1.25rem;
     font-weight: 400;
   }
-
+ 
   .pt-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 300;
@@ -315,7 +316,7 @@
     color: var(--color-text-primary, #f8fafc);
     margin: 0 0 1rem;
   }
-
+ 
   .pt-tagline {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(1rem, 1.5vw, 1.15rem);
@@ -324,7 +325,7 @@
     font-weight: 300;
     margin: 0 0 1.5rem;
   }
-
+ 
   .pt-description {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(0.9rem, 1.2vw, 1rem);
@@ -334,7 +335,7 @@
     margin: 0 0 2rem;
     text-wrap: pretty;
   }
-
+ 
   .pt-cta {
     display: inline-flex;
     align-items: center;
@@ -352,82 +353,88 @@
     text-transform: uppercase;
     transition: all 0.3s ease;
   }
-
+ 
   .pt-cta:hover {
     background: color-mix(in srgb, var(--color-accent, #e8c574) 20%, transparent);
     transform: translateY(-1px);
   }
-
+ 
   .pt-cta-arrow {
     font-size: 1rem;
     transition: transform 0.3s ease;
   }
-
+ 
   .pt-cta:hover .pt-cta-arrow {
     transform: translateX(3px);
   }
-
+ 
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
     .prism-teaser-section {
       padding: 4rem 1.25rem;
     }
-
+ 
     .prism-teaser-section::before,
     .prism-teaser-section::after {
       left: 10%;
       right: 10%;
     }
-
+ 
     .pt-inner {
       grid-template-columns: 1fr;
       gap: 2.5rem;
       text-align: center;
     }
-
+ 
+    .pt-visual {
+      justify-content: center;
+      padding-right: 0;
+    }
+ 
     .pt-stage {
       width: 280px;
       height: 240px;
     }
-
+ 
     .pt-prism-wrap {
       left: 25px;
       top: 85px;
       width: 70px;
       height: 70px;
     }
-
+ 
     .pt-orb {
       width: 90px;
       height: 90px;
     }
-
+ 
     .pt-gem {
       width: 50px;
       height: 50px;
     }
-
+ 
     .pt-label {
       left: 60px;
       top: 172px;
       font-size: 0.72rem;
     }
-
+ 
     .pt-letter {
       right: 36px;
       width: 28px;
       height: 28px;
       font-size: 0.95rem;
     }
-
+ 
     .pt-p { top: 16px; }
     .pt-r { top: 61px; }
     .pt-i { top: 106px; }
     .pt-s { top: 151px; }
     .pt-m { top: 196px; }
-
+ 
     .pt-copy {
       max-width: none;
     }
   }
 </style>
+ 
