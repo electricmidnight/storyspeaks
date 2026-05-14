@@ -1,7 +1,6 @@
 ---
 // Hero.astro — opening section
 ---
-
 <section class="hero">
   <div class="hero-inner">
     <div class="eyebrow">Boulder &middot; Denver &middot; The Rockies</div>
@@ -15,8 +14,8 @@
       story is everything.
     </p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#films">See the Films</a>
-      <a class="btn btn-secondary" href="#contact">Start a Conversation</a>
+      <a class="btn btn-primary" href="/work">See the Films</a>
+      <a class="btn btn-secondary" href="/contact">Start a Conversation</a>
     </div>
     <div class="credentials">
       <span>5 Emmys</span>
@@ -29,7 +28,6 @@
     </div>
   </div>
 </section>
-
 <style>
  .hero {
     background-color: var(--color-bg-deep);
@@ -63,27 +61,23 @@
     );
     pointer-events: none;
   }
-
   .hero-inner {
     position: relative;
     z-index: 2;
     max-width: var(--hero-width);
     margin: 0 auto;
   }
-
   .hero h1 {
     font-size: clamp(2.25rem, 5.5vw, 4.75rem);
     line-height: 1.05;
     margin: 0 0 1.5rem 0;
     color: var(--color-text);
   }
-
   .hero h1 em {
     font-style: italic;
     color: var(--color-accent);
     font-weight: 300;
   }
-
   .subhead {
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.65;
@@ -92,14 +86,12 @@
     opacity: 0.92;
     font-weight: 300;
   }
-
   .cta-row {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
   }
-
   .credentials {
     margin-top: 3rem;
     font-size: 0.75rem;
@@ -107,12 +99,10 @@
     text-transform: uppercase;
     opacity: 0.75;
   }
-
   .credentials .sep {
     margin: 0 0.65rem;
     opacity: 0.5;
   }
-
   @media (max-width: 768px) {
     .hero {
       min-height: 78vh;
@@ -128,3 +118,4 @@
     }
   }
 </style>
+ 
