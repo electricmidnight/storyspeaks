@@ -1,0 +1,433 @@
+---
+// PrismTeaserSection.astro
+// Single hero element section between Diagnostic and Work on the home page.
+// Reuses the animated prism illustration from the /process/ page mobile preview.
+// SVG IDs are prefixed with "pt-" to keep them unique on the home page.
+---
+
+<section class="prism-teaser-section">
+  <div class="pt-inner">
+
+    <!-- Animated prism illustration -->
+    <div class="pt-visual">
+      <div class="pt-stage" aria-hidden="true">
+        <svg class="pt-rays-svg" viewBox="0 0 280 240" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="pt-ray-p" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="30">
+              <stop offset="0%" stop-color="rgba(212, 117, 111, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(212, 117, 111, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="pt-ray-r" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="75">
+              <stop offset="0%" stop-color="rgba(245, 213, 137, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(245, 213, 137, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="pt-ray-i" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="120">
+              <stop offset="0%" stop-color="rgba(163, 188, 126, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(163, 188, 126, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="pt-ray-s" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="165">
+              <stop offset="0%" stop-color="rgba(134, 168, 201, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(134, 168, 201, 0.95)"/>
+            </linearGradient>
+            <linearGradient id="pt-ray-m" gradientUnits="userSpaceOnUse" x1="60" y1="120" x2="210" y2="210">
+              <stop offset="0%" stop-color="rgba(165, 131, 181, 0.4)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.95)"/>
+            </linearGradient>
+            <filter id="pt-blur" x="-20%" y="-50%" width="140%" height="200%">
+              <feGaussianBlur stdDeviation="1.5"/>
+            </filter>
+            <linearGradient id="pt-prism-front" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(212, 117, 111, 0.85)"/>
+              <stop offset="25%"  stop-color="rgba(245, 213, 137, 0.85)"/>
+              <stop offset="50%"  stop-color="rgba(163, 188, 126, 0.85)"/>
+              <stop offset="75%"  stop-color="rgba(134, 168, 201, 0.85)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.85)"/>
+            </linearGradient>
+            <linearGradient id="pt-prism-side" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(134, 168, 201, 0.45)"/>
+              <stop offset="100%" stop-color="rgba(165, 131, 181, 0.45)"/>
+            </linearGradient>
+            <radialGradient id="pt-prism-highlight">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0.6)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+          </defs>
+
+          <polygon points="60,120 210,22 210,38" fill="url(#pt-ray-p)" filter="url(#pt-blur)"/>
+          <polygon points="60,120 210,67 210,83" fill="url(#pt-ray-r)" filter="url(#pt-blur)"/>
+          <polygon points="60,120 210,112 210,128" fill="url(#pt-ray-i)" filter="url(#pt-blur)"/>
+          <polygon points="60,120 210,157 210,173" fill="url(#pt-ray-s)" filter="url(#pt-blur)"/>
+          <polygon points="60,120 210,202 210,218" fill="url(#pt-ray-m)" filter="url(#pt-blur)"/>
+        </svg>
+
+        <div class="pt-prism-wrap">
+          <div class="pt-orb"></div>
+          <div class="pt-gem">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <polygon points="50,10 8,82 90,82" fill="url(#pt-prism-front)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+              <polygon points="50,10 90,82 95,86" fill="url(#pt-prism-side)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <ellipse cx="50" cy="36" rx="18" ry="22" fill="url(#pt-prism-highlight)"/>
+              <circle cx="50" cy="10" r="2.5" fill="rgba(255,255,255,0.95)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="pt-label">
+          <span>RAW</span>
+          <span>STORY</span>
+        </div>
+
+        <div class="pt-letter pt-p" style="--phase-color: #d4756f;">P</div>
+        <div class="pt-letter pt-r" style="--phase-color: #f5d589;">R</div>
+        <div class="pt-letter pt-i" style="--phase-color: #a3bc7e;">I</div>
+        <div class="pt-letter pt-s" style="--phase-color: #86a8c9;">S</div>
+        <div class="pt-letter pt-m" style="--phase-color: #a583b5;">M</div>
+      </div>
+    </div>
+
+    <!-- Copy + CTA -->
+    <div class="pt-copy">
+      <p class="pt-eyebrow">The Method</p>
+      <h2 class="pt-headline">The PRISM Method.</h2>
+      <p class="pt-tagline">Five phases for translating truth into resonance.</p>
+      <p class="pt-description">
+        A proprietary narrative architecture designed to translate complex truth into resonant human experience.
+      </p>
+      <a href="/process" class="pt-cta">
+        <span>Explore the Method</span>
+        <span class="pt-cta-arrow">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .prism-teaser-section {
+    background: var(--color-bg-deep, #0a1628);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle gold hairline rules top & bottom (matches diagnostic section treatment) */
+  .prism-teaser-section::before,
+  .prism-teaser-section::after {
+    content: '';
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232, 197, 116, 0.25), transparent);
+    pointer-events: none;
+  }
+  .prism-teaser-section::before { top: 0; }
+  .prism-teaser-section::after { bottom: 0; }
+
+  .pt-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* ============ VISUAL (prism illustration) ============ */
+  .pt-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pt-stage {
+    position: relative;
+    width: 320px;
+    height: 280px;
+  }
+
+  .pt-rays-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .pt-prism-wrap {
+    position: absolute;
+    left: 29px;
+    top: 105px;
+    width: 80px;
+    height: 80px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pt-orb {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle,
+      rgba(212, 117, 111, 0.22) 0%,
+      rgba(245, 213, 137, 0.22) 20%,
+      rgba(163, 188, 126, 0.22) 40%,
+      rgba(134, 168, 201, 0.24) 60%,
+      rgba(165, 131, 181, 0.18) 80%,
+      transparent 100%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: pt-orbPulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .pt-gem {
+    position: relative;
+    z-index: 2;
+    width: 58px;
+    height: 58px;
+    filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.45));
+    animation: pt-prismPulse 4s ease-in-out infinite;
+  }
+
+  .pt-gem svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .pt-label {
+    position: absolute;
+    left: 69px;
+    top: 200px;
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: rgba(248, 250, 252, 0.95);
+    text-shadow:
+      0 0 8px rgba(248, 250, 252, 0.75),
+      0 0 16px rgba(248, 250, 252, 0.45),
+      0 0 24px rgba(245, 213, 137, 0.3);
+    animation: pt-rawStoryPulse 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  .pt-label span {
+    display: block;
+  }
+
+  .pt-letter {
+    position: absolute;
+    right: 42px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans, system-ui);
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--phase-color);
+    border: 1.2px solid color-mix(in srgb, var(--phase-color) 80%, transparent);
+    background: color-mix(in srgb, var(--phase-color) 22%, var(--color-bg-deep, #0a1628));
+    border-radius: 3px;
+    text-shadow:
+      0 0 8px color-mix(in srgb, var(--phase-color) 70%, transparent),
+      0 0 16px color-mix(in srgb, var(--phase-color) 45%, transparent);
+    z-index: 5;
+  }
+
+  .pt-p { top: 18px; }
+  .pt-r { top: 73px; }
+  .pt-i { top: 128px; }
+  .pt-s { top: 183px; }
+  .pt-m { top: 238px; }
+
+  /* ============ ANIMATIONS (scoped to this section) ============ */
+  @keyframes pt-orbPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.85;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pt-prismPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.35));
+    }
+    50% {
+      filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.55));
+    }
+  }
+
+  @keyframes pt-rawStoryPulse {
+    0%, 100% {
+      text-shadow:
+        0 0 10px rgba(248, 250, 252, 0.75),
+        0 0 20px rgba(248, 250, 252, 0.45),
+        0 0 30px rgba(245, 213, 137, 0.3);
+    }
+    50% {
+      text-shadow:
+        0 0 14px rgba(248, 250, 252, 0.9),
+        0 0 28px rgba(248, 250, 252, 0.6),
+        0 0 42px rgba(245, 213, 137, 0.45);
+    }
+  }
+
+  /* ============ COPY ============ */
+  .pt-copy {
+    max-width: 460px;
+  }
+
+  .pt-eyebrow {
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent, #e8c574);
+    margin: 0 0 1.25rem;
+    font-weight: 400;
+  }
+
+  .pt-headline {
+    font-family: var(--font-sans, system-ui);
+    font-weight: 300;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary, #f8fafc);
+    margin: 0 0 1rem;
+  }
+
+  .pt-tagline {
+    font-family: var(--font-sans, system-ui);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--color-accent, #e8c574);
+    font-style: italic;
+    font-weight: 300;
+    margin: 0 0 1.5rem;
+  }
+
+  .pt-description {
+    font-family: var(--font-sans, system-ui);
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    line-height: 1.7;
+    color: rgba(248, 250, 252, 0.75);
+    font-weight: 300;
+    margin: 0 0 2rem;
+    text-wrap: pretty;
+  }
+
+  .pt-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.95rem 1.75rem;
+    background: color-mix(in srgb, var(--color-accent, #e8c574) 10%, transparent);
+    border: 1px solid var(--color-accent, #e8c574);
+    border-radius: 2px;
+    color: var(--color-accent, #e8c574);
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .pt-cta:hover {
+    background: color-mix(in srgb, var(--color-accent, #e8c574) 20%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .pt-cta-arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .pt-cta:hover .pt-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 900px) {
+    .prism-teaser-section {
+      padding: 4rem 1.25rem;
+    }
+
+    .prism-teaser-section::before,
+    .prism-teaser-section::after {
+      left: 10%;
+      right: 10%;
+    }
+
+    .pt-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
+    }
+
+    .pt-stage {
+      width: 280px;
+      height: 240px;
+    }
+
+    .pt-prism-wrap {
+      left: 25px;
+      top: 85px;
+      width: 70px;
+      height: 70px;
+    }
+
+    .pt-orb {
+      width: 90px;
+      height: 90px;
+    }
+
+    .pt-gem {
+      width: 50px;
+      height: 50px;
+    }
+
+    .pt-label {
+      left: 60px;
+      top: 172px;
+      font-size: 0.72rem;
+    }
+
+    .pt-letter {
+      right: 36px;
+      width: 28px;
+      height: 28px;
+      font-size: 0.95rem;
+    }
+
+    .pt-p { top: 16px; }
+    .pt-r { top: 61px; }
+    .pt-i { top: 106px; }
+    .pt-s { top: 151px; }
+    .pt-m { top: 196px; }
+
+    .pt-copy {
+      max-width: none;
+    }
+  }
+</style>
