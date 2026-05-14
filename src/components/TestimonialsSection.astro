@@ -1,0 +1,415 @@
+---
+// TestimonialsSection.astro
+// Home page testimonials section — Option 1 featured rotator.
+// One large quote at top, four sector thumbnails below.
+// Auto-rotates every 8 seconds; rotation pauses once visitor clicks any thumb.
+---
+
+<section class="testimonials-section">
+  <div class="ts-inner">
+
+    <p class="ts-eyebrow">Testimonials</p>
+
+    <h2 class="ts-headline">
+      <span class="gold">Partners</span> in Story.
+    </h2>
+
+    <p class="ts-subtitle">
+      Where collaboration becomes transformation. Discover why visionary leaders trust The Story Speaks to architect the stories that matter most.
+    </p>
+
+    <!-- Featured quote (swaps when thumb activates) -->
+    <div class="ts-featured" id="tsFeatured">
+      <span class="ts-quote-mark" aria-hidden="true">"</span>
+      <p class="ts-quote" id="tsQuote">Working with Lance on The Shadow Between Us was an honor. His deep experience as a journalist and filmmaker elevated the project to global impact — leading to a national PBS broadcast and two Emmy Awards. He's an exceptional talent in documentary film.</p>
+      <div class="ts-attribution">
+        <div class="ts-rule"></div>
+        <div class="ts-attribution-text">
+          <p class="ts-name" id="tsName">Dr. Obadiah Baker</p>
+          <p class="ts-title" id="tsTitle">Founder, Tenderheart Crusades &middot; Fulbright Scholar</p>
+        </div>
+        <div class="ts-rule"></div>
+      </div>
+    </div>
+
+    <!-- Sector thumbnails -->
+    <div class="ts-thumbs" role="tablist" aria-label="Select a testimonial">
+      <button class="ts-thumb is-active" data-id="baker" role="tab" type="button" aria-selected="true">
+        <p class="ts-thumb-sector">Nonprofit</p>
+        <p class="ts-thumb-name">Dr. Obadiah Baker</p>
+        <p class="ts-thumb-org">Tenderheart Crusades</p>
+      </button>
+      <button class="ts-thumb" data-id="yam" role="tab" type="button" aria-selected="false">
+        <p class="ts-thumb-sector">Science</p>
+        <p class="ts-thumb-name">Philip Yam</p>
+        <p class="ts-thumb-org">Simons Foundation</p>
+      </button>
+      <button class="ts-thumb" data-id="texter" role="tab" type="button" aria-selected="false">
+        <p class="ts-thumb-sector">Healthcare</p>
+        <p class="ts-thumb-name">Ben Texter</p>
+        <p class="ts-thumb-org">Digital Health Strategies</p>
+      </button>
+      <button class="ts-thumb" data-id="hernandez" role="tab" type="button" aria-selected="false">
+        <p class="ts-thumb-sector">Corporate</p>
+        <p class="ts-thumb-name">Mark Hernandez</p>
+        <p class="ts-thumb-org">GM Financial</p>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    const testimonials = {
+      baker: {
+        quote: "Working with Lance on The Shadow Between Us was an honor. His deep experience as a journalist and filmmaker elevated the project to global impact \u2014 leading to a national PBS broadcast and two Emmy Awards. He's an exceptional talent in documentary film.",
+        name: "Dr. Obadiah Baker",
+        title: "Founder, Tenderheart Crusades \u00b7 Fulbright Scholar"
+      },
+      yam: {
+        quote: "Watching Lance work is seeing a master storyteller in action. On multiple trips to film winners of the famous Fields Medals mathematics award, he drew out thoughtful, human stories from even the most reserved subjects. His calm presence, sharp instincts, and creative eye shaped narratives anyone could appreciate.",
+        name: "Philip Yam",
+        title: "Past Editor, Simons Foundation \u00b7 Managing Editor, Scientific American"
+      },
+      texter: {
+        quote: "Lance produced a series of excellent films under tight deadlines for a multibillion-dollar healthcare system. The films exceeded all expectations and inspired us to create a mini film festival that played throughout the entire healthcare system.",
+        name: "Ben Texter",
+        title: "Co-Founder, Digital Health Strategies"
+      },
+      hernandez: {
+        quote: "Lance is a great resource for our corporate brand assets. He has a keen eye for capturing everyday moments in a remarkable way. His work is featured throughout our marketing collateral and displayed in our corporate offices.",
+        name: "Mark Hernandez",
+        title: "VP of Marketing, General Motors Financial"
+      }
+    };
+
+    const order = ['baker', 'yam', 'texter', 'hernandez'];
+    let current = 0;
+    let autoRotateActive = true;
+    let intervalId = null;
+
+    const featured = document.getElementById('tsFeatured');
+    const quoteEl = document.getElementById('tsQuote');
+    const nameEl = document.getElementById('tsName');
+    const titleEl = document.getElementById('tsTitle');
+    const thumbs = document.querySelectorAll('.ts-thumb');
+
+    if (!featured || !quoteEl) return;
+
+    function setActive(id, animate) {
+      const data = testimonials[id];
+      if (!data) return;
+
+      if (animate) {
+        // Fade out, swap content, fade in
+        featured.classList.add('is-fading');
+        setTimeout(() => {
+          quoteEl.textContent = data.quote;
+          nameEl.textContent = data.name;
+          titleEl.textContent = data.title;
+          featured.classList.remove('is-fading');
+        }, 280);
+      } else {
+        quoteEl.textContent = data.quote;
+        nameEl.textContent = data.name;
+        titleEl.textContent = data.title;
+      }
+
+      // Update thumb states
+      thumbs.forEach(thumb => {
+        const isActive = thumb.getAttribute('data-id') === id;
+        thumb.classList.toggle('is-active', isActive);
+        thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      // Update index
+      current = order.indexOf(id);
+    }
+
+    function rotateNext() {
+      current = (current + 1) % order.length;
+      setActive(order[current], true);
+    }
+
+    function startAutoRotate() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (autoRotateActive) rotateNext();
+      }, 8000);
+    }
+
+    function stopAutoRotate() {
+      autoRotateActive = false;
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+
+    // Wire up thumbnail clicks
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', (e) => {
+        const id = thumb.getAttribute('data-id');
+        stopAutoRotate();
+        setActive(id, true);
+      });
+    });
+
+    // Respect prefers-reduced-motion
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      startAutoRotate();
+    }
+  })();
+</script>
+
+<style>
+  .testimonials-section {
+    background: var(--color-bg-deep, #0a1628);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle gold hairline rules top & bottom — matches other home sections */
+  .testimonials-section::before,
+  .testimonials-section::after {
+    content: '';
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232, 197, 116, 0.25), transparent);
+    pointer-events: none;
+  }
+  .testimonials-section::before { top: 0; }
+  .testimonials-section::after { bottom: 0; }
+
+  .ts-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ts-eyebrow {
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent, #e8c574);
+    margin: 0 0 1.5rem;
+    font-weight: 400;
+  }
+
+  .ts-headline {
+    font-family: var(--font-sans, system-ui);
+    font-weight: 300;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary, #f8fafc);
+    margin: 0 0 1.25rem;
+  }
+
+  .ts-headline .gold {
+    color: var(--color-accent, #e8c574);
+    font-weight: 400;
+  }
+
+  .ts-subtitle {
+    font-family: var(--font-sans, system-ui);
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    color: rgba(248, 250, 252, 0.7);
+    font-weight: 300;
+    line-height: 1.65;
+    margin: 0 auto 3.5rem;
+    max-width: 620px;
+    text-wrap: pretty;
+  }
+
+  /* ============ FEATURED QUOTE ============ */
+  .ts-featured {
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.28s ease;
+  }
+
+  .ts-featured.is-fading {
+    opacity: 0;
+  }
+
+  .ts-quote-mark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 4.5rem;
+    color: rgba(232, 197, 116, 0.4);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .ts-quote {
+    font-family: var(--font-sans, system-ui);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.65;
+    color: rgba(248, 250, 252, 0.92);
+    font-weight: 300;
+    font-style: italic;
+    margin: 0 0 2rem;
+    text-wrap: pretty;
+  }
+
+  .ts-attribution {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .ts-rule {
+    height: 1px;
+    width: 32px;
+    background: rgba(232, 197, 116, 0.5);
+    flex-shrink: 0;
+  }
+
+  .ts-attribution-text {
+    text-align: center;
+  }
+
+  .ts-name {
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.9rem;
+    color: var(--color-text-primary, #f8fafc);
+    font-weight: 500;
+    margin: 0 0 0.2rem;
+    letter-spacing: 0.01em;
+  }
+
+  .ts-title {
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.78rem;
+    color: rgba(232, 197, 116, 0.85);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  /* ============ SECTOR THUMBNAILS ============ */
+  .ts-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .ts-thumb {
+    display: block;
+    text-align: left;
+    padding: 1rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(232, 197, 116, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .ts-thumb:hover {
+    opacity: 0.95;
+    border-color: rgba(232, 197, 116, 0.5);
+    background: rgba(232, 197, 116, 0.04);
+    transform: translateY(-2px);
+  }
+
+  .ts-thumb.is-active {
+    opacity: 1;
+    border-color: var(--color-accent, #e8c574);
+    background: rgba(232, 197, 116, 0.08);
+    box-shadow: 0 0 24px rgba(232, 197, 116, 0.15);
+  }
+
+  .ts-thumb-sector {
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent, #e8c574);
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+  }
+
+  .ts-thumb-name {
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.82rem;
+    color: var(--color-text-primary, #f8fafc);
+    font-weight: 500;
+    margin: 0 0 0.2rem;
+    line-height: 1.3;
+  }
+
+  .ts-thumb-org {
+    font-family: var(--font-sans, system-ui);
+    font-size: 0.7rem;
+    color: rgba(248, 250, 252, 0.55);
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 900px) {
+    .testimonials-section {
+      padding: 4rem 1.25rem;
+    }
+
+    .testimonials-section::before,
+    .testimonials-section::after {
+      left: 10%;
+      right: 10%;
+    }
+
+    .ts-subtitle {
+      margin-bottom: 2.5rem;
+    }
+
+    .ts-featured {
+      margin-bottom: 2.5rem;
+    }
+
+    .ts-quote {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .ts-thumbs {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      max-width: 480px;
+    }
+
+    .ts-attribution {
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .ts-rule {
+      width: 60px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ts-thumbs {
+      grid-template-columns: 1fr;
+      max-width: 320px;
+      gap: 0.65rem;
+    }
+  }
+</style>
