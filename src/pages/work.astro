@@ -52,7 +52,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Case 02: Nonprofit / Tenderheart Crusades -->
         <article class="case-card" data-case="nonprofit">
           <div class="case-video-preview">
-            <div class="video-poster poster-placeholder">
+            <div class="video-poster poster-nonprofit">
               <div class="poster-overlay"></div>
               <div class="play-indicator">
                 <div class="play-indicator-inner"></div>
@@ -67,7 +67,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h3 class="case-title">The Shadow Between Us</h3>
             <p class="case-subtitle">Tenderheart Crusades · Cleveland</p>
             <p class="case-outcome">
-              <strong>Emmy-winning documentary.</strong> Full case study coming soon.
+              <strong>Documentary:</strong> Emmy-winning feature on racial unity, now in national PBS rotation.
             </p>
           </div>
         </article>
@@ -184,10 +184,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         number: 'Case 02 — Nonprofit',
         title: 'The Shadow Between Us',
         subtitle: 'Tenderheart Crusades · Cleveland',
-        challenge: 'Full case study coming soon.',
-        process: 'Full case study coming soon.',
-        outcome: 'Emmy-winning documentary. <strong>Full details coming soon.</strong>',
-        vimeoUrl: ''
+        challenge: 'A Cleveland nonprofit founder wanted to film a shadow dance about racial unity in the wake of George Floyd. A fragile concept, no clear story.',
+        process: 'Deep storyfinding interviews found the center: Cleveland dancer Nehemiah Spencer. His life — Cleveland roots, Juilliard training, return home — became the narrative spine.',
+        outcome: 'What started as a short performance film grew into a feature documentary, now in national PBS rotation. <strong>Two Emmys, four nominations, festivals worldwide.</strong>',
+        vimeoUrl: 'https://player.vimeo.com/video/666118583?badge=0&autopause=0&dnt=1'
       },
       corporate: {
         number: 'Case 03 — Corporate',
@@ -487,10 +487,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transform: scale(1.05);
   }
  
-  /* Geisinger Amish buggy still — replace path with actual upload location */
+  /* Geisinger Amish buggy still */
   .poster-healthcare {
     background-image: url('/images/geisinger-acts-of-kindness.jpg');
     background-color: #2a1810;
+  }
+ 
+  /* The Shadow Between Us — Nemo portrait still */
+  .poster-nonprofit {
+    background-image: url('/images/shadow-between-us-poster.jpg');
+    background-color: #0a1a2a;
   }
  
   /* Placeholder poster for cases 02 and 03 */
@@ -1053,3 +1059,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
+ 
