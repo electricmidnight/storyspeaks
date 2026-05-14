@@ -75,7 +75,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Case 03: Corporate / Memphis Chamber -->
         <article class="case-card" data-case="corporate">
           <div class="case-video-preview">
-            <div class="video-poster poster-placeholder">
+            <div class="video-poster poster-corporate">
               <div class="poster-overlay"></div>
               <div class="play-indicator">
                 <div class="play-indicator-inner"></div>
@@ -93,7 +93,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h3 class="case-title">The Soundtrack Project</h3>
             <p class="case-subtitle">Memphis Chamber of Commerce</p>
             <p class="case-outcome">
-              <strong>Emmy-winning film series.</strong> Full case study coming soon.
+              <strong>Series:</strong> Eight films pairing entrepreneurs with symphony composers. Emmy, ADDY, and TED honors.
             </p>
           </div>
         </article>
@@ -192,11 +192,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       corporate: {
         number: 'Case 03 — Corporate',
         title: 'The Soundtrack Project',
-        subtitle: 'Memphis Chamber of Commerce',
-        challenge: 'Full case study coming soon.',
-        process: 'Full case study coming soon.',
-        outcome: 'Emmy-winning film series. <strong>Full details coming soon.</strong>',
-        vimeoUrl: ''
+        subtitle: 'Greater Memphis Chamber',
+        challenge: 'The Greater Memphis Chamber wanted to celebrate the rich tapestry of their small business members. To show that the city is much more than FedEx and other larger corporations.',
+        process: 'We found compelling characters and stories to profile. Then we paired each small-business owner with a composer from the Memphis Symphony Orchestra. The composers joined the storyfinding, then wrote scores that reflected each person\'s spirit — from a laconic cattle farmer to an immigrant\'s emotional path to citizenship.',
+        outcome: 'Eight films aired on Memphis PBS, premiered to a packed theater scored live by the Memphis Symphony. <strong>Emmys for writing and editing, a national silver ADDY, and TED \'Ads Worth Spreading\' recognition.</strong>',
+        vimeoUrl: 'https://player.vimeo.com/video/418195942?h=8108119099&badge=0&autopause=0&dnt=1'
       }
     };
  
@@ -497,6 +497,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .poster-nonprofit {
     background-image: url('/images/shadow-between-us-poster.jpg');
     background-color: #0a1a2a;
+  }
+ 
+  /* The Soundtrack Project — Memphis father/child on horseback */
+  .poster-corporate {
+    background-image: url('/images/soundtrack-project-poster.jpg');
+    background-color: #1a2010;
   }
  
   /* Placeholder poster for cases 02 and 03 */
@@ -1059,4 +1065,3 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   }
 </style>
- 
