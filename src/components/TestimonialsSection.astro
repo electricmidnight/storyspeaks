@@ -261,6 +261,12 @@
     position: relative;
     opacity: 1;
     transition: opacity 0.28s ease;
+    /* Fixed min-height so the section doesn't shift as quotes change length.
+       Sized to accommodate the longest quote (Yam, ~51 words at desktop scale). */
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
  
   .ts-featured.is-fading {
@@ -286,6 +292,9 @@
     font-style: italic;
     margin: 0 0 2rem;
     text-wrap: pretty;
+    /* Reserve space for the longest quote (Yam, 51 words) so the thumbnails below
+       don't shift up and down as testimonials rotate */
+    min-height: clamp(9rem, 16vw, 11rem);
   }
  
   .ts-attribution {
@@ -328,6 +337,7 @@
  
   .ts-thumb {
     position: relative;
+    isolation: isolate;
     display: block;
     text-align: left;
     padding: 1rem 1rem;
@@ -359,23 +369,23 @@
     box-shadow: 0 0 24px rgba(232, 197, 116, 0.18);
   }
  
-  /* Gold progress underline on the active thumb — animates 0% → 100% over 8s,
-     restarts each time a new thumb becomes active (handled via reflow in JS) */
+  /* Gold gradient wash on the active thumb — sweeps from left to right over 8s,
+     showing time until the next rotation. Sits behind the text content. */
   .ts-thumb.is-active::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
+    inset: 0;
+    z-index: -1;
     width: 0;
     background: linear-gradient(90deg,
-      var(--color-accent, #e8c574),
-      color-mix(in srgb, var(--color-accent, #e8c574) 60%, transparent));
+      rgba(232, 197, 116, 0.32) 0%,
+      rgba(232, 197, 116, 0.18) 60%,
+      rgba(232, 197, 116, 0.04) 100%);
     animation: ts-progress 8s linear forwards;
-    box-shadow: 0 0 8px rgba(232, 197, 116, 0.6);
+    pointer-events: none;
   }
  
-  /* When user has clicked (paused rotation), hide the progress bar entirely */
+  /* When user has clicked (paused rotation), hide the wash entirely */
   .testimonials-section.is-rotation-paused .ts-thumb.is-active::after {
     animation: none;
     width: 0;
@@ -433,6 +443,7 @@
  
     .ts-featured {
       margin-bottom: 2.5rem;
+      min-height: 360px;
     }
  
     .ts-quote {
