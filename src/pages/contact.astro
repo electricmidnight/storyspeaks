@@ -4,17 +4,17 @@
 // Form submits via mailto for now; easy to swap to Formspree or Pages Functions later.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
+ 
 <BaseLayout title="Start a Conversation — The Story Speaks">
-
+ 
   <main class="contact-page">
-
+ 
     <section class="contact-hero">
       <p class="contact-eyebrow">Start a Conversation</p>
       <h1 class="contact-headline">Let's talk <span class="gold">story.</span></h1>
       <p class="contact-subtitle">No pitch. No pressure. Just a conversation.</p>
     </section>
-
+ 
     <section class="contact-letter">
       <p>
         The best films I've made started with a conversation, not a brief. Someone called and told me about a person, a place, or a problem they were trying to give voice to. We talked it through together.
@@ -23,7 +23,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         If you have a story you're trying to find &mdash; or one you can feel the shape of but can't quite tell &mdash; I'd love to hear about it.
       </p>
     </section>
-
+ 
     <section class="contact-fit">
       <div class="fit-card">
         <p class="fit-title">Best Fit</p>
@@ -38,10 +38,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
       </div>
     </section>
-
+ 
     <section class="contact-form-wrapper">
-      <form class="contact-form" id="contactForm" method="post" action="mailto:Lance@thestoryspeaks.com" enctype="text/plain">
-
+      <form class="contact-form" id="contactForm" novalidate>
+ 
         <div class="form-row form-row-split">
           <div class="form-field">
             <label class="form-label" for="cf-name">Your Name</label>
@@ -52,34 +52,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <input class="form-input" type="email" id="cf-email" name="Email" required autocomplete="email" />
           </div>
         </div>
-
+ 
         <div class="form-field">
           <label class="form-label" for="cf-org">Organization</label>
           <input class="form-input" type="text" id="cf-org" name="Organization" placeholder="If applicable" autocomplete="organization" />
         </div>
-
+ 
         <div class="form-field">
           <label class="form-label" for="cf-project">What are you working on?</label>
           <input class="form-input" type="text" id="cf-project" name="Project" placeholder="Documentary, brand film, campaign &mdash; or not sure yet" />
         </div>
-
+ 
         <div class="form-field">
           <label class="form-label" for="cf-message">Tell me about the story</label>
           <textarea class="form-textarea" id="cf-message" name="Message" rows="5" placeholder="What are you trying to say? Who needs to hear it? What would success look like? &mdash; whatever you'd tell me if we were on the phone." required></textarea>
         </div>
-
+ 
         <div class="form-actions">
           <button type="submit" class="form-submit">
             <span>Send the Note</span>
             <span class="submit-arrow">&rarr;</span>
           </button>
         </div>
-
+ 
         <p class="form-status" id="cf-status" aria-live="polite"></p>
-
+ 
       </form>
     </section>
-
+ 
     <section class="contact-next">
       <p class="next-title">What Happens Next</p>
       <ol class="next-steps">
@@ -97,18 +97,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </li>
       </ol>
     </section>
-
+ 
     <section class="contact-aside">
       <p class="aside-label">Prefer email?</p>
       <p class="aside-text">
         <a href="mailto:Lance@thestoryspeaks.com">Lance@thestoryspeaks.com</a>
       </p>
     </section>
-
+ 
   </main>
-
+ 
 </BaseLayout>
-
+ 
 <style>
   .contact-page {
     background: var(--color-bg-deep, #0a1628);
@@ -117,7 +117,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0 2rem 5rem;
     position: relative;
   }
-
+ 
   /* Horizontal accent line under nav, matching the work page treatment */
   .contact-page::before {
     content: '';
@@ -135,7 +135,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     pointer-events: none;
     z-index: 1;
   }
-
+ 
   /* ============ HERO HEADER ============ */
   .contact-hero {
     max-width: 720px;
@@ -143,7 +143,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 6rem 0 2rem;
     text-align: center;
   }
-
+ 
   .contact-eyebrow {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.75rem;
@@ -153,7 +153,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.5rem;
     font-weight: 400;
   }
-
+ 
   .contact-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 300;
@@ -162,12 +162,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: -0.025em;
     margin: 0 0 1rem;
   }
-
+ 
   .contact-headline .gold {
     color: var(--color-accent, #e8c574);
     font-weight: 400;
   }
-
+ 
   .contact-subtitle {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(1.05rem, 1.6vw, 1.25rem);
@@ -176,14 +176,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 300;
     margin: 0;
   }
-
+ 
   /* ============ LETTER ============ */
   .contact-letter {
     max-width: 580px;
     margin: 0 auto 3rem;
     padding: 0 0.5rem;
   }
-
+ 
   .contact-letter p {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(0.95rem, 1.3vw, 1.05rem);
@@ -194,11 +194,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     /* Prevent single-word orphans on the last line of each paragraph */
     text-wrap: pretty;
   }
-
+ 
   .contact-letter p:last-child {
     margin-bottom: 0;
   }
-
+ 
   /* ============ FIT CARDS ============ */
   .contact-fit {
     display: grid;
@@ -207,14 +207,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 720px;
     margin: 0 auto 3rem;
   }
-
+ 
   .fit-card {
     padding: 1.25rem 1.5rem;
     border: 1px solid rgba(232, 197, 116, 0.22);
     border-radius: 3px;
     background: rgba(232, 197, 116, 0.025);
   }
-
+ 
   .fit-title {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.7rem;
@@ -224,7 +224,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     margin: 0 0 0.65rem;
   }
-
+ 
   .fit-text {
     font-family: var(--font-sans, system-ui);
     font-size: 0.9rem;
@@ -234,31 +234,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.65;
     text-wrap: pretty;
   }
-
+ 
   /* ============ FORM ============ */
   .contact-form-wrapper {
     max-width: 560px;
     margin: 0 auto;
   }
-
+ 
   .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1.35rem;
   }
-
+ 
   .form-row-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: 0;
   }
-
+ 
   .form-field {
     display: flex;
     flex-direction: column;
   }
-
+ 
   .form-label {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.68rem;
@@ -268,7 +268,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     margin: 0 0 0.55rem;
   }
-
+ 
   .form-input,
   .form-textarea {
     width: 100%;
@@ -283,19 +283,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     box-sizing: border-box;
     transition: border-color 0.3s ease, background 0.3s ease;
   }
-
+ 
   .form-textarea {
     min-height: 130px;
     resize: vertical;
     line-height: 1.6;
   }
-
+ 
   .form-input::placeholder,
   .form-textarea::placeholder {
     color: rgba(248, 250, 252, 0.4);
     font-style: italic;
   }
-
+ 
   .form-input:focus,
   .form-textarea:focus {
     outline: none;
@@ -303,12 +303,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: rgba(255, 255, 255, 0.06);
     box-shadow: 0 0 0 1px rgba(232, 197, 116, 0.35);
   }
-
+ 
   .form-actions {
     text-align: center;
     margin-top: 0.5rem;
   }
-
+ 
   .form-submit {
     display: inline-flex;
     align-items: center;
@@ -327,23 +327,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: all 0.3s ease;
     box-shadow: 0 6px 20px rgba(232, 197, 116, 0.2);
   }
-
+ 
   .form-submit:hover {
     background: #f0d28d;
     border-color: #f0d28d;
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(232, 197, 116, 0.35);
   }
-
+ 
   .submit-arrow {
     font-size: 1rem;
     transition: transform 0.3s ease;
   }
-
+ 
   .form-submit:hover .submit-arrow {
     transform: translateX(3px);
   }
-
+ 
   .form-status {
     margin: 0;
     min-height: 1.25rem;
@@ -352,7 +352,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(232, 197, 116, 0.85);
     font-style: italic;
   }
-
+ 
   /* ============ WHAT HAPPENS NEXT ============ */
   .contact-next {
     max-width: 720px;
@@ -362,7 +362,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border: 1px solid rgba(232, 197, 116, 0.18);
     border-radius: 4px;
   }
-
+ 
   .next-title {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.72rem;
@@ -373,24 +373,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.5rem;
     text-align: center;
   }
-
+ 
   .next-steps {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-
+ 
   .next-step {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
   }
-
+ 
   .next-step:last-child {
     margin-bottom: 0;
   }
-
+ 
   .step-num {
     flex-shrink: 0;
     width: 26px;
@@ -406,7 +406,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: center;
     justify-content: center;
   }
-
+ 
   .step-text {
     font-family: var(--font-sans, system-ui);
     font-size: 0.95rem;
@@ -416,12 +416,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     padding-top: 0.15rem;
   }
-
+ 
   .step-text strong {
     color: var(--color-text-primary, #f8fafc);
     font-weight: 500;
   }
-
+ 
   /* ============ ASIDE / DIRECT EMAIL ============ */
   .contact-aside {
     max-width: 560px;
@@ -430,7 +430,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-top: 1px solid rgba(232, 197, 116, 0.18);
     text-align: center;
   }
-
+ 
   .aside-label {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.65rem;
@@ -440,7 +440,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     margin: 0 0 0.75rem;
   }
-
+ 
   .aside-text {
     font-family: var(--font-sans, system-ui);
     font-size: 0.95rem;
@@ -448,69 +448,126 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     font-weight: 300;
   }
-
+ 
   .aside-text a {
     color: var(--color-accent, #e8c574);
     text-decoration: none;
     border-bottom: 1px solid rgba(232, 197, 116, 0.4);
     transition: border-color 0.3s ease;
   }
-
+ 
   .aside-text a:hover {
     border-bottom-color: var(--color-accent, #e8c574);
   }
-
+ 
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
     .contact-page {
       padding: 0 1.25rem 4rem;
     }
-
+ 
     .contact-hero {
       padding: 4rem 0 1.5rem;
     }
-
+ 
     .contact-headline {
       font-size: clamp(2rem, 10vw, 3rem);
       line-height: 1.1;
     }
-
+ 
     .contact-letter {
       margin-bottom: 2.5rem;
     }
-
+ 
     .contact-fit {
       grid-template-columns: 1fr;
       gap: 1rem;
       margin-bottom: 2.5rem;
     }
-
+ 
     .form-row-split {
       grid-template-columns: 1fr;
       gap: 1.35rem;
     }
-
+ 
     .contact-next {
       margin-top: 3rem;
       padding: 1.75rem 1.25rem;
     }
-
+ 
     .contact-aside {
       margin-top: 2.5rem;
     }
   }
 </style>
-
+ 
 <script is:inline>
-  // Light progressive enhancement: when the form submits, swap the button label
-  // and show a friendly status message. The mailto handoff still works normally.
+  // Handle submit in JS so the form's action attribute isn't mailto:
+  // (mailto in action triggers an "insecure form" warning and disables autofill).
+  // Same end result for the visitor: their mail client opens with a pre-filled message.
   (function() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('cf-status');
     if (!form || !status) return;
-
-    form.addEventListener('submit', () => {
-      status.textContent = "Opening your email app...";
+ 
+    const RECIPIENT = 'Lance@thestoryspeaks.com';
+ 
+    function getValue(name) {
+      const el = form.elements.namedItem(name);
+      return el ? (el.value || '').trim() : '';
+    }
+ 
+    function setStatus(message, isError) {
+      status.textContent = message;
+      status.style.color = isError
+        ? 'rgba(248, 180, 180, 0.9)'
+        : 'rgba(232, 197, 116, 0.9)';
+    }
+ 
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+ 
+      const name = getValue('Name');
+      const email = getValue('Email');
+      const organization = getValue('Organization');
+      const project = getValue('Project');
+      const message = getValue('Message');
+ 
+      // Manual validation since we set novalidate
+      if (!name || !email || !message) {
+        setStatus('Please fill in your name, email, and a message.', true);
+        return;
+      }
+ 
+      // Simple email shape check
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setStatus('That email address looks off — mind double-checking?', true);
+        return;
+      }
+ 
+      // Build the email body
+      const lines = [
+        'Name: ' + name,
+        'Email: ' + email
+      ];
+      if (organization) lines.push('Organization: ' + organization);
+      if (project) lines.push('Project: ' + project);
+      lines.push('');
+      lines.push(message);
+ 
+      const subject = 'Note from ' + name + (organization ? ' (' + organization + ')' : '');
+      const body = lines.join('\n');
+ 
+      const mailto = 'mailto:' + RECIPIENT
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+ 
+      setStatus('Opening your email app…', false);
+ 
+      // Use a tiny delay so the status message has a chance to render
+      window.setTimeout(function() {
+        window.location.href = mailto;
+      }, 100);
     });
   })();
 </script>
