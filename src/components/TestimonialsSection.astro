@@ -151,23 +151,23 @@
         if (sectionEl) sectionEl.classList.add('is-rotation-paused');
       }
  
-      // Hover = preview (does NOT pause rotation, but resets the timer)
+      // Hover = preview (switches + resets the rotation timer)
       thumbs.forEach(thumb => {
         thumb.addEventListener('mouseenter', () => {
-          if (userPaused) return; // once paused, hover does nothing
           const id = thumb.getAttribute('data-id');
           if (id && id !== order[current]) {
             setActive(id, true);
-            // Reset the rotate timer so it counts from this moment
-            startAutoRotate();
+            startAutoRotate(); // reset 8s timer
           }
         });
  
-        // Click = commit + pause rotation permanently
+        // Click = same behavior as hover (switch + reset timer, rotation continues)
         thumb.addEventListener('click', () => {
           const id = thumb.getAttribute('data-id');
-          stopAutoRotate();
-          setActive(id, true);
+          if (id) {
+            setActive(id, true);
+            startAutoRotate(); // reset 8s timer
+          }
         });
       });
  
