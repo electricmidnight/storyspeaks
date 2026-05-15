@@ -1,0 +1,351 @@
+---
+// ClientLogosSection.astro
+// Infinite-scrolling client logos marquee. Ported from Luminous Story.
+// Each "logo" is styled text in the brand's recognizable colors.
+// Two identical tracks side-by-side animate continuously for seamless loop.
+---
+
+<section class="client-logos-section">
+  <div class="cl-inner">
+
+    <p class="cl-label">Trusted by industry leaders</p>
+
+    <div class="cl-marquee" role="list" aria-label="Selected clients">
+      <div class="cl-track" aria-hidden="false">
+        <div class="cl-logo cl-nytimes">The New York Times</div>
+        <div class="cl-logo cl-wapo">The Washington Post</div>
+        <div class="cl-logo cl-time">TIME</div>
+        <div class="cl-logo cl-wsj">The Wall Street Journal</div>
+        <div class="cl-logo cl-ap">Associated Press</div>
+        <div class="cl-logo cl-gm">GM</div>
+        <div class="cl-logo cl-marriott">Marriott Hotels</div>
+        <div class="cl-logo cl-autozone">AutoZone</div>
+        <div class="cl-logo cl-nielsen">nielsen</div>
+        <div class="cl-logo cl-nba">NBA</div>
+        <div class="cl-logo cl-univision">Univision</div>
+        <div class="cl-logo cl-geisinger">Geisinger Health</div>
+        <div class="cl-logo cl-weill">WEILL CORNELL MEDICINE</div>
+        <div class="cl-logo cl-columbia">Columbia University</div>
+        <div class="cl-logo cl-kavli">KAVLI PRIZE</div>
+        <div class="cl-logo cl-simons">Simons Foundation</div>
+        <div class="cl-logo cl-cross">Cross Catholic</div>
+        <div class="cl-logo cl-humane">The Humane Society</div>
+      </div>
+
+      <!-- Duplicate track for seamless infinite scroll -->
+      <div class="cl-track" aria-hidden="true">
+        <div class="cl-logo cl-nytimes">The New York Times</div>
+        <div class="cl-logo cl-wapo">The Washington Post</div>
+        <div class="cl-logo cl-time">TIME</div>
+        <div class="cl-logo cl-wsj">The Wall Street Journal</div>
+        <div class="cl-logo cl-ap">Associated Press</div>
+        <div class="cl-logo cl-gm">GM</div>
+        <div class="cl-logo cl-marriott">Marriott Hotels</div>
+        <div class="cl-logo cl-autozone">AutoZone</div>
+        <div class="cl-logo cl-nielsen">nielsen</div>
+        <div class="cl-logo cl-nba">NBA</div>
+        <div class="cl-logo cl-univision">Univision</div>
+        <div class="cl-logo cl-geisinger">Geisinger Health</div>
+        <div class="cl-logo cl-weill">WEILL CORNELL MEDICINE</div>
+        <div class="cl-logo cl-columbia">Columbia University</div>
+        <div class="cl-logo cl-kavli">KAVLI PRIZE</div>
+        <div class="cl-logo cl-simons">Simons Foundation</div>
+        <div class="cl-logo cl-cross">Cross Catholic</div>
+        <div class="cl-logo cl-humane">The Humane Society</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .client-logos-section {
+    background: var(--color-bg-mid, #0d1b32);
+    padding: 4.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle gold hairlines top & bottom (matches other home sections) */
+  .client-logos-section::before,
+  .client-logos-section::after {
+    content: '';
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232, 197, 116, 0.25), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .client-logos-section::before { top: 0; }
+  .client-logos-section::after { bottom: 0; }
+
+  .cl-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cl-label {
+    font-family: var(--font-wordmark, system-ui);
+    font-size: 0.72rem;
+    color: rgba(232, 197, 116, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    margin: 0 0 2.25rem;
+    font-weight: 400;
+  }
+
+  /* ============ MARQUEE ============ */
+  .cl-marquee {
+    display: flex;
+    width: max-content;
+    animation: cl-scroll 55s linear infinite;
+    /* Gradient mask fades the logos in and out at the edges for a polished feel */
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  /* Pause marquee on hover so visitors can read individual logos */
+  .cl-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes cl-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .cl-track {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 0 30px;
+  }
+
+  .cl-logo {
+    opacity: 0.85;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .cl-logo:hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* ============ INDIVIDUAL LOGO STYLES (brand-recognizable text) ============ */
+
+  /* Editorial / Press */
+  .cl-nytimes {
+    font-size: 1.8rem;
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+  }
+
+  .cl-wapo {
+    font-size: 1.3rem;
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .cl-time {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #e90606;
+    letter-spacing: 0.05em;
+    border: 3px solid currentColor;
+    padding: 2px 8px;
+  }
+
+  .cl-wsj {
+    font-size: 1.5rem;
+    font-family: "Times New Roman", Georgia, serif;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.01em;
+  }
+
+  .cl-ap {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+  }
+
+  /* Corporate / Brands */
+  .cl-gm {
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: #3399ff;
+    border: 3px solid currentColor;
+    padding: 6px 14px;
+    border-radius: 5px;
+    letter-spacing: -0.05em;
+  }
+
+  .cl-marriott {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f87171;
+    letter-spacing: 0.03em;
+  }
+
+  .cl-autozone {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ff4438;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .cl-nielsen {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #00e676;
+    letter-spacing: -0.03em;
+  }
+
+  .cl-nba {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ef4444;
+    letter-spacing: 0.05em;
+  }
+
+  .cl-univision {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #a855f7;
+    font-style: italic;
+  }
+
+  /* Healthcare / Research / Universities */
+  .cl-geisinger {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #10b981;
+    letter-spacing: -0.02em;
+  }
+
+  .cl-weill {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ef4444;
+    letter-spacing: 0.05em;
+  }
+
+  .cl-columbia {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #60a5fa;
+    letter-spacing: -0.02em;
+  }
+
+  .cl-kavli {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #60a5fa;
+    letter-spacing: 0.05em;
+  }
+
+  .cl-simons {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #c084fc;
+    letter-spacing: 0.01em;
+  }
+
+  /* Nonprofit */
+  .cl-cross {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fbbf24;
+    letter-spacing: 0.01em;
+  }
+
+  .cl-humane {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ ACCESSIBILITY ============ */
+  @media (prefers-reduced-motion: reduce) {
+    .cl-marquee {
+      animation: none;
+      overflow-x: auto;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 900px) {
+    .client-logos-section {
+      padding: 3rem 0;
+    }
+
+    .client-logos-section::before,
+    .client-logos-section::after {
+      left: 10%;
+      right: 10%;
+    }
+
+    .cl-label {
+      font-size: 0.65rem;
+      margin-bottom: 1.75rem;
+      padding: 0 1rem;
+    }
+
+    .cl-marquee {
+      animation-duration: 45s; /* slightly faster on mobile so the loop feels brisker */
+    }
+
+    .cl-track {
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    /* Scale down the biggest logos so they don't dominate small screens */
+    .cl-gm { font-size: 1.8rem; padding: 4px 10px; }
+    .cl-time { font-size: 1.65rem; }
+    .cl-nytimes { font-size: 1.4rem; }
+    .cl-nba { font-size: 1.4rem; }
+    .cl-nielsen { font-size: 1.3rem; }
+    .cl-ap { font-size: 1.25rem; }
+    .cl-univision { font-size: 1.25rem; }
+    .cl-wsj { font-size: 1.15rem; }
+    .cl-marriott { font-size: 1.1rem; }
+    .cl-autozone { font-size: 1.15rem; }
+    .cl-kavli { font-size: 1.15rem; }
+    .cl-columbia { font-size: 1.1rem; }
+    .cl-geisinger { font-size: 1.1rem; }
+    .cl-simons { font-size: 1.05rem; }
+    .cl-wapo { font-size: 1.05rem; }
+    .cl-weill { font-size: 0.9rem; }
+    .cl-cross { font-size: 0.95rem; }
+    .cl-humane { font-size: 0.9rem; }
+  }
+</style>
