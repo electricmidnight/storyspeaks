@@ -519,12 +519,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     .hero-caption {
-      position: static;
-      padding: 0.5rem 1.5rem 1.25rem;
+      position: absolute;
+      bottom: 5rem;
+      right: 1rem;
+      max-width: 9rem;
+      padding: 0.6rem 0.85rem;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(4px);
       text-align: left;
-      max-width: none;
-      background: var(--color-bg-deep, #0a1628);
-      margin-top: -2px;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      margin-top: 0;
     }
 
     .about-article {
