@@ -21,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="hero-content">
         <p class="hero-eyebrow">About</p>
         <h1 class="hero-headline">
-          The story <span class="gold-italic">behind the story.</span>
+         The story<br><span class="gold-italic">behind the story.</span>
         </h1>
         <p class="hero-byline">By Lance Murphey</p>
       </div>
@@ -173,14 +173,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
   /* hero-stage is an unstyled wrapper on desktop — needed for mobile CSS to work.
      hero-image positions absolutely against .about-hero (the nearest positioned ancestor). */
-  .hero-image {
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/about-boll-weevil-monument-horizontal.jpg');
-    background-size: cover;
-    background-position: center 10%;
-    z-index: 0;
-  }
+ .hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 2.5rem;
+  background-image: url('/images/about-boll-weevil-monument-horizontal.jpg');
+  background-size: cover;
+  background-position: center top%;
+  z-index: 0;
+}
  
   /* Gradient overlay: subtle vignette top, darker at bottom for headline contrast */
   .hero-gradient {
