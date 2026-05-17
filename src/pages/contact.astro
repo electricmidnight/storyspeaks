@@ -1,7 +1,7 @@
 ---
 // contact.astro — Start a Conversation
-// Hybrid contact page: B's structure with A's warmth woven through.
-// Form submits via mailto for now; easy to swap to Formspree or Pages Functions later.
+// Form submits via Formspree (https://formspree.io/f/meedqalw)
+// Includes honeypot anti-spam field and inline success/error feedback.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
  
@@ -68,9 +68,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <textarea class="form-textarea" id="cf-message" name="Message" rows="5" placeholder="What are you trying to say? Who needs to hear it? What would success look like? &mdash; whatever you'd tell me if we were on the phone." required></textarea>
         </div>
  
+        <!-- Honeypot anti-spam field — hidden from real users, irresistible to bots -->
+        <div class="form-honeypot" aria-hidden="true">
+          <label for="cf-website">Website (leave blank)</label>
+          <input type="text" id="cf-website" name="_gotcha" tabindex="-1" autocomplete="off" />
+        </div>
+ 
         <div class="form-actions">
-          <button type="submit" class="form-submit">
-            <span>Send the Note</span>
+          <button type="submit" class="form-submit" id="cf-submit">
+            <span class="submit-label">Send the Note</span>
             <span class="submit-arrow">&rarr;</span>
           </button>
         </div>
@@ -96,13 +102,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p class="step-text"><strong>If there's a fit, we get on a 30-minute call.</strong> No pitch deck required.</p>
         </li>
       </ol>
-    </section>
- 
-    <section class="contact-aside">
-      <p class="aside-label">Prefer email?</p>
-      <p class="aside-text">
-        <a href="mailto:Lance@thestoryspeaks.com">Lance@thestoryspeaks.com</a>
-      </p>
     </section>
  
   </main>
@@ -191,7 +190,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: rgba(248, 250, 252, 0.85);
     font-weight: 300;
     margin: 0 0 1.25rem;
-    /* Prevent single-word orphans on the last line of each paragraph */
     text-wrap: pretty;
   }
  
@@ -304,6 +302,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     box-shadow: 0 0 0 1px rgba(232, 197, 116, 0.35);
   }
  
+  /* Honeypot: visually hidden, off-screen, not focusable by tab.
+     Bots fill every field they see; real users never see this. */
+  .form-honeypot {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+ 
   .form-actions {
     text-align: center;
     margin-top: 0.5rem;
@@ -328,11 +337,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     box-shadow: 0 6px 20px rgba(232, 197, 116, 0.2);
   }
  
-  .form-submit:hover {
+  .form-submit:hover:not(:disabled) {
     background: #f0d28d;
     border-color: #f0d28d;
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(232, 197, 116, 0.35);
+  }
+ 
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
   }
  
   .submit-arrow {
@@ -340,7 +354,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: transform 0.3s ease;
   }
  
-  .form-submit:hover .submit-arrow {
+  .form-submit:hover:not(:disabled) .submit-arrow {
     transform: translateX(3px);
   }
  
@@ -348,9 +362,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0;
     min-height: 1.25rem;
     text-align: center;
-    font-size: 0.85rem;
-    color: rgba(232, 197, 116, 0.85);
+    font-size: 0.9rem;
+    color: rgba(232, 197, 116, 0.9);
     font-style: italic;
+    line-height: 1.5;
+  }
+ 
+  .form-status.is-error {
+    color: rgba(248, 180, 180, 0.9);
+  }
+ 
+  .form-status.is-success {
+    color: rgba(180, 232, 200, 0.95);
+    font-style: normal;
+    font-size: 1rem;
+  }
+ 
+  /* When form is in success state, hide the form and show only the status */
+  .contact-form.is-submitted .form-field,
+  .contact-form.is-submitted .form-actions,
+  .contact-form.is-submitted .form-honeypot {
+    display: none;
   }
  
   /* ============ WHAT HAPPENS NEXT ============ */
@@ -422,44 +454,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
   }
  
-  /* ============ ASIDE / DIRECT EMAIL ============ */
-  .contact-aside {
-    max-width: 560px;
-    margin: 3rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(232, 197, 116, 0.18);
-    text-align: center;
-  }
- 
-  .aside-label {
-    font-family: var(--font-wordmark, system-ui);
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(232, 197, 116, 0.7);
-    font-weight: 500;
-    margin: 0 0 0.75rem;
-  }
- 
-  .aside-text {
-    font-family: var(--font-sans, system-ui);
-    font-size: 0.95rem;
-    color: rgba(248, 250, 252, 0.8);
-    margin: 0;
-    font-weight: 300;
-  }
- 
-  .aside-text a {
-    color: var(--color-accent, #e8c574);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(232, 197, 116, 0.4);
-    transition: border-color 0.3s ease;
-  }
- 
-  .aside-text a:hover {
-    border-bottom-color: var(--color-accent, #e8c574);
-  }
- 
   /* ============ MOBILE ============ */
   @media (max-width: 900px) {
     .contact-page {
@@ -494,80 +488,81 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-top: 3rem;
       padding: 1.75rem 1.25rem;
     }
- 
-    .contact-aside {
-      margin-top: 2.5rem;
-    }
   }
 </style>
  
 <script is:inline>
-  // Handle submit in JS so the form's action attribute isn't mailto:
-  // (mailto in action triggers an "insecure form" warning and disables autofill).
-  // Same end result for the visitor: their mail client opens with a pre-filled message.
+  // Form submission via Formspree — async fetch with inline success/error feedback
   (function() {
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meedqalw';
+ 
     const form = document.getElementById('contactForm');
     const status = document.getElementById('cf-status');
-    if (!form || !status) return;
+    const submitBtn = document.getElementById('cf-submit');
+    const submitLabel = submitBtn ? submitBtn.querySelector('.submit-label') : null;
  
-    const RECIPIENT = 'Lance@thestoryspeaks.com';
+    if (!form || !status || !submitBtn) return;
+ 
+    function setStatus(message, state) {
+      status.textContent = message;
+      status.classList.remove('is-error', 'is-success');
+      if (state) status.classList.add('is-' + state);
+    }
  
     function getValue(name) {
       const el = form.elements.namedItem(name);
       return el ? (el.value || '').trim() : '';
     }
  
-    function setStatus(message, isError) {
-      status.textContent = message;
-      status.style.color = isError
-        ? 'rgba(248, 180, 180, 0.9)'
-        : 'rgba(232, 197, 116, 0.9)';
-    }
- 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
  
       const name = getValue('Name');
       const email = getValue('Email');
-      const organization = getValue('Organization');
-      const project = getValue('Project');
       const message = getValue('Message');
  
-      // Manual validation since we set novalidate
+      // Manual validation
       if (!name || !email || !message) {
-        setStatus('Please fill in your name, email, and a message.', true);
+        setStatus('Please fill in your name, email, and a message.', 'error');
         return;
       }
- 
-      // Simple email shape check
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setStatus('That email address looks off — mind double-checking?', true);
+        setStatus('That email address looks off — mind double-checking?', 'error');
         return;
       }
  
-      // Build the email body
-      const lines = [
-        'Name: ' + name,
-        'Email: ' + email
-      ];
-      if (organization) lines.push('Organization: ' + organization);
-      if (project) lines.push('Project: ' + project);
-      lines.push('');
-      lines.push(message);
+      // Disable button, show sending state
+      submitBtn.disabled = true;
+      if (submitLabel) submitLabel.textContent = 'Sending…';
+      setStatus('Sending your note…', null);
  
-      const subject = 'Note from ' + name + (organization ? ' (' + organization + ')' : '');
-      const body = lines.join('\n');
+      try {
+        const formData = new FormData(form);
  
-      const mailto = 'mailto:' + RECIPIENT
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
  
-      setStatus('Opening your email app…', false);
- 
-      // Use a tiny delay so the status message has a chance to render
-      window.setTimeout(function() {
-        window.location.href = mailto;
-      }, 100);
+        if (response.ok) {
+          form.classList.add('is-submitted');
+          setStatus("Thanks for reaching out. I'll get back to you within two business days.", 'success');
+        } else {
+          const data = await response.json().catch(function() { return {}; });
+          const errorMsg = (data.errors && data.errors[0] && data.errors[0].message)
+            ? data.errors[0].message
+            : 'Something went wrong sending the note. Please try again in a moment.';
+          setStatus(errorMsg, 'error');
+          submitBtn.disabled = false;
+          if (submitLabel) submitLabel.textContent = 'Send the Note';
+        }
+      } catch (err) {
+        setStatus("Couldn't send the note — please check your connection and try again.", 'error');
+        submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = 'Send the Note';
+      }
     });
   })();
 </script>
+ 
