@@ -1,12 +1,7 @@
-About letterbox · ASTRO
-Copy
-
 ---
-// about.astro — Magazine LETTERBOX desktop variant.
-// Desktop: image displayed at native portrait aspect ratio, centered in the hero
-//          with dark navy bars on left and right. Whole monument visible.
-//          Headline overlays the lower portion of the navy frame.
-// Mobile: UNCHANGED from the locked-in original.
+// about.astro — Lance Murphey's origin story, magazine-style.
+// Desktop: full-bleed boll weevil monument hero (restored original design).
+// Mobile: UNCHANGED from the locked-in version.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
  
@@ -14,18 +9,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
   <main class="about-page">
  
-    <!-- ============ HERO: Boll weevil monument, letterboxed ============ -->
+    <!-- ============ HERO: Boll weevil monument, full bleed ============ -->
     <section class="about-hero">
  
-      <!-- Wrapper sets the dark navy stage; image lives centered inside -->
       <div class="hero-stage">
         <div class="hero-image"></div>
       </div>
  
-      <!-- Gradient overlay — for mobile only; on desktop the navy stage handles contrast -->
       <div class="hero-gradient"></div>
  
-      <!-- Headline content: bottom-left on desktop, overlaid on mobile -->
       <div class="hero-content">
         <p class="hero-eyebrow">About</p>
         <h1 class="hero-headline">
@@ -34,11 +26,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="hero-byline">By Lance Murphey</p>
       </div>
  
-      <!-- Caption: bottom-right corner -->
       <p class="hero-caption">The boll weevil monument in Enterprise, Alabama.</p>
     </section>
  
-    <!-- ============ ARTICLE BODY (unchanged) ============ -->
+    <!-- ============ ARTICLE BODY ============ -->
     <article class="about-article">
  
       <p class="lead-paragraph">
@@ -168,58 +159,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
  
   /* ============================================================
-     HERO — DESKTOP: letterboxed (image centered, navy bars on sides)
+     HERO — DESKTOP: full-bleed boll weevil monument
      ============================================================ */
   .about-hero {
     position: relative;
     width: 100%;
     min-height: 88vh;
     overflow: hidden;
-    background: var(--color-bg-deep, #0a1628);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
   }
  
-  /* Stage = the full hero area, sets the dark navy background and centers the image */
-  .hero-stage {
+  /* hero-stage is an unstyled wrapper on desktop — needed for mobile CSS to work.
+     hero-image positions absolutely against .about-hero (the nearest positioned ancestor). */
+  .hero-image {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-bg-deep, #0a1628);
+    background-image: url('/images/about-boll-weevil-monument.jpg');
+    background-size: cover;
+    background-position: center 10%;
     z-index: 0;
   }
  
-  /* Image: native portrait aspect ratio (1513x2200 ≈ 0.688), full height of hero,
-     width derived from aspect ratio. Result: image is fully visible, navy bars
-     fill the empty space on left and right. */
-  .hero-image {
-    height: 100%;
-    aspect-ratio: 1513 / 2200;
-    background-image: url('/images/about-boll-weevil-monument.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
-  }
- 
-  /* Gradient — for mobile only; effectively transparent on desktop */
+  /* Gradient overlay: subtle vignette top, darker at bottom for headline contrast */
   .hero-gradient {
     position: absolute;
     inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(10, 22, 40, 0.25) 0%,
+        rgba(10, 22, 40, 0.0) 30%,
+        rgba(10, 22, 40, 0.4) 70%,
+        rgba(10, 22, 40, 0.92) 100%);
     z-index: 1;
-    pointer-events: none;
-    background: transparent;
   }
  
-  /* Headline content: bottom-left on desktop, overlays the navy bar (not the image) */
   .hero-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
     z-index: 2;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 3rem 4rem;
+    padding: 0 2.5rem 5rem;
     width: 100%;
   }
  
@@ -236,7 +217,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 200;
-    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-size: clamp(2.75rem, 7vw, 5.25rem);
     line-height: 1.0;
     letter-spacing: -0.03em;
     color: #f8fafc;
@@ -261,24 +242,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.02em;
   }
  
-  /* Caption: bottom-right corner */
   .hero-caption {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 1.25rem;
     right: 2rem;
     z-index: 2;
     font-family: Georgia, 'Times New Roman', serif;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-style: italic;
     color: rgba(248, 250, 252, 0.55);
     margin: 0;
-    max-width: 240px;
+    max-width: 280px;
     text-align: right;
-    line-height: 1.55;
+    line-height: 1.5;
   }
  
   /* ============================================================
-     ARTICLE  (unchanged from original)
+     ARTICLE
      ============================================================ */
   .about-article {
     max-width: 680px;
@@ -504,17 +484,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .about-hero {
       min-height: 74vh;
     }
-    .hero-image {
-      top: 2rem;
-      background-position: center top;
+ 
+    /* Mobile: restore full-bleed image (no letterboxing) */
+    .hero-stage {
+      display: block;
+      position: absolute;
+      inset: 0;
     }
+ 
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      top: 2rem;
+      height: calc(100% - 2rem);
+      aspect-ratio: auto;
+      background-position: center top;
+      box-shadow: none;
+    }
+ 
+    .hero-gradient {
+      background:
+        linear-gradient(180deg,
+          rgba(10, 22, 40, 0.25) 0%,
+          rgba(10, 22, 40, 0.0) 30%,
+          rgba(10, 22, 40, 0.4) 70%,
+          rgba(10, 22, 40, 0.92) 100%);
+    }
+ 
     .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 16rem 1.5rem 3.5rem;
     }
-
+ 
     .hero-headline {
       max-width: 5ch;
     }
+ 
     .hero-caption {
       position: absolute;
       bottom: 0rem;
@@ -528,12 +536,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       line-height: 1.45;
       margin-top: 0;
     }
-
+ 
     .about-article {
       padding: 3.5rem 1.25rem 4.5rem;
     }
-
-    /* Image pair: stack on mobile and don't break out wider than column */
+ 
     .image-pair {
       grid-template-columns: 1fr;
       gap: 1.5rem;
@@ -543,8 +550,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       transform: none;
       margin-left: 0;
     }
-
-    /* Pull quote: don't break out wider than column on mobile */
+ 
     .pull-quote {
       max-width: 100%;
       margin: 3rem 0;
@@ -552,36 +558,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-left: 0;
       padding: 2rem 0;
     }
-
+ 
     .pull-quote::before,
     .pull-quote::after {
       left: 15%;
       right: 15%;
     }
-
+ 
     .lead-paragraph::first-letter {
       font-size: 4em;
     }
-
+ 
     .portrait {
       max-width: 280px;
       margin: 2.5rem auto 2rem;
     }
-
+ 
     .cta-button {
       padding: 1rem 1.75rem;
       font-size: 0.82rem;
     }
   }
-
+ 
   @media (max-width: 480px) {
     .hero-headline {
       font-size: clamp(2.25rem, 11vw, 3rem);
     }
-
+ 
     .about-article p {
       font-size: 1rem;
       line-height: 1.8;
     }
   }
 </style>
+ 
