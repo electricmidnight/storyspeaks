@@ -1,9 +1,12 @@
+About letterbox · ASTRO
+Copy
+
 ---
-// about.astro — Magazine SPLIT desktop variant.
-// Desktop: image fills the left half of the hero at its natural portrait aspect,
-//          headline + byline get the right half with a solid navy background.
-// Mobile: UNCHANGED from the locked-in original — image full-bleed at top,
-//          headline overlaid, caption box bottom-right.
+// about.astro — Magazine LETTERBOX desktop variant.
+// Desktop: image displayed at native portrait aspect ratio, centered in the hero
+//          with dark navy bars on left and right. Whole monument visible.
+//          Headline overlays the lower portion of the navy frame.
+// Mobile: UNCHANGED from the locked-in original.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
  
@@ -11,26 +14,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
  
   <main class="about-page">
  
-    <!-- ============ HERO: Boll weevil monument ============ -->
+    <!-- ============ HERO: Boll weevil monument, letterboxed ============ -->
     <section class="about-hero">
  
-      <!-- Left half (desktop) / full bleed (mobile): the image -->
-      <div class="hero-image"></div>
+      <!-- Wrapper sets the dark navy stage; image lives centered inside -->
+      <div class="hero-stage">
+        <div class="hero-image"></div>
+      </div>
  
-      <!-- Gradient overlay — kept for mobile; barely visible on desktop split -->
+      <!-- Gradient overlay — for mobile only; on desktop the navy stage handles contrast -->
       <div class="hero-gradient"></div>
  
-      <!-- Right half (desktop) / overlaid (mobile): headline panel -->
+      <!-- Headline content: bottom-left on desktop, overlaid on mobile -->
       <div class="hero-content">
         <p class="hero-eyebrow">About</p>
         <h1 class="hero-headline">
           The story <span class="gold-italic">behind the story.</span>
         </h1>
         <p class="hero-byline">By Lance Murphey</p>
-        <p class="hero-caption-desktop">The boll weevil monument in Enterprise, Alabama.</p>
       </div>
  
-      <!-- Mobile caption (kept identical to your locked-in mobile version) -->
+      <!-- Caption: bottom-right corner -->
       <p class="hero-caption">The boll weevil monument in Enterprise, Alabama.</p>
     </section>
  
@@ -164,51 +168,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
  
   /* ============================================================
-     HERO — DESKTOP: split layout (image left, headline right)
+     HERO — DESKTOP: letterboxed (image centered, navy bars on sides)
      ============================================================ */
   .about-hero {
     position: relative;
     width: 100%;
     min-height: 88vh;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
+    background: var(--color-bg-deep, #0a1628);
   }
  
-  /* Image takes the left half. Background-size: contain so the full
-     portrait monument is visible end-to-end (no cropping). */
+  /* Stage = the full hero area, sets the dark navy background and centers the image */
+  .hero-stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-deep, #0a1628);
+    z-index: 0;
+  }
+ 
+  /* Image: native portrait aspect ratio (1513x2200 ≈ 0.688), full height of hero,
+     width derived from aspect ratio. Result: image is fully visible, navy bars
+     fill the empty space on left and right. */
   .hero-image {
-    position: relative;
+    height: 100%;
+    aspect-ratio: 1513 / 2200;
     background-image: url('/images/about-boll-weevil-monument.jpg');
     background-size: cover;
     background-position: center center;
-    background-color: #0a1628;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
   }
  
-  /* Gradient overlay — only visible/active on mobile (kept here so the
-     element exists in the DOM for the mobile media query). On desktop it
-     sits over the image area but with minimal effect. */
+  /* Gradient — for mobile only; effectively transparent on desktop */
   .hero-gradient {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    /* On desktop, no gradient (image side already has natural contrast) */
     background: transparent;
   }
  
-  /* Right half: dark navy panel with eyebrow + headline + byline + caption */
+  /* Headline content: bottom-left on desktop, overlays the navy bar (not the image) */
   .hero-content {
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     z-index: 2;
-    background: var(--color-bg-deep, #0a1628);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 4rem 4rem 4.5rem;
-    max-width: none;
-    margin: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem 4rem;
     width: 100%;
   }
  
@@ -225,7 +236,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 200;
-    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
     line-height: 1.0;
     letter-spacing: -0.03em;
     color: #f8fafc;
@@ -250,23 +261,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.02em;
   }
  
-  /* Desktop-only caption — sits beneath the byline with a hairline separator.
-     Hidden on mobile (mobile uses .hero-caption instead). */
-  .hero-caption-desktop {
+  /* Caption: bottom-right corner */
+  .hero-caption {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    z-index: 2;
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 0.78rem;
     font-style: italic;
     color: rgba(248, 250, 252, 0.55);
-    margin: 2rem 0 0;
-    max-width: 32ch;
+    margin: 0;
+    max-width: 240px;
+    text-align: right;
     line-height: 1.55;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba(232, 197, 116, 0.25);
-  }
- 
-  /* Mobile-only caption — hidden on desktop, shown on mobile media query */
-  .hero-caption {
-    display: none;
   }
  
   /* ============================================================
