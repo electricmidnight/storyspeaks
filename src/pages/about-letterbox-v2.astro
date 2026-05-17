@@ -1,28 +1,23 @@
 ---
-// about.astro — Letterboxed photo + CENTERED headline overlap variant.
-// Desktop: image displayed at native portrait aspect ratio, centered in the hero
-//          with dark navy bars on left/right. Headline block sits centered horizontally
-//          and overlaps the bottom of the image with a gradient for readability.
+// about.astro — Letterboxed photo + bigger centered headline straddling
+// the bottom of the photo into the navy area below.
 // Mobile: UNCHANGED from the locked-in original.
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
+ 
 <BaseLayout title="About — Lance Murphey · The Story Speaks">
-
+ 
   <main class="about-page">
-
+ 
     <!-- ============ HERO: Boll weevil monument, letterboxed ============ -->
     <section class="about-hero">
-
-      <!-- Stage = the full hero area, centers the image -->
+ 
       <div class="hero-stage">
         <div class="hero-image"></div>
       </div>
-
-      <!-- Gradient overlay — darkens the bottom of the hero for text readability -->
+ 
       <div class="hero-gradient"></div>
-
-      <!-- Headline content: centered horizontally, overlapping bottom of image -->
+ 
       <div class="hero-content">
         <p class="hero-eyebrow">About</p>
         <h1 class="hero-headline">
@@ -30,36 +25,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </h1>
         <p class="hero-byline">By Lance Murphey</p>
       </div>
-
-      <!-- Caption: bottom-right corner -->
+ 
       <p class="hero-caption">The boll weevil monument in Enterprise, Alabama.</p>
     </section>
-
+ 
     <!-- ============ ARTICLE BODY (unchanged) ============ -->
     <article class="about-article">
-
+ 
       <p class="lead-paragraph">
         I was 5,000 miles into a story when my phone rang.
       </p>
-
+ 
       <p>
         For weeks I'd been driving the back roads of the cotton belt, chasing the boll weevil &mdash; a small insect that crossed the Rio Grande in the early 1900s and destroyed every farm in its path. The story had become an obsession. The boll weevil's path had triggered the Great Migration, sparked the birth of the Blues, and pushed the bald eagle to the brink.
       </p>
-
+ 
       <p>
         When my phone rang, I was pulling over to unload my cameras at the side of the road.
       </p>
-
+ 
       <div class="dialogue">
         <p>&ldquo;I'm sorry,&rdquo; said my colleague.</p>
         <p>&ldquo;For what?&rdquo;</p>
         <p>&ldquo;Oh sh*t. You haven't heard?&rdquo;</p>
       </div>
-
+ 
       <p>
         A few minutes later I sat in the dust at the edge of a cotton field knowing that the photojournalism job I'd held for nearly two decades, the one I'd built my family on, was gone. A week later I drove to the unemployment office and learned the money would not be enough to feed my newborn son.
       </p>
-
+ 
       <figure class="image-pair">
         <div class="pair-item">
           <img src="/images/about-crop-duster.jpg" alt="Crop duster biplane silhouetted against a sunset sky over a cotton field, with a boll weevil trap in the foreground" loading="lazy" />
@@ -70,90 +64,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <figcaption>A boll weevil on a cotton plant near the Rio Grande in Brownsville, Texas.</figcaption>
         </div>
       </figure>
-
+ 
       <p>
         For twenty years I had carried a camera in pursuit of stories. From the burning ghats of Varanasi, India, to a smuggler's tunnel in Nogales, Mexico. I rode an elephant in pursuit of wild tigers and shattered speed limits in a presidential motorcade. I made pictures for the <em>New York Times</em>, the <em>Washington Post</em>, and <em>TIME</em>. And I was twice honored as Scripps Howard Newspaper Photographer of the Year.
       </p>
-
+ 
       <p>
         And then, in a single phone call, it all stopped.
       </p>
-
+ 
       <div class="section-divider" aria-hidden="true"></div>
-
+ 
       <p>
         But the call that changed my life came a few weeks later.
       </p>
-
+ 
       <p class="dialogue-single">
         &ldquo;This is the editor of <em>Pumper Magazine</em>. Will you take the cover photograph for our May issue?&rdquo;
       </p>
-
+ 
       <p>
         I screamed yes before I knew what <em>Pumper Magazine</em> was. (It is, I learned, the leading trade publication for the liquid waste industry. The May cover was a photo of a septic tank truck.)
       </p>
-
+ 
       <p>
         I built a freelance business from there, one truck at a time. The work taught me something I hadn't fully understood before. The most valuable thing I'd brought home from twenty years in newsrooms wasn't a camera or a Rolodex or even my skill at making pictures.
       </p>
-
+ 
       <p>
         The most valuable thing was knowing how to find a story. How to recognize the human truth inside any subject &mdash; even a septic tank truck on a back road in early summer.
       </p>
-
+ 
       <blockquote class="pull-quote">
         <p>The currency of journalism, honest stories full of universal human truths, turned out to be the most valuable asset I owned.</p>
       </blockquote>
-
+ 
       <p>
         What started as a freelance photography business has evolved into The Story Speaks: a strategic film and media company for organizations that need to move people.
       </p>
-
+ 
       <p>
         The films I've made since have earned five Emmys, a national ADDY, and recognition from TED as one of 20 Ads Worth Spreading in the world. <em>The Shadow Between Us</em>, a documentary about racial unity made in the wake of George Floyd, won two Emmys and is in national rotation on PBS. I've worked with healthcare systems, research universities, Fortune 500 brands, and nonprofits fighting for things that matter.
       </p>
-
+ 
       <p>
         Behind every project, the same instinct: find the story underneath the brief.
       </p>
-
+ 
       <p>
         That instinct is what I eventually codified as the PRISM Method &mdash; a five-phase narrative architecture for translating complex truth into resonant human experience. More than a creative process, it's a way of bringing the discipline of journalism into the work of filmmaking. A way of refusing to start with a concept and instead starting with the human moment that makes the rest of the work matter.
       </p>
-
+ 
       <div class="section-divider" aria-hidden="true"></div>
-
+ 
       <figure class="portrait">
         <img src="/images/about-lance-portrait.jpg" alt="Lance Murphey, with the Flatirons of Boulder, Colorado, in the background" loading="lazy" />
       </figure>
-
+ 
       <p>
         I live in Boulder, Colorado, with my family. I travel for most of my work.
       </p>
-
+ 
       <p>
         If you have a story you're trying to find, or one you can feel the shape of but can't quite tell, I'd love to hear about it. The best films I've ever made started not with a brief but with a conversation. A phone call. Someone telling me about a person, a place, a problem they wanted to give voice to.
       </p>
-
+ 
       <p class="closing-line">
         Maybe the next one is yours.
       </p>
-
+ 
       <p class="signature">&mdash; Lance Murphey</p>
-
+ 
       <div class="cta-wrapper">
         <a href="/contact" class="cta-button">
           <span>Start a Conversation</span>
           <span class="cta-arrow">&rarr;</span>
         </a>
       </div>
-
+ 
     </article>
-
+ 
   </main>
-
+ 
 </BaseLayout>
-
+ 
 <style>
   /* ============================================================
      PAGE FRAME
@@ -163,9 +157,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-text-primary, #f8fafc);
     min-height: 100vh;
   }
-
+ 
   /* ============================================================
-     HERO — DESKTOP: letterboxed photo + centered overlapping headline
+     HERO — DESKTOP: letterboxed photo + bigger overlapping headline
      ============================================================ */
   .about-hero {
     position: relative;
@@ -174,21 +168,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
     background: var(--color-bg-deep, #0a1628);
   }
-
-  /* Stage = the full hero area, sets the dark navy background and centers the image */
+ 
+  /* Stage = full hero area. Image is anchored to TOP so a navy strip
+     forms at the bottom (below the photo). */
   .hero-stage {
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     background: var(--color-bg-deep, #0a1628);
     z-index: 0;
   }
-
-  /* Image at native portrait aspect ratio. Full hero height, width derived. */
+ 
+  /* Image is now 82% of hero height, leaving an 18% navy strip below.
+     Top of image hugs top of hero (under the nav, same as before). */
   .hero-image {
-    height: 100%;
+    height: 82%;
     aspect-ratio: 1513 / 2200;
     background-image: url('/images/about-boll-weevil-monument.jpg');
     background-size: cover;
@@ -196,9 +192,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background-repeat: no-repeat;
     box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
   }
-
-  /* Gradient — darkens the lower portion of the hero so the headline is readable
-     when it overlaps the bottom of the image */
+ 
+  /* Gradient — darkens the lower portion of the hero so the headline reads
+     against both the photo AND the navy strip below */
   .hero-gradient {
     position: absolute;
     inset: 0;
@@ -208,26 +204,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       180deg,
       transparent 0%,
       transparent 45%,
-      rgba(10, 22, 40, 0.35) 70%,
-      rgba(10, 22, 40, 0.88) 100%
+      rgba(10, 22, 40, 0.35) 65%,
+      rgba(10, 22, 40, 0.9) 88%,
+      rgba(10, 22, 40, 1) 100%
     );
   }
-
-  /* Headline content: centered horizontally, overlapping bottom of image.
-     Block-level container is centered, text inside stays left-aligned. */
+ 
+  /* Headline content: centered horizontally, sits low so it straddles the
+     bottom of the photo and extends into the navy strip below. */
   .hero-content {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 2;
-    max-width: 640px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 0 2rem 4rem;
+    padding: 0 2rem 2.5rem;
     width: 100%;
     box-sizing: border-box;
   }
-
+ 
   .hero-eyebrow {
     font-family: var(--font-wordmark, system-ui);
     font-size: 0.78rem;
@@ -237,11 +234,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.5rem;
     font-weight: 400;
   }
-
+ 
+  /* Bigger headline */
   .hero-headline {
     font-family: var(--font-sans, system-ui);
     font-weight: 200;
-    font-size: clamp(2.75rem, 6vw, 4.75rem);
+    font-size: clamp(3.25rem, 7.5vw, 6rem);
     line-height: 1.0;
     letter-spacing: -0.03em;
     color: #f8fafc;
@@ -249,13 +247,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 14ch;
     text-wrap: balance;
   }
-
+ 
   .hero-headline .gold-italic {
     color: var(--color-accent, #e8c574);
     font-style: italic;
     font-weight: 300;
   }
-
+ 
   .hero-byline {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 0.95rem;
@@ -265,8 +263,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 400;
     letter-spacing: 0.02em;
   }
-
-  /* Caption: bottom-right corner */
+ 
   .hero-caption {
     position: absolute;
     bottom: 1.5rem;
@@ -281,7 +278,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: right;
     line-height: 1.55;
   }
-
+ 
   /* ============================================================
      ARTICLE  (unchanged from original)
      ============================================================ */
@@ -291,7 +288,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 5rem 1.5rem 6rem;
     position: relative;
   }
-
+ 
   .about-article p {
     font-family: var(--font-sans, system-ui);
     font-size: clamp(1.05rem, 1.25vw, 1.15rem);
@@ -301,13 +298,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 0 1.5rem;
     text-wrap: pretty;
   }
-
+ 
   .about-article p em,
   .about-article p i {
     font-style: italic;
     color: rgba(248, 250, 252, 0.95);
   }
-
+ 
   .lead-paragraph {
     font-size: clamp(1.35rem, 1.9vw, 1.65rem) !important;
     line-height: 1.5 !important;
@@ -316,7 +313,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 2.25rem !important;
     letter-spacing: -0.005em;
   }
-
+ 
   .lead-paragraph::first-letter {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 4.5em;
@@ -327,30 +324,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 400;
     font-style: italic;
   }
-
+ 
   .dialogue {
     margin: 0 0 1.75rem;
     padding-left: 1.5rem;
     border-left: 2px solid rgba(232, 197, 116, 0.3);
   }
-
+ 
   .dialogue p {
     margin-bottom: 0.5rem !important;
     font-style: italic;
     color: rgba(248, 250, 252, 0.85) !important;
   }
-
+ 
   .dialogue p:last-child {
     margin-bottom: 0 !important;
   }
-
+ 
   .dialogue-single {
     padding-left: 1.5rem;
     border-left: 2px solid rgba(232, 197, 116, 0.3);
     font-style: italic;
     color: rgba(248, 250, 252, 0.92) !important;
   }
-
+ 
   .image-pair {
     margin: 3.5rem auto;
     display: grid;
@@ -362,11 +359,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transform: translateX(-50%);
     position: relative;
   }
-
+ 
   .pair-item {
     margin: 0;
   }
-
+ 
   .pair-item img {
     width: 100%;
     height: auto;
@@ -376,7 +373,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 2px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   }
-
+ 
   .pair-item figcaption {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 0.78rem;
@@ -387,7 +384,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: left;
     padding: 0 0.25rem;
   }
-
+ 
   .pull-quote {
     margin: 4rem auto;
     padding: 2.5rem 0;
@@ -397,7 +394,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-left: 50%;
     transform: translateX(-50%);
   }
-
+ 
   .pull-quote::before,
   .pull-quote::after {
     content: '';
@@ -409,7 +406,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .pull-quote::before { top: 0; }
   .pull-quote::after { bottom: 0; }
-
+ 
   .pull-quote p {
     font-family: Georgia, 'Times New Roman', serif !important;
     font-size: clamp(1.4rem, 2.4vw, 1.95rem) !important;
@@ -421,19 +418,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 32ch;
     text-wrap: balance;
   }
-
+ 
   .section-divider {
     width: 60px;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(232, 197, 116, 0.6), transparent);
     margin: 3rem auto;
   }
-
+ 
   .portrait {
     margin: 3.5rem auto 2.5rem;
     max-width: 380px;
   }
-
+ 
   .portrait img {
     width: 100%;
     height: auto;
@@ -441,7 +438,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 2px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   }
-
+ 
   .closing-line {
     font-family: Georgia, 'Times New Roman', serif !important;
     font-style: italic;
@@ -451,7 +448,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: center;
     font-weight: 400 !important;
   }
-
+ 
   .signature {
     font-family: Georgia, 'Times New Roman', serif !important;
     font-style: italic;
@@ -461,12 +458,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: center;
     font-weight: 400 !important;
   }
-
+ 
   .cta-wrapper {
     text-align: center;
     margin-top: 2rem;
   }
-
+ 
   .cta-button {
     display: inline-flex;
     align-items: center;
@@ -485,23 +482,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: all 0.3s ease;
     box-shadow: 0 8px 28px rgba(232, 197, 116, 0.25);
   }
-
+ 
   .cta-button:hover {
     background: #f0d28d;
     border-color: #f0d28d;
     transform: translateY(-2px);
     box-shadow: 0 12px 40px rgba(232, 197, 116, 0.4);
   }
-
+ 
   .cta-arrow {
     font-size: 1.05rem;
     transition: transform 0.3s ease;
   }
-
+ 
   .cta-button:hover .cta-arrow {
     transform: translateX(4px);
   }
-
+ 
   /* ============================================================
      MOBILE (UNCHANGED — exactly as locked-in)
      ============================================================ */
