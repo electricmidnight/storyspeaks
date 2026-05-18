@@ -1,19 +1,24 @@
 ---
 import '../styles/global.css';
-import Nav from '../components/Nav.astro';
-
-const pathname = Astro.url.pathname;
-const bodyClass = pathname.startsWith('/process') ? 'page-process' : '';
 
 export interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
 }
 
+const SITE_URL = 'https://thestoryspeaks.com';
+
 const {
-  title = 'The Story Speaks | Emmy-Winning Storytelling, Rooted in the Rockies',
-  description = 'The Story Speaks is an Emmy-winning film and video production company in Boulder, Colorado serving Denver, the Rockies and the world. Working with Fortune 500s, universities, hospitals, scientific institutions and brands.',
+  title = 'The Story Speaks — Emmy-Winning Documentary Films | Boulder, CO',
+  description = 'The Story Speaks is an Emmy-winning film and media studio led by Lance Murphey. Strategic documentary, brand, and impact storytelling for healthcare systems, research universities, nonprofits, and Fortune 500 brands.',
+  ogImage = '/images/og-default.jpg',
+  canonicalPath = '',
 } = Astro.props;
+
+const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 ---
 
 <!doctype html>
@@ -21,23 +26,75 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph / social -->
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="The Story Speaks" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
 
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <title>{title}</title>
+    <!-- JSON-LD Structured Data: Person + LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "The Story Speaks",
+      "description": "Emmy-winning strategic documentary and brand film studio led by Lance Murphey. Based in Boulder, Colorado, serving clients globally in healthcare, research, nonprofits, and Fortune 500 brands.",
+      "url": SITE_URL,
+      "image": absoluteOgImage,
+      "founder": {
+        "@type": "Person",
+        "name": "Lance Murphey",
+        "jobTitle": "Emmy-winning filmmaker and photojournalist",
+        "description": "Award-winning documentary filmmaker, former photojournalist for The New York Times, Washington Post, and TIME. Twice named Scripps Howard Newspaper Photographer of the Year.",
+        "award": [
+          "Five Emmy Awards",
+          "National ADDY",
+          "TED Ads Worth Spreading",
+          "Scripps Howard Newspaper Photographer of the Year (twice)"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Boulder",
+        "addressRegion": "CO",
+        "addressCountry": "US"
+      },
+      "areaServed": "Worldwide",
+      "knowsAbout": [
+        "Documentary filmmaking",
+        "Brand storytelling",
+        "Impact narratives",
+        "Healthcare communications",
+        "Research and science communication",
+        "PRISM Method"
+      ],
+      "sameAs": []
+    })} />
   </head>
-  <body class={bodyClass}>
-    <Nav />
+  <body>
     <slot />
   </body>
+</html>
