@@ -1,38 +1,41 @@
 ---
 import '../styles/global.css';
-
+import Nav from '../components/Nav.astro';
+ 
+const pathname = Astro.url.pathname;
+const bodyClass = pathname.startsWith('/process') ? 'page-process' : '';
+ 
 export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   canonicalPath?: string;
 }
-
+ 
 const SITE_URL = 'https://thestoryspeaks.com';
-
+ 
 const {
-  title = 'The Story Speaks — Emmy-Winning Documentary Films | Boulder, CO',
-  description = 'The Story Speaks is an Emmy-winning film and media studio led by Lance Murphey. Strategic documentary, brand, and impact storytelling for healthcare systems, research universities, nonprofits, and Fortune 500 brands.',
+  title = 'The Story Speaks | Emmy-Winning Storytelling, Rooted in the Rockies',
+  description = 'The Story Speaks is an Emmy-winning film and video production company in Boulder, Colorado serving Denver, the Rockies and the world. Working with Fortune 500s, universities, hospitals, scientific institutions and brands.',
   ogImage = '/images/og-default.jpg',
   canonicalPath = '',
 } = Astro.props;
-
+ 
 const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-
+ 
     <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-
+ 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
@@ -42,21 +45,26 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogI
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="The Story Speaks" />
-
+ 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteOgImage} />
-
+ 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-
-    <!-- JSON-LD Structured Data: Person + LocalBusiness -->
+ 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+ 
+    <!-- JSON-LD Structured Data: Professional Service + Person -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
@@ -90,11 +98,12 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogI
         "Healthcare communications",
         "Research and science communication",
         "PRISM Method"
-      ],
-      "sameAs": []
+      ]
     })} />
   </head>
-  <body>
+  <body class={bodyClass}>
+    <Nav />
     <slot />
   </body>
 </html>
+ 
